@@ -1,0 +1,32 @@
+main {
+    margin-top: 120px;
+}
+
+.form-number{
+    height:30px;
+    width: 80px;
+    text-align: center;
+    font-size: 15px;
+    border:1px solid #ddd;
+    border-radius:4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@media (min-width: 1200px) {
+
+    main {
+        margin-bottom: 20px;
+    }
+
+    .store-description{
+        margin-left: -50px;
+    }
+    
+    /*.carousel-control-prev-icon, .carousel-control-next-icon{
+        background-color: #f58800;
+        border-radius: 100px;
+
+    }*/
+
+}

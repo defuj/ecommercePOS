@@ -1,0 +1,252 @@
+    <!-- Main Content -->
+    <main>
+      <!-- Address -->
+      <div class="container">
+        <div class="card h-100 w-100 shadow mt-5 border-0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="p-2 bd-highlight bg-light">Data Diri</div>
+                <div class="row pt-3">
+                  <div class="col-lg-2">
+                    <p class="card-text text-muted mt-3">No Telp</p>
+                    <p class="card-text mt-3" id="noTelp-dr">085523844630</p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text text-muted mt-3">Nama</p>
+                    <p class="card-text mt-3" id="nama-dr">Cep Imam</p>
+                  </div>
+                  <div class="col-lg-2">
+                    <p class="card-text text-muted mt-3">Kode Pos</p>
+                    <p class="card-text mt-3" id="kodePos-dr">45363</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p class="card-text text-muted mt-3">Alamat</p>
+                    <p class="card-text mt-3" id="alamat-dr">Dusun. Gunung tanjung RT01 RW08, Desa. Cinangsi, Kec. Cisitu, Kab. Sumedang</p>
+                  </div>
+                </div>
+                <hr/>
+                <div class="col">
+                  <button class="btn btn-custom btn-sm float-end me-2" id="btn-ubah" data-bs-toggle="modal" data-bs-target="#exampleModal">Ubah</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Address -->
+
+      <!-- Selector -->
+      <div class="container">
+        <div class="card h-100 w-100 shadow mt-3 border-0">
+          <div class="card-body">
+            <div class="row ">
+              <div class="col-sm-6 mb-3 mb-sm-0">
+                <select class="form-select" >
+                  <option selected>Pilih Provinsi</option>
+                  <option value="jawa-barat">Jawa Barat</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <select class="form-select" >
+                  <option selected>Pilih Kota/Kabupaten</option>
+                  <option value="sumedang">Sumedang</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Selector -->
+
+      <!-- List Produk -->
+      <div class="container">
+        <div class="card shadow border-white mt-4 mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="p-2 bd-highlight bg-light">Produk Dipesan</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2 col-sm-12 mt-3">
+                <img src="<?= base_url('assets/img/card-2.jpg') ?>" class="img-fluid rounded">
+              </div>
+              <div class="col-md-3 col-sm-12 mt-3">
+                <p class="text-muted">Nama Produk</p>
+                <h6 class="card-subtitle nama-produk">Headset</h6>
+              </div>
+              <div class="col-md-3 col-sm-12 mt-3">
+                <p class="text-muted">Harga</p>
+                <p class="card-text">Rp. 483400</p>
+              </div>
+              <div class="col-md-2 col-sm-12 mt-3">
+                <p class="text-muted">Jumlah</p>
+                <p class="card-text ">2</p>
+              </div>
+              <div class="col-md-2 col-sm-12 mt-3">
+                <p class="text-muted">Sub Total</p>
+                <p class="card-text ">Rp. 57400</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row justify-content-end">
+              <div class="col-md-2 col-sm-12">
+                <p class="text-muted">Total Jumlah</p>
+                <p class="card-text ">2</p>
+              </div>
+              <div class="col-md-2 col-sm-12 mt-md-0 mt-3">
+                <p class="text-muted">Total Harga</p>
+                <p class="card-text ">Rp. 57400</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- List Produk -->
+
+      <!-- Voucher -->
+      <div class="container">
+        <div class="card h-100 w-100 shadow mt-3 border-0">
+          <div class="card-body">
+            <div class="row ">
+              <div class="col-sm-12">
+                <form class="d-flex align-items-center">
+                  <label  class="d-flex p-2 bd-highlight bg-light">Diskon</label>
+                  <input class="form-control me-2" type="text" placeholder="Masukan Kode Diskon">
+                  <button class="btn btn-custom-2" type="button">Reedem</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Voucher -->
+
+      <!-- Method Payment -->
+      <div class="container">
+        <div class="card h-100 w-100 shadow mt-3 border-0">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="p-2 bd-highlight bg-light">Metode Pembayaran</div>
+              </div>
+            </div>
+            <div class="row ">
+              <div class="col-sm-12">
+                <div class="my-3">
+                  <input type="radio" class="btn-check" name="transaksi" id="primary-outlined" value="transfer-bank" autocomplete="off" data-bs-toggle="collapse" data-bs-target="#transfer-bank" aria-expanded="false" aria-controls="">
+                  <label class="btn btn-outline-primary me-2 lh-base" for="primary-outlined">Transfer Bank</label>
+
+                  <input type="radio" class="btn-check" name="transaksi" value="bayar-ditempat" id="dark-outlined-2" autocomplete="off">
+                  <label class="btn btn-outline-dark lh-base" for="dark-outlined-2">Bayar Ditempat</label>
+                </div>
+                <div class="collapse" id="transfer-bank">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bank" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Bank BCA
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bank" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Bank BNI
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bank" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Bank Mandiri
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bank" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Bank Mega
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr/>
+            <div class="row justify-content-md-end">
+              <div class="col-lg-3 col-md-3 col-6">
+                <p class="text-muted">Subtotal Produk</p>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-5 text-end col-6 mt-md-0">
+                <p class="card-text ">Rp.120.000</p>
+              </div>
+            </div>
+            <div class="row justify-content-md-end">
+              <div class="col-lg-3 col-md-3 col-6">
+                <p class="text-muted">Ongkos Kirim</p>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-5 text-end col-6 mt-md-0">
+                <p class="card-text ">Rp.120.000</p>
+              </div>
+            </div>
+            <div class="row justify-content-md-end">
+              <div class="col-lg-3 col-md-3 col-6">
+                <p class="text-muted">Total Pembayaran</p>
+              </div>
+              <div class="col-lg-3 col-md-4 col-sm-5 text-end col-6 mt-md-0">
+                <p class="card-text ">Rp.120.000</p>
+              </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col">
+                <a class="btn btn-custom float-end" href="<?= base_url('index.php/user/pesanan') ?>" id="pesanan">Buat Pesanan</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Method Payment -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-custom" id="exampleModalLabel">Form Ubah Data Diri</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="">
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">No. Telp</label>
+                <input type="text" class="form-control" id="noTelp-form" value="" placeholder="Masukan No. Telp...">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" class="form-control" id="nama-form" value="" placeholder="Masukan Nama..." disabled>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Kode Pos</label>
+                <input type="text" class="form-control" id="kodePos-form" value="" placeholder="Masukan Kode Pos..." disabled>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Alamat</label>
+                <textarea class="form-control" id="alamat-form" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-custom" data-bs-dismiss="modal">Simpan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- Btn Back -->
+    <div class="container mt-3">
+      <a class="btn btn-custom shadow w-100 text-center" href="<?= base_url('index.php/cart/index') ?>"><i class="fas fa-arrow-left m-3"></i>Kembali</a>
+    </div>
+    <!-- Btn Back -->
+
+  </main>
+  <!-- End Main Content -->
