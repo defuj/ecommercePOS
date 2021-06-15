@@ -21,7 +21,7 @@ class Produk extends CI_Model
 
         // Delete Data
         function delete($where, $table){
-                $this->db->where($where);
+                $this->db->where(array('kode_item' => $where));
                 $this->db->delete($table);
         }
 
@@ -32,7 +32,7 @@ class Produk extends CI_Model
 
         // Update Data
         function update($where, $data, $table){
-                $this->db->where($where);
+                $this->db->where(array('kode_item' => $where));
                 $this->db->update($table, $data);
         }
 

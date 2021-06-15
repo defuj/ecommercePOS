@@ -19,27 +19,6 @@ $(document).ready(function () {
 
     }
 
-    // Add Cart
-    $('.add-cart-qty').on('click', function (e) {
-
-        e.preventDefault();
-
-        const href = $(this).data('href');
-        const kode = $(this).data('kode');
-
-        $.ajax({
-          url: href,
-          type: 'post',
-          dataType: 'html',
-          data: {id: kode},
-          success:function (data) {
-            loadCost();
-            loadPrice();
-          }
-        })
-
-    })
-
     // Change Cost Cart
     $('.form-number').on('change', function () {
 

@@ -31,14 +31,17 @@
             </div>
           </div>
           <div class="col-lg-6 ms-none">
+            <?php if ($data->stok == 0) { ?>
+              <span class="text-danger fw-bold d-inline d-sm-none"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+            <?php } ?>
             <div class="d-flex flex-column bd-highlight product-box">
-              <h3 class="card-title mt-3 mt-lg-0 nama-produk"><?= $data->nama_item ?> <a href=""><i class="fas fa-share-alt float-end text-muted pe-2"></i></a></h3>
+              <h3 class="card-title mt-3 mt-lg-0 nama-produk"><?= $data->nama_item ?> <a href=""><i class="fas fa-share-alt float-end text-custom pe-2"></i></a></h3>
               <h4>Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h4>
               <div class="bd-highlight">
                 <span>Terjual <small class="badge badge-sm bg-warning"><?= $data->status_jual ?></small></span>
                 <span class="text-warning ms-5 me-1">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
                 <?php if ($data->stok == 0) { ?>
-                  <span class="text-danger ms-2 fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+                  <span class="text-danger ms-2 fw-bold d-none d-sm-inline"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
                 <?php } ?>
               </div>
               <hr />
@@ -64,11 +67,16 @@
               <hr />
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <?php if ($data->stok == 0) { ?>
-                  <button class="btn btn-sm btn-secondary text-white"><i class="fas fa-cart-plus me-2"></i> Masukan Keranjang</button>
+                  <button class="btn btn-secondary text-white"><i class="fas fa-cart-plus me-2"></i> Masukan Keranjang</button>
+                  <a class="btn btn-secondary"><i class="fas fa-share me-1"></i> Beli Sekarang</a>
                 <?php } else { ?>
                   <a class="btn btn-custom text-white add-cart" data-kode="<?= $data->kode_item ?>" href="<?= base_url('index.php/cart/insert') ?>"><i class="fas fa-cart-plus me-1"></i> Masukan Keranjang</a>
+                  <form action="<?= base_url('index.php/cart/checkout') ?>" method="get" class="d-inline">
+                    <input type="hidden" id="input-qty" name="qty" value="1">
+                    <input type="hidden" name="kode" value="<?= $data->kode_item ?>">
+                    <button class="btn btn-custom-2" type="submit"><i class="fas fa-share me-1"></i> Beli Sekarang</button>
+                  </form>
                 <?php } ?>
-                <a class="btn btn-custom-2" href="<?= base_url('index.php/cart/checkout') ?>">Beli Sekarang</a>
               </div>
             </div>
           </div>
@@ -233,9 +241,10 @@
                   <h6 class="card-subtitle mb-2 nama-produk"><a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
                   <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h5>
                   <footer class="blockquote-footer mt-2">
-                    <span>Terjual <?= $data->status_jual ?></span>
                     <?php if ($data->stok == 0) { ?>
                       <span class="text-danger ms-2 fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+                    <?php } else { ?>
+                      <span>Terjual <?= $data->status_jual ?></span>
                     <?php } ?>
                   </footer>
                 </div>

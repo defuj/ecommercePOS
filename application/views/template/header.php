@@ -39,11 +39,11 @@
         <img src="<?= base_url('assets/img/logo.png') ?>" class="me-2" alt="" width="50" height="50">
         <span class="d-sm-inline d-none">Megakomputer</span>
       </a>
-      <form class="d-md-block d-none">
+      <form class="d-md-block d-none" method="get" action="<?= base_url('index.php/pages/kategori') ?>">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Cari Produk" aria-label="Cari Produk" aria-describedby="button-addon2">
+          <input type="text" class="form-control" name="key" placeholder="Cari Produk">
           <button class="btn btn-outline-custom me-2
-              " type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+              " type="submit"><i class="fas fa-search"></i></button>
           <a class="btn btn-custom text-decoration-none me-2" href="<?= base_url('index.php/cart') ?>">
             <i class="fas fa-shopping-cart me-2"></i>
             <span class="cart-cost" data-href="<?= base_url('index.php/cart/loadCost') ?>"><?= $this->cart->total_items() ?></span>
@@ -51,7 +51,7 @@
           <!-- <button class="btn btn-custom me-2">Daftar</button> -->
           <!-- <button class="btn btn-custom-2">Login</button> -->
           <div class="dropdown">
-            <a class="text-decoration-none text-custom-1 dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="text-decoration-none text-custom dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="dropdownMenuButton1">
@@ -73,7 +73,7 @@
         <!-- <button class="btn btn-custom me-2">Daftar</button> -->
         <!-- <button class="btn btn-custom-2 me-2">Login</button> -->
         <div class="dropdown">
-          <a class="text-decoration-none text-custom-1 dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="text-decoration-none text-custom dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://github.com/mdo.png" alt="mdo" width="40" height="40" class="rounded-circle">
           </a>
           <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="dropdownMenuButton1">

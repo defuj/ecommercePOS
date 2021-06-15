@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2021 at 11:43 AM
+-- Generation Time: Jun 15, 2021 at 11:09 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -36,6 +36,7 @@ CREATE TABLE `dat_produk` (
   `id_jenis` int(11) NOT NULL,
   `id_sub_jenis` int(11) DEFAULT NULL,
   `id_merk` int(11) NOT NULL,
+  `id_kategori` int(11) NOT NULL,
   `rak` varchar(10) NOT NULL,
   `status_jual` int(11) NOT NULL,
   `stok_minimum` int(11) NOT NULL,
@@ -63,13 +64,40 @@ CREATE TABLE `dat_produk` (
 -- Dumping data for table `dat_produk`
 --
 
-INSERT INTO `dat_produk` (`id`, `tipe`, `kode_item`, `nama_item`, `id_jenis`, `id_sub_jenis`, `id_merk`, `rak`, `status_jual`, `stok_minimum`, `ket`, `berat`, `panjang`, `lebar`, `tinggi`, `pot_umum`, `pot_reseller`, `pot_dealer`, `link_share`, `id_varian`, `kondisi_barang`, `id_toko`, `deskripsi_ecommerce`, `id_cover_img`, `cover_img`, `stok`, `satuan_dasar`, `is_active`) VALUES
-(48, 0, '654324', 'ASUS Vivobook', 0, NULL, 0, '', 20, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 400, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-1.jpg', 20, 3000000, 0),
-(49, 0, '5287398', 'ASUS ROG', 0, NULL, 0, '', 26, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 450, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-2.jpg', 15, 6000000, 0),
-(52, 0, '3526138', 'Lenovo Yoga', 0, NULL, 0, '', 8, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 670, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-3.jpg', 16, 10000000, 0),
-(53, 0, '9283653', 'ASUS Laptop E410MA', 0, NULL, 0, '', 5, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 800, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-4.jpg', 5, 6000000, 0),
-(54, 0, '9378274', 'ASUS X200MA', 0, NULL, 0, '', 3, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 800, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-5.jpg', 0, 6666000, 0),
-(55, 0, '3531782', 'Lenovo Ideapad 320 14', 0, NULL, 0, '', 2, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 900, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-6.jpg', 2, 3800000, 0);
+INSERT INTO `dat_produk` (`id`, `tipe`, `kode_item`, `nama_item`, `id_jenis`, `id_sub_jenis`, `id_merk`, `id_kategori`, `rak`, `status_jual`, `stok_minimum`, `ket`, `berat`, `panjang`, `lebar`, `tinggi`, `pot_umum`, `pot_reseller`, `pot_dealer`, `link_share`, `id_varian`, `kondisi_barang`, `id_toko`, `deskripsi_ecommerce`, `id_cover_img`, `cover_img`, `stok`, `satuan_dasar`, `is_active`) VALUES
+(48, 0, '654324', 'ASUS Vivobook', 0, NULL, 0, 1, '', 20, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 400, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-1.jpg', 20, 3000000, 0),
+(49, 0, '5287398', 'ASUS ROG', 0, NULL, 0, 1, '', 26, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 450, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-2.jpg', 15, 6000000, 0),
+(52, 0, '3526138', 'Lenovo Yoga', 0, NULL, 0, 1, '', 8, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 670, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-3.jpg', 16, 10000000, 0),
+(53, 0, '9283653', 'ASUS Laptop E410MA', 0, NULL, 0, 1, '', 5, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 800, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-4.jpg', 5, 6000000, 0),
+(54, 0, '9378274', 'ASUS X200MA', 0, NULL, 0, 1, '', 3, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 800, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-5.jpg', 0, 6666000, 0),
+(55, 0, '3531782', 'Lenovo Ideapad 320 14', 0, NULL, 0, 1, '', 2, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 900, 0, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 0, 'card-6.jpg', 2, 3800000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kategori`
+--
+
+CREATE TABLE `kategori` (
+  `id` int(11) NOT NULL,
+  `nama_kategori` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kategori`
+--
+
+INSERT INTO `kategori` (`id`, `nama_kategori`) VALUES
+(1, 'notebook/laptop'),
+(2, 'perangkat pc'),
+(3, 'pc'),
+(4, 'lcd'),
+(5, 'aksesoris'),
+(6, 'ups'),
+(7, 'printer'),
+(8, 'storage'),
+(9, 'networking'),
+(10, 'proyektor');
 
 --
 -- Indexes for dumped tables
@@ -87,7 +115,14 @@ ALTER TABLE `dat_produk`
   ADD KEY `id_sub_jenis` (`id_sub_jenis`),
   ADD KEY `id_merk` (`id_merk`),
   ADD KEY `id_varian` (`id_varian`),
-  ADD KEY `is_active` (`is_active`);
+  ADD KEY `is_active` (`is_active`),
+  ADD KEY `id_kategori` (`id_kategori`);
+
+--
+-- Indexes for table `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -98,6 +133,12 @@ ALTER TABLE `dat_produk`
 --
 ALTER TABLE `dat_produk`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
+--
+-- AUTO_INCREMENT for table `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -16,19 +16,13 @@
 
                     <?php foreach ($produkLimit as $data) { ?>
                     <div class="owl-item">
-                      <div class="card <?= ($data->stok == 0) ? 'border border-danger' : ''; ?>">
+                      <div class="card">
                         <a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>">
                           <img src="<?= base_url('assets/img/'.$data->cover_img) ?>" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                           <h6 class="card-subtitle mb-2 nama-produk"><a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
                           <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h5>
-                          <footer class="blockquote-footer mt-2">
-                            <span>Terjual <?= $data->status_jual ?></span>
-                            <?php if ($data->stok == 0) { ?>
-                              <span class="text-danger ms-2 fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
-                            <?php } ?>
-                          </footer>
                         </div>
                       </div>
                     </div>

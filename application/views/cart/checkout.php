@@ -25,10 +25,6 @@
                     <p class="card-text mt-3" id="alamat-dr">Dusun. Gunung tanjung RT01 RW08, Desa. Cinangsi, Kec. Cisitu, Kab. Sumedang</p>
                   </div>
                 </div>
-                <hr/>
-                <div class="col">
-                  <button class="btn btn-custom btn-sm float-end me-2" id="btn-ubah" data-bs-toggle="modal" data-bs-target="#exampleModal">Ubah</button>
-                </div>
               </div>
             </div>
           </div>
@@ -68,38 +64,91 @@
                 <div class="p-2 bd-highlight bg-light">Produk Dipesan</div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-2 col-sm-12 mt-3">
-                <img src="<?= base_url('assets/img/card-2.jpg') ?>" class="img-fluid rounded">
+            <?php
+              if ($produk) {
+                foreach ($produk as $data) {
+             ?>
+              <div class="row">
+                <div class="col-md-2 col-sm-12 mt-3">
+                  <img src="<?= base_url('assets/img/'.$data->cover_img) ?>" class="img-fluid rounded">
+                </div>
+                <div class="col-md-3 col-sm-12 mt-3">
+                  <p class="text-muted">Nama Produk</p>
+                  <h6 class="card-subtitle nama-produk"><?= $data->nama_item ?></h6>
+                </div>
+                <div class="col-md-3 col-sm-12 mt-3">
+                  <p class="text-muted">Harga</p>
+                  <p class="card-text"><?= $data->satuan_dasar ?></p>
+                </div>
+                <div class="col-md-2 col-sm-12 mt-3">
+                  <p class="text-muted">Jumlah</p>
+                  <p class="card-text"><?= $qty ?></p>
+                </div>
+                <div class="col-md-2 col-sm-12 mt-3">
+                  <p class="text-muted">Sub Total</p>
+                  <p class="card-text ">Rp.&nbsp;<?= number_format(($data->satuan_dasar * $qty), 0,',','.') ?></p>
+                </div>
               </div>
-              <div class="col-md-3 col-sm-12 mt-3">
-                <p class="text-muted">Nama Produk</p>
-                <h6 class="card-subtitle nama-produk">Headset</h6>
+            <?php 
+                }
+              } else {
+                foreach ($this->cart->contents() as $data) {
+            ?>
+              <div class="row">
+                <div class="col-md-2 col-sm-12 mt-3">
+                  <img src="<?= base_url('assets/img/'.$data['img']) ?>" class="img-fluid rounded">
+                </div>
+                <div class="col-md-3 col-sm-12 mt-3">
+                  <p class="text-muted">Nama Produk</p>
+                  <h6 class="card-subtitle nama-produk"><?= $data['name'] ?></h6>
+                </div>
+                <div class="col-md-3 col-sm-12 mt-3">
+                  <p class="text-muted">Harga</p>
+                  <p class="card-text"><?= $data['price'] ?></p>
+                </div>
+                <div class="col-md-2 col-sm-12 mt-3">
+                  <p class="text-muted">Jumlah</p>
+                  <p class="card-text "><?= $data['qty'] ?></p>
+                </div>
+                <div class="col-md-2 col-sm-12 mt-3">
+                  <p class="text-muted">Sub Total</p>
+                  <p class="card-text">Rp.&nbsp;<?= number_format(($data['price'] * $data['qty']), 0,',','.') ?></p>
+                </div>
               </div>
-              <div class="col-md-3 col-sm-12 mt-3">
-                <p class="text-muted">Harga</p>
-                <p class="card-text">Rp. 483400</p>
-              </div>
-              <div class="col-md-2 col-sm-12 mt-3">
-                <p class="text-muted">Jumlah</p>
-                <p class="card-text ">2</p>
-              </div>
-              <div class="col-md-2 col-sm-12 mt-3">
-                <p class="text-muted">Sub Total</p>
-                <p class="card-text ">Rp. 57400</p>
-              </div>
-            </div>
+            <?php
+                } 
+              }
+            ?>
             <hr>
-            <div class="row justify-content-end">
-              <div class="col-md-2 col-sm-12">
-                <p class="text-muted">Total Jumlah</p>
-                <p class="card-text ">2</p>
+            <?php 
+              if ($produk) {
+                foreach ($produk as $data) {
+             ?>
+              <div class="row justify-content-end">
+                <div class="col-md-2 col-sm-12">
+                  <p class="text-muted">Total Jumlah</p>
+                  <p class="card-text "><?= $qty ?></p>
+                </div>
+                <div class="col-md-2 col-sm-12 mt-md-0 mt-3">
+                  <p class="text-muted">Total Harga</p>
+                  <p class="card-text ">Rp.&nbsp;<?= number_format(($data->satuan_dasar * $qty), 0,',','.') ?></p>
+                </div>
               </div>
-              <div class="col-md-2 col-sm-12 mt-md-0 mt-3">
-                <p class="text-muted">Total Harga</p>
-                <p class="card-text ">Rp. 57400</p>
+            <?php
+                }
+              } else { 
+             ?>
+              <div class="row justify-content-end">
+                <div class="col-md-2 col-sm-12">
+                  <p class="text-muted">Total Jumlah</p>
+                  <p class="card-text "><?= $this->cart->total_items() ?></p>
+                </div>
+                <div class="col-md-2 col-sm-12 mt-md-0 mt-3">
+                  <p class="text-muted">Total Harga</p>
+                  <p class="card-text ">Rp.&nbsp;<?= number_format(($this->cart->total()), 0,',','.') ?></p>
+                </div>
               </div>
-            </div>
+            <?php } ?>
           </div>
         </div>
       </div>

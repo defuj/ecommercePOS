@@ -22,12 +22,17 @@ class Cart extends CI_Controller {
 
 	public function checkout()
 	{
+		$kode = $this->input->get('kode');
+		$qty = $this->input->get('qty');
+		
 		$data = [
-			'title' => 'Checkout | Product Listening'
+			'title' => 'Checkout | Product Listening',
+			'produk' => $this->produk->getData($kode, 'dat_produk')->result(),
+			'qty' => $qty
 		];
 
 		$this->load->view('template/header.php', $data);
-		$this->load->view('cart/checkout.php');
+		$this->load->view('cart/checkout.php', $data);
 		$this->load->view('template/footer.php');
 	}
 

@@ -170,6 +170,16 @@ $('.img-thumb').on('click', function(){
     var src = $(this).attr('src');
      $('.thumb').attr('src', src);
 });
+ 
+
+
+
+
+
+
+
+
+
 
     
 
