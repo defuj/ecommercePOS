@@ -26,6 +26,7 @@ $(document).ready(function () {
         const id = $(this).data('id');
         const kode = $(this).data('kode');
         const cost = $(this).val();
+        const stok = $(this).data('stok');
 
         $.ajax({
           url: href,
@@ -39,6 +40,23 @@ $(document).ready(function () {
         })
 
     })
+
+    // Batasan Qty
+    $('.form-number').on('keyup', function () {
+      const cost = $(this).val();
+      const stok = $(this).data('stok');
+
+      if (cost > stok) {
+        alert('Kuantitas melebihi batas stok!');
+        $(this).val(stok);
+      }
+
+      if (cost == 0) {
+        $(this).val(1);
+      }
+    })
+
+
     
     // Btn Minus
     $(".minus").click(function () {
@@ -56,8 +74,12 @@ $(document).ready(function () {
     // Btn Plus
     $(".plus").click(function () {
         var $input = $(this).parent().find("input");
-        $input.val(parseInt($input.val()) + 1);
+        var stok = $('.form-number').data('stok');
 
+        var count = parseInt($input.val()) + 1;
+        count = count > stok ? stok : count;
+
+        $input.val(count);
         $input.change();
         return false;
     });

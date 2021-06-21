@@ -27,7 +27,7 @@ class Produk extends CI_Model
 
         // Edit Data
         function getData($where, $table){
-                return $this->db->get_where($table, array('kode_item' => $where));
+                return $this->db->get_where($table, array('slug' => $where));
         }
 
         // Update Data

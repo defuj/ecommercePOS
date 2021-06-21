@@ -42,7 +42,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md">
-          <form method="get" action="<?= base_url('index.php/pages/kategori') ?>">
+          <form method="get" action="<?= base_url('pages/kategori') ?>">
             <div class="input-group mb-3">
               <input type="text" class="form-control" name="key" placeholder="Cari Produk">
               <button class="btn btn-custom" type="submit"><i class="fas fa-search"></i></button>
@@ -62,31 +62,31 @@
             <div class="owl-stage-outer">
               <div class="owl-stage m-auto border-top border-bottom">
                 <div class="owl-item">
-                  <a class="text-decoration-none text-dark" href="<?= base_url('index.php/pages/kategori/notebook') ?>">
+                  <a class="text-decoration-none text-dark" href="<?= base_url('pages/kategori/notebook') ?>">
                     <img src="<?= base_url('assets/img/kategori/laptop-40.svg') ?>" class="d-block m-auto mt-3" alt="...">
                     <p class="mt-3 text-center">Notebook</p>
                   </a>
                 </div>
                 <div class="owl-item">
-                  <a class="text-decoration-none text-dark" href="<?= base_url('index.php/pages/kategori/perangkat pc') ?>">
+                  <a class="text-decoration-none text-dark" href="<?= base_url('pages/kategori/perangkat pc') ?>">
                     <img src="<?= base_url('assets/img/kategori/microchip.svg') ?>" class="d-block m-auto mt-3" alt="...">
                     <p class="mt-3 text-center">Perangkat PC</p>
                   </a>
                 </div>
                 <div class="owl-item">
-                  <a class="text-decoration-none text-dark" href="<?= base_url('index.php/pages/kategori/pc') ?>">
+                  <a class="text-decoration-none text-dark" href="<?= base_url('pages/kategori/pc') ?>">
                     <img src="<?= base_url('assets/img/kategori/computer-1.svg') ?>" class="d-md-blockock m-auto mt-3" alt="...">
                     <p class="mt-3 text-center">PC</p>
                   </a>
                 </div>
                 <div class="owl-item">
-                  <a class="text-decoration-none text-dark" href="<?= base_url('index.php/pages/kategori/lcd') ?>">
+                  <a class="text-decoration-none text-dark" href="<?= base_url('pages/kategori/lcd') ?>">
                     <img src="<?= base_url('assets/img/kategori/monitor-1.svg') ?>" class="d-block m-auto mt-3" alt="...">
                     <p class="mt-3 text-center">LCD</p>
                   </a>
                 </div>
                 <div class="owl-item">
-                  <a class="text-decoration-none text-dark" href="<?= base_url('index.php/pages/kategori/aksesoris') ?>">
+                  <a class="text-decoration-none text-dark" href="<?= base_url('pages/kategori/aksesoris') ?>">
                     <img src="<?= base_url('assets/img/kategori/keyboard.svg') ?>" class="d-block m-auto mt-3" alt="...">
                     <p class="mt-3 text-center">Aksesoris</p>
                   </a>
@@ -99,31 +99,31 @@
             <div class="owl-stage-outer">
               <div class="owl-stage m-auto border-top border-bottom">
                 <div class="owl-item">
-                  <a class="text-decoration-none text-dark" href="<?= base_url('index.php/pages/kategori/ups') ?>">
+                  <a class="text-decoration-none text-dark" href="<?= base_url('pages/kategori/ups') ?>">
                     <img src="<?= base_url('assets/img/kategori/storage-drive.svg') ?>" class="d-block m-auto mt-3" alt="...">
                     <p class="mt-3 text-center">UPS</p>
                   </a>
                 </div>
                 <div class="owl-item">
-                  <a class="text-decoration-none text-dark" href="<?= base_url('index.php/pages/kategori/printer') ?>">
+                  <a class="text-decoration-none text-dark" href="<?= base_url('pages/kategori/printer') ?>">
                     <img src="<?= base_url('assets/img/kategori/printer.svg') ?>" class="d-block m-auto mt-3" alt="...">
                     <p class="mt-3 text-center">Printer</p>
                   </a>
                 </div>
                 <div class="owl-item">
-                  <a class="text-decoration-none text-dark" href="<?= base_url('index.php/pages/kategori/storage') ?>">
+                  <a class="text-decoration-none text-dark" href="<?= base_url('pages/kategori/storage') ?>">
                     <img src="<?= base_url('assets/img/kategori/compact-discs.svg') ?>" class="d-block m-auto mt-3" alt="...">
                     <p class="mt-3 text-center">Storage</p>
                   </a>
                 </div>
                 <div class="owl-item">
-                  <a class="text-decoration-none text-dark" href="<?= base_url('index.php/pages/kategori/networking') ?>">
+                  <a class="text-decoration-none text-dark" href="<?= base_url('pages/kategori/networking') ?>">
                     <img src="<?= base_url('assets/img/kategori/router-1.svg') ?>" class="d-block m-auto mt-3" alt="...">
                     <p class="mt-3 text-center">Networking</p>
                   </a>
                 </div>
                 <div class="owl-item">
-                  <a class="text-decoration-none text-dark" href="<?= base_url('index.php/pages/kategori/proyektor') ?>">
+                  <a class="text-decoration-none text-dark" href="<?= base_url('pages/kategori/proyektor') ?>">
                     <img src="<?= base_url('assets/img/kategori/webcam.svg') ?>" class="d-block m-auto mt-3" alt="...">
                     <p class="mt-3 text-center">Proyektor</p>
                   </a>
@@ -150,11 +150,11 @@
           <?php foreach ($produk as $data) { ?>
           <div class="col-md-4 col-sm-6 col-12 mb-4">
             <div class="card shadow <?= ($data->stok == 0) ? 'border border-danger' : ''; ?>">
-              <a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>">
+              <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
                 <img src="<?= base_url('assets/img/'.$data->cover_img) ?>" class="card-img-top" alt="...">
               </a>
               <div class="card-body">
-                <h6 class="card-subtitle mb-2 nama-produk"><a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
+                <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
                 <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h5>
                 <footer class="blockquote-footer mt-2">
                   <?php if ($data->stok == 0) { ?>
@@ -167,7 +167,7 @@
                 <?php if ($data->stok == 0) { ?>
                   <button class="btn btn-sm btn-secondary text-white">Tambah Keranjang <i class="fas fa-cart-plus"></i></button>
                 <?php } else { ?>
-                  <a class="btn btn-sm btn-custom text-white add-cart" data-kode="<?= $data->kode_item ?>" href="<?= base_url('index.php/cart/insert') ?>">Tambah Keranjang <i class="fas fa-cart-plus"></i></a>
+                  <a class="btn btn-sm btn-custom text-white add-cart" data-kode="<?= $data->kode_item ?>" href="<?= base_url('cart/insert') ?>">Tambah Keranjang <i class="fas fa-cart-plus"></i></a>
                 <?php } ?>
               </div>
             </div>
@@ -194,12 +194,12 @@
             <?php foreach ($produkLimit as $data) { ?>
             <div class="owl-item">
               <div class="card <?= ($data->stok == 0) ? 'border border-danger' : ''; ?>">
-                <a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>">
+                <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
                   <img src="<?= base_url('assets/img/'.$data->cover_img) ?>" class="card-img-top" alt="...">
                 </a>
                 <div class="card-body">
-                  <h6 class="card-subtitle mb-2 nama-produk"><a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
-                  <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h5>
+                  <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
+                  <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h5>
                   <footer class="blockquote-footer mt-2">
                     <?php if ($data->stok == 0) { ?>
                       <span class="text-danger ms-2 fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
@@ -297,12 +297,12 @@
             <?php foreach ($produkLimit as $data) { ?>
             <div class="owl-item">
               <div class="card <?= ($data->stok == 0) ? 'border border-danger' : ''; ?>">
-                <a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>">
+                <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
                   <img src="<?= base_url('assets/img/'.$data->cover_img) ?>" class="card-img-top" alt="...">
                 </a>
                 <div class="card-body">
-                  <h6 class="card-subtitle mb-2 nama-produk"><a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
-                  <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h5>
+                  <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
+                  <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h5>
                   <footer class="blockquote-footer mt-2">
                     <?php if ($data->stok == 0) { ?>
                       <span class="text-danger ms-2 fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>

@@ -140,6 +140,7 @@ $(document).ready(function () {
       }) 
 
     });
+
     // Ubah Gambar Upload
     $('.upload').change(function(){
        readImage(this);
@@ -151,6 +152,7 @@ $(document).ready(function () {
      
           reader.onload = function (e) {
             $('.img-profile').attr('src', e.target.result);
+            $('.push-upload').removeClass('d-none');
           }
      
           reader.readAsDataURL(input.files[0]);

@@ -32,29 +32,6 @@
       </div>
       <!-- End Address -->
 
-      <!-- Selector -->
-      <div class="container">
-        <div class="card h-100 w-100 shadow mt-3 border-0">
-          <div class="card-body">
-            <div class="row ">
-              <div class="col-sm-6 mb-3 mb-sm-0">
-                <select class="form-select" >
-                  <option selected>Pilih Provinsi</option>
-                  <option value="jawa-barat">Jawa Barat</option>
-                </select>
-              </div>
-              <div class="col-sm-6">
-                <select class="form-select" >
-                  <option selected>Pilih Kota/Kabupaten</option>
-                  <option value="sumedang">Sumedang</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End Selector -->
-
       <!-- List Produk -->
       <div class="container">
         <div class="card shadow border-white mt-4 mb-4">
@@ -246,7 +223,7 @@
             <hr/>
             <div class="row">
               <div class="col">
-                <a class="btn btn-custom float-end" href="<?= base_url('index.php/user/pesanan') ?>" id="pesanan">Buat Pesanan</a>
+                <a class="btn btn-custom float-end" href="<?= base_url('user/pesanan') ?>" id="pesanan">Buat Pesanan</a>
               </div>
             </div>
           </div>
@@ -293,7 +270,7 @@
 
     <!-- Btn Back -->
     <div class="container mt-3">
-      <a class="btn btn-custom shadow w-100 text-center" href="<?= base_url('index.php/cart/index') ?>"><i class="fas fa-arrow-left m-3"></i>Kembali</a>
+      <a class="btn btn-custom shadow w-100 text-center" href="<?= base_url('cart/index') ?>"><i class="fas fa-arrow-left m-3"></i>Back to Cart</a>
     </div>
     <!-- Btn Back -->
 

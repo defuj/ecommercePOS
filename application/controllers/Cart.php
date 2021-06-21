@@ -6,13 +6,20 @@ class Cart extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
+
+        if (!$this->ion_auth->logged_in())
+	    {
+	      redirect('auth/login');
+	    }
+	    
         $this->load->model('produk');
     }
 
 	public function index()
 	{
 		$data = [
-			'title' => 'Keranjang | Product Listening'
+			'title' => 'Keranjang | Product Listening',
+			'user' => $this->ion_auth->user()->row()
 		];
 
 		$this->load->view('template/header.php', $data);
@@ -22,13 +29,14 @@ class Cart extends CI_Controller {
 
 	public function checkout()
 	{
-		$kode = $this->input->get('kode');
-		$qty = $this->input->get('qty');
+		$slug = $this->input->post('slug');
+		$qty = $this->input->post('qty');
 		
 		$data = [
 			'title' => 'Checkout | Product Listening',
-			'produk' => $this->produk->getData($kode, 'dat_produk')->result(),
-			'qty' => $qty
+			'produk' => $this->produk->getData($slug, 'dat_produk')->result(),
+			'qty' => $qty,
+			'user' => $this->ion_auth->user()->row()
 		];
 
 		$this->load->view('template/header.php', $data);
@@ -68,9 +76,11 @@ class Cart extends CI_Controller {
 	        'qty'     => 1,
 	        'price'   => $produk->satuan_dasar,
 	        'terjual' => $produk->status_jual,
-	        'ket' => $produk->ket,
+	        'ket'	  => $produk->ket,
 	        'name'    => $produk->nama_item,
-	        'img'    => $produk->cover_img
+	        'img'	  => $produk->cover_img,
+	        'slug' 	  => $produk->slug,
+	        'stok' 	  => $produk->stok
 		];
 
 		$this->cart->insert($data);

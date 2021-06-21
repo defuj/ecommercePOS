@@ -39,50 +39,50 @@
         <img src="<?= base_url('assets/img/logo.png') ?>" class="me-2" alt="" width="50" height="50">
         <span class="d-sm-inline d-none">Megakomputer</span>
       </a>
-      <form class="d-md-block d-none" method="get" action="<?= base_url('index.php/pages/kategori') ?>">
+      <form class="d-md-block d-none" method="get" action="<?= base_url('pages/kategori') ?>">
         <div class="input-group">
           <input type="text" class="form-control" name="key" placeholder="Cari Produk">
           <button class="btn btn-outline-custom me-2
               " type="submit"><i class="fas fa-search"></i></button>
-          <a class="btn btn-custom text-decoration-none me-2" href="<?= base_url('index.php/cart') ?>">
+          <a class="btn btn-custom text-decoration-none me-2" href="<?= base_url('cart') ?>">
             <i class="fas fa-shopping-cart me-2"></i>
-            <span class="cart-cost" data-href="<?= base_url('index.php/cart/loadCost') ?>"><?= $this->cart->total_items() ?></span>
+            <span class="cart-cost" data-href="<?= base_url('cart/loadCost') ?>"><?= $this->cart->total_items() ?></span>
           </a>
           <!-- <button class="btn btn-custom me-2">Daftar</button> -->
           <!-- <button class="btn btn-custom-2">Login</button> -->
           <div class="dropdown">
             <a class="text-decoration-none text-custom dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+              <img src="<?= base_url('assets/img/'.$user->img) ?>" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item mb-2" href="<?= base_url('index.php/user') ?>"><i class="fas fa-user me-2"></i>Profile</a></li>
-              <li><a class="dropdown-item my-2" href="<?= base_url('index.php/user/pesanan') ?>"><i class="fas fa-list me-2"></i></i>Daftar Pesanan</a></li>
+              <li><a class="dropdown-item mb-2" href="<?= base_url('user') ?>"><i class="fas fa-user me-2"></i>Profile</a></li>
+              <li><a class="dropdown-item my-2" href="<?= base_url('user/pesanan') ?>"><i class="fas fa-list me-2"></i></i>Daftar Pesanan</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('auth/logout') ?>"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
             </ul>
           </div>
         </div>
       </form>
       <div class="d-flex d-md-none d-block">
-        <a class="btn btn-custom me-2" href="<?= base_url('index.php/cart') ?>">
+        <a class="btn btn-custom me-2" href="<?= base_url('cart') ?>">
           <i class="fas fa-shopping-cart me-2"></i>
-          <span class="cart-cost" data-href="<?= base_url('index.php/cart/loadCost') ?>"><?= $this->cart->total_items() ?></span>
+          <span class="cart-cost" data-href="<?= base_url('cart/loadCost') ?>"><?= $this->cart->total_items() ?></span>
         </a>
         <!-- <button class="btn btn-custom me-2">Daftar</button> -->
         <!-- <button class="btn btn-custom-2 me-2">Login</button> -->
         <div class="dropdown">
           <a class="text-decoration-none text-custom dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="40" height="40" class="rounded-circle">
+            <img src="<?= base_url('assets/img/'.$user->img) ?>" alt="mdo" width="40" height="40" class="rounded-circle">
           </a>
           <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item mb-2" href="<?= base_url('index.php/user') ?>"><i class="fas fa-user me-2"></i>Profile</a></li>
-            <li><a class="dropdown-item my-2" href="<?= base_url('index.php/user/pesanan') ?>"><i class="fas fa-list me-2"></i></i>Daftar Pesanan</a></li>
+            <li><a class="dropdown-item mb-2" href="<?= base_url('user') ?>"><i class="fas fa-user me-2"></i>Profile</a></li>
+            <li><a class="dropdown-item my-2" href="<?= base_url('user/pesanan') ?>"><i class="fas fa-list me-2"></i></i>Daftar Pesanan</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+            <li><a class="dropdown-item" href="<?= base_url('auth/logout') ?>"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
           </ul>
         </div>
       </div>

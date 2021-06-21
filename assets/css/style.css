@@ -1,4 +1,4 @@
-html{
+
     scroll-behavior: smooth;
 }
 
@@ -132,7 +132,7 @@ body{
 	height: 300px;
 }
 
-.nama-produk{
+.text-hidden{
 	white-space: nowrap; 
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -263,6 +263,16 @@ body{
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+.card .btn-close-card {
+	position: absolute;
+	top: -15px;
+	right: -15px;
+	opacity: 1;
+	z-index: 1;
+	cursor: pointer;
+}
+
 /*End CSS Page Profile*/
 
 /* Detail Thumbnail */

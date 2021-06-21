@@ -4,7 +4,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md">
-              <form method="get" action="<?= base_url('index.php/pages/kategori') ?>">
+              <form method="get" action="<?= base_url('pages/kategori') ?>">
                 <div class="input-group mb-3">
                   <input type="text" class="form-control" name="key" placeholder="Cari Produk">
                   <button class="btn btn-custom" type="submit"><i class="fas fa-search"></i></button>
@@ -28,16 +28,16 @@
                               </button>
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                 <a href="<?= base_url('index.php/pages/kategori/notebook') ?>" class="list-group-item border-0">Notebook</a>
-                                 <a href="<?= base_url('index.php/pages/kategori/perangkat pc') ?>" class="list-group-item border-0">Perangkat PC</a>
-                                 <a href="<?= base_url('index.php/pages/kategori/pc') ?>" class="list-group-item border-0">PC</a>
-                                 <a href="<?= base_url('index.php/pages/kategori/lcd') ?>" class="list-group-item border-0">LCD</a>
-                                 <a href="<?= base_url('index.php/pages/kategori/aksesoris') ?>" class="list-group-item border-0">Aksesoris</a>
-                                 <a href="<?= base_url('index.php/pages/kategori/ups') ?>" class="list-group-item border-0">UPS</a>
-                                 <a href="<?= base_url('index.php/pages/kategori/printer') ?>" class="list-group-item border-0">Printer</a>
-                                 <a href="<?= base_url('index.php/pages/kategori/storage') ?>" class="list-group-item border-0">Storage</a>
-                                 <a href="<?= base_url('index.php/pages/kategori/networking') ?>" class="list-group-item border-0">Networking</a>
-                                 <a href="<?= base_url('index.php/pages/kategori/proyektor') ?>" class="list-group-item border-0">Proyektor</a>
+                                 <a href="<?= base_url('pages/kategori/notebook') ?>" class="list-group-item border-0">Notebook</a>
+                                 <a href="<?= base_url('pages/kategori/perangkat pc') ?>" class="list-group-item border-0">Perangkat PC</a>
+                                 <a href="<?= base_url('pages/kategori/pc') ?>" class="list-group-item border-0">PC</a>
+                                 <a href="<?= base_url('pages/kategori/lcd') ?>" class="list-group-item border-0">LCD</a>
+                                 <a href="<?= base_url('pages/kategori/aksesoris') ?>" class="list-group-item border-0">Aksesoris</a>
+                                 <a href="<?= base_url('pages/kategori/ups') ?>" class="list-group-item border-0">UPS</a>
+                                 <a href="<?= base_url('pages/kategori/printer') ?>" class="list-group-item border-0">Printer</a>
+                                 <a href="<?= base_url('pages/kategori/storage') ?>" class="list-group-item border-0">Storage</a>
+                                 <a href="<?= base_url('pages/kategori/networking') ?>" class="list-group-item border-0">Networking</a>
+                                 <a href="<?= base_url('pages/kategori/proyektor') ?>" class="list-group-item border-0">Proyektor</a>
                             </div>
                           </div>
                         </div>
@@ -57,14 +57,17 @@
                          </div>
                          <div class="row ">
 
+                             <?php if (!$produk) { ?>
+                                <div class="text-center text-muted my-5">Tidak ada item yang dapat ditampilkan. Silahkan cari keyword atau kategori yang benar!</div>
+                             <?php } ?>
                              <?php foreach ($produk as $data) { ?>
                              <div class="col-md-3 col-sm-4 col-12 mb-4">
                                  <div class="card shadow">
-                                    <a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>">
+                                    <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
                                         <img src="<?= base_url('assets/img/'.$data->cover_img) ?>" class="card-img-top" alt="...">
                                     </a>
                                     <div class="card-body">
-                                         <h6 class="card-subtitle mb-2 nama-produk"><a href="<?= base_url('index.php/pages/detail/'.$data->kode_item) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
+                                         <h6 class="card-subtitle mb-2 nama-produk"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
                                          <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h5>
                                          <footer class="blockquote-footer mt-2">
                                           <span>Terjual <?= $data->status_jual ?></span>
@@ -76,26 +79,13 @@
                          </div>
                      </div>
                  </div>
-                 <nav aria-label="Page navigation example">
-                     <ul class="pagination justify-content-end">
-                         <li class="page-item disabled">
-                             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                         </li>
-                         <li class="page-item"><a class="page-link" href="#">1</a></li>
-                         <li class="page-item"><a class="page-link" href="#">2</a></li>
-                         <li class="page-item"><a class="page-link" href="#">3</a></li>
-                         <li class="page-item">
-                             <a class="page-link" href="#">Next</a>
-                         </li>
-                     </ul>
-                 </nav>
              </div>
          </div>
      </div>
 
      <!-- Btn Back -->
       <div class="container mt-3">
-        <a class="btn btn-custom shadow w-100 text-center p-3" href="<?= base_url('index.php/pages') ?>"><i class="fas fa-arrow-left me-2"></i>Beranda</a>
+        <a class="btn btn-custom shadow w-100 text-center p-3" href="<?= base_url() ?>"><i class="fas fa-arrow-left me-2"></i>Beranda</a>
       </div>
       <!-- Btn Back -->
 
