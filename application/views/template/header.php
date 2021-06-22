@@ -52,7 +52,7 @@
           <!-- <button class="btn btn-custom-2">Login</button> -->
           <div class="dropdown">
             <a class="text-decoration-none text-custom dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="<?= base_url('assets/img/'.$user->img) ?>" alt="mdo" width="32" height="32" class="rounded-circle">
+              <img src="<?= base_url('assets/img/'.$user['image']) ?>" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="dropdownMenuButton1">
               <li><a class="dropdown-item mb-2" href="<?= base_url('user') ?>"><i class="fas fa-user me-2"></i>Profile</a></li>
@@ -74,7 +74,7 @@
         <!-- <button class="btn btn-custom-2 me-2">Login</button> -->
         <div class="dropdown">
           <a class="text-decoration-none text-custom dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="<?= base_url('assets/img/'.$user->img) ?>" alt="mdo" width="40" height="40" class="rounded-circle">
+            <img src="<?= base_url('assets/img/'.$user['image']) ?>" alt="mdo" width="40" height="40" class="rounded-circle">
           </a>
           <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="dropdownMenuButton1">
             <li><a class="dropdown-item mb-2" href="<?= base_url('user') ?>"><i class="fas fa-user me-2"></i>Profile</a></li>

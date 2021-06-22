@@ -28,40 +28,36 @@
         <div class="card p-2">
           <div class="card-body">
             <h1 class="h3 mb-2 fw-normal text-center">Register</h1>
-            <?php if ($message) { ?>
-              <div class="alert alert-danger" id="infoMessage"><?php echo $message;?></div>
-            <?php } ?>
-            <form class="row g-3 mt-3" method="post" action="<?= base_url('auth/create_user') ?>">
-              <?php if($identity_column !== 'email') { ?>
-                <div class="col-md-6">
-                  <input type="text" name="identity" class="form-control p-3" placeholder="Username">
-                </div>
-              <?php } else { ?>
-                <div class="col-md-6">
-                  <input type="text" name="username" class="form-control p-3" placeholder="Username">
-                </div>
-              <?php } ?>
+            <form class="row g-3 mt-3" action="<?= base_url('auth/register') ?>" method="post">
               <div class="col-md-6">
-                <input type="text" class="form-control p-3" name="phone" placeholder="No. Telp">
+                <input type="text" class="form-control p-3" placeholder="Username" name="username" value="<?= set_value('username') ?>">
+                <?= form_error('username', '<small class="text-danger">', '</small>') ?>
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control p-3" placeholder="No. Telp" name="no_telp" value="<?= set_value('no_telp') ?>">
+                <?= form_error('no_telp', '<small class="text-danger">', '</small>') ?>
               </div>
               <div class="col-12">
-                <input type="email" class="form-control p-3" name="email" placeholder="Email">
+                <input type="text" class="form-control p-3" placeholder="Email" name="email" value="<?= set_value('email') ?>">
+                <?= form_error('email', '<small class="text-danger">', '</small>') ?>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control p-3" name="password" placeholder="Password">
+                <input type="password" class="form-control p-3" placeholder="Password" name="password">
+                <?= form_error('password', '<small class="text-danger">', '</small>') ?>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control p-3" name="password_confirm" placeholder="Confirm Password">
+                <input type="password" class="form-control p-3" placeholder="Confirm Password" name="confirm_pass">
+                <?= form_error('confirm_pass', '<small class="text-danger">', '</small>') ?>
               </div>
               <div class="col-12">
                 <button class="w-100 btn btn-custom p-3" type="submit">Register</button>
               </div>
               <div class="my-2 float-center ">
                 <div class="text-center mt-3">
-                  Sudah punya Akun?<a href="login" class="text-decoration-none ms-1 text-custom">Login</a>
+                  Sudah punya Akun?<a href="<?= base_url('auth') ?>" class="text-decoration-none ms-1 text-custom">Login</a>
                 </div>
                 <div class="text-center mt-2">
-                  <a href="<?= base_url('auth/forgot_password') ?>" class="text-decoration-none text-custom">Lupa Password?</a>
+                  <a href="<?= base_url('auth/forgot') ?>" class="text-decoration-none text-custom">Lupa Password?</a>
                 </div>
               </div>
             </form>

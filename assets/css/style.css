@@ -321,6 +321,10 @@ body{
 		height: 300px;
 	}
 
+	#header .image-header img {
+		height: 150px;
+	}
+
 	#kategori .card img {
 		width: 40%;
 	}

@@ -38,10 +38,10 @@
               </div>
               <div class="my-2 float-center">
                 <div class="text-center mt-2">
-                  Sudah punya Akun?<a href="<?= base_url('index.php/auth/login') ?>" class="text-decoration-none ms-1 text-custom">Login</a>
+                  Sudah punya Akun?<a href="<?= base_url('auth') ?>" class="text-decoration-none ms-1 text-custom">Login</a>
                 </div>
                 <div class="text-center mt-2">
-                  Belum punya akun?<a href="<?= base_url('index.php/auth/register') ?>" class="text-decoration-none ms-1 text-custom">Daftar</a>
+                  Belum punya akun?<a href="<?= base_url('auth/register') ?>" class="text-decoration-none ms-1 text-custom">Daftar</a>
                 </div>
               </div>
             </form>

@@ -26,36 +26,36 @@
     <div class="row mt-5">
       <div class="col-lg-6 col-12 m-auto">
         <div class="card p-4">
-          <div class="card-body text-center">
-            <?php echo form_open("auth/login");?>
-              <img class="mb-4" src="<?= base_url('assets/img/logo.png') ?>" alt="" width="80" height="70">
-              <h1 class="h3 mb-3 fw-normal">Silahkan Login</h1>
-              <?php if ($message) { ?>
-                <div class="alert alert-danger" id="infoMessage"><?php echo $message;?></div>
-              <?php } ?>
+          <div class="card-body">
+            <form action="<?= base_url('auth') ?>" method="post">
+              <img class="mb-4 d-block m-auto" src="<?= base_url('assets/img/logo.png') ?>" alt="" width="80" height="70">
+              <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
+              <?= $this->session->flashdata('message') ?>
               <div class="form-floating mb-1">
-                <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="identity">
-                <label for="floatingInput">Email</label>
+                <input type="text" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="<?= set_value('email') ?>">
+                <label for="floatingInput">Email address</label>
+                <?= form_error('email', '<small class="text-danger">', '</small>') ?>
               </div>
               <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
+                <?= form_error('password', '<small class="text-danger">', '</small>') ?>
               </div>
               <div class="forgot my-3 float-start ">
                 <label class="forgot">
-                  <input type="checkbox" value="1" id="remember" name="remember"> Remember me
+                  <input type="checkbox" value="remember-me"> Remember me
                 </label>
               </div>
               <button class="w-100 btn btn-custom p-3" type="submit">Login</button>
               <div class="my-2 float-center ">
                 <div class="text-center mt-3">
-                  Belum punya akun?<a href="<?= base_url('auth/create_user') ?>" class="text-decoration-none ms-1 text-custom">Daftar</a>
+                  Belum punya akun?<a href="<?= base_url('index.php/auth/register') ?>" class="text-decoration-none ms-1 text-custom">Daftar</a>
                 </div>
                 <div class="text-center mt-2">
-                  <a href="<?= base_url('auth/forgot_password') ?>" class="text-decoration-none text-custom">Lupa Password?</a>
+                  <a href="<?= base_url('index.php/auth/forgot') ?>" class="text-decoration-none text-custom">Lupa Password?</a>
                 </div>
               </div>
-            <?php echo form_close();?>
+            </form>
           </div>
         </div>
       </div>

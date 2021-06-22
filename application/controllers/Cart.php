@@ -3,23 +3,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Cart extends CI_Controller {
 
+	protected $user;
+
 	public function __construct()
     {
         parent::__construct();
 
-        if (!$this->ion_auth->logged_in())
-	    {
-	      redirect('auth/login');
-	    }
+        // Get user data
+		$this->user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 	    
         $this->load->model('produk');
+
     }
 
 	public function index()
 	{
+
 		$data = [
 			'title' => 'Keranjang | Product Listening',
-			'user' => $this->ion_auth->user()->row()
+			'user' => $this->user
 		];
 
 		$this->load->view('template/header.php', $data);
@@ -29,6 +31,7 @@ class Cart extends CI_Controller {
 
 	public function checkout()
 	{
+
 		$slug = $this->input->post('slug');
 		$qty = $this->input->post('qty');
 		
@@ -36,7 +39,7 @@ class Cart extends CI_Controller {
 			'title' => 'Checkout | Product Listening',
 			'produk' => $this->produk->getData($slug, 'dat_produk')->result(),
 			'qty' => $qty,
-			'user' => $this->ion_auth->user()->row()
+			'user' => $this->user
 		];
 
 		$this->load->view('template/header.php', $data);

@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="d-flex justify-content-center align-self-center">
-                                <img src="<?= base_url('assets/img/'.$user->img) ?>" height="200" width="200"
+                                <img src="<?= base_url('assets/img/user.png') ?>" height="200" width="200"
                                     class="img-thumbnail rounded-circle img-profile">
                             </div>
                             <div class="d-grid d-md-flex mt-3 justify-content-center">
@@ -47,27 +47,28 @@
 	                                    </p>
 	                                </div>
 	                                <hr>
-	                                <form action="" method="">
+	                                <form action="<?= base_url('user') ?>" method="post">	
+	                                	<?= $this->session->flashdata('message') ?> 
+	                                	<input type="hidden" name="id" value="<?= $user['id'] ?>">   
 		                                <div class="mb-3 row">
 		                                    <label class="col-sm-3 col-form-label">Username</label>
 		                                    <div class="col-sm-9">
-												<div class="input-group mb-3">
-												  <input type="text" class="form-control" placeholder="Username" value="<?= $user->username ?>" readonly>
-												  <button class="btn btn-outline-custom" type="button" data-bs-toggle="modal" data-bs-target="#modal-username"><i class="fas fa-user-edit "></i></button>
-												</div>
+											  <input type="text" class="form-control" placeholder="Username" value="<?= ($user['username']) ? $user['username'] : set_value('username') ?>" name="username">
+											  <?= form_error('username', '<small class="text-danger">', '</small>') ?>
 		                                    </div>
 		                                </div>
 		                                <div class="mb-3 row">
 		                                    <label class="col-sm-3 col-form-label">Nama Lengkap</label>
 		                                    <div class="col-sm-9">
-		                                        <input type="text" class="form-control" value="<?= $user->nama ?>" placeholder="Masukan Nama Lengkap Anda">
+		                                        <input type="text" class="form-control" value="<?= ($user['name']) ? $user['name'] : set_value('name') ?>" placeholder="Masukan Nama Lengkap Anda" name="name">
+		                                        <?= form_error('name', '<small class="text-danger">', '</small>') ?>
 		                                    </div>
 		                                </div>
 		                                <div class="mb-3 row">
 		                                    <label class="col-sm-3 col-form-label ">Email</label>
 		                                    <div class="col-sm-9">
 												<div class="input-group mb-3">
-												  <input type="text" class="form-control" placeholder="Email" value="<?= $user->email ?>" aria-describedby="button-addon2" readonly>
+												  <input type="text" class="form-control" placeholder="Email" value="<?= $user['email'] ?>" readonly>
 												  <button class="btn btn-outline-custom" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#modal-email"><i class="fas fa-user-edit "></i></button>
 												</div>
 		                                    </div>
@@ -75,22 +76,23 @@
 		                                <div class="mb-3 row">
 		                                    <label class="col-sm-3 col-form-label">No. Telp</label>
 		                                    <div class="col-sm-9">
-		                                        <input type="text" class="form-control" value="<?= $user->phone ?>" placeholder="Masukan No. Telp Anda">
+		                                        <input type="text" class="form-control" value="<?= ($user['no_telp']) ? $user['no_telp'] : set_value('no_telp') ?>" placeholder="Masukan No. Telp Anda" name="no_telp">
+		                                        <?= form_error('no_telp', '<small class="text-danger">', '</small>') ?>
 		                                    </div>
 		                                </div>
 		                                <div class="mb-3 row">
 		                                    <label class="col-sm-3 col-form-label">Jenis Kelamin</label>
 		                                    <div class="col-sm-9 mt-2">
 		                                        <div class="form-check  form-check-inline">
-		                                            <input class="form-check-input" type="radio" name="jk" value="laki-laki">
+		                                            <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki">
 		                                            <label class="form-check-label">Laki - laki</label>
 		                                        </div>
 		                                        <div class="form-check  form-check-inline">
-		                                            <input class="form-check-input" type="radio" name="jk" value="perempuan">
+		                                            <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan">
 		                                            <label class="form-check-label">Perempuan</label>
 		                                        </div>
 		                                        <div class="form-check  form-check-inline">
-		                                            <input class="form-check-input" type="radio" name="jk" value="lainnya">
+		                                            <input class="form-check-input" type="radio" name="jenis_kelamin" value="lainnya">
 		                                            <label class="form-check-label">Lainnya</label>
 		                                        </div>
 		                                    </div>
@@ -98,7 +100,7 @@
 		                                <div class="mb-3 row">
 		                                    <label class="col-sm-3 col-form-label">Tanggal Lahir</label>
 		                                    <div class="col-sm-9">
-		                                        <input type="date" class="form-control" value="<?= $user->tgl_lahir ?>">
+		                                        <input type="date" class="form-control" value="<?= ($user['tgl_lahir']) ? $user['tgl_lahir'] : set_value('tgl_lahir') ?>" name="tgl_lahir">
 		                                    </div>
 		                                </div>
 		                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -213,51 +215,6 @@
             </div>
         </div>
 
-	    <!-- Username Modal -->
-	    <div class="modal fade" id="modal-username" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	        <div class="modal-dialog modal-lg">
-	            <div class="modal-content">
-	                <div class="modal-header">
-	                    <h4 class="modal-title" id="exampleModalLabel">
-	                        Ubah Username
-	                    </h4>
-	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	                </div>
-	                <div class="modal-body">
-	                    <p>Untuk mengubah Username, silahkan masukkan password akun Anda.</p>
-	                    <hr>
-	                    <div class="row my-3">
-	                        <label class="col-md-4 col-form-label ">Username Saat Ini</label>
-	                        <div class="col-md-8">
-	                            <input type="text" readonly class="form-control-plaintext" value="Prommpd830">
-	                        </div>
-	                    </div>
-	                    <div class="row my-3">
-	                        <label class="col-md-4 col-form-label ">Username Baru</label>
-	                        <div class="col-md-8">
-	                            <input type="text" class="form-control" placeholder="Masukan Username baru Anda">
-	                        </div>
-	                    </div>
-	                    <div class="row my-3">
-	                        <label class="col-md-4 col-form-label ">Password</label>
-	                        <div class="col-md-8">
-	                            <input type="password" class="form-control">
-	                        </div>
-	                    </div>
-	                    <div class="row my-3">
-	                        <label class="col-md-4 col-form-label ">Confirm Password</label>
-	                        <div class="col-md-8">
-	                            <input type="password" class="form-control">
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="modal-footer">
-	                    <button type="button" class="btn btn-custom">Simpan</button>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-
 	    <!-- Email Modal -->
 	    <div class="modal fade" id="modal-email" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	        <div class="modal-dialog modal-lg">
@@ -268,37 +225,36 @@
 	                    </h4>
 	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	                </div>
-	                <div class="modal-body">
-	                    <p>Untuk mengubah email, silahkan masukkan password akun Anda.</p>
-	                    <hr>
-	                    <div class="row my-3">
-	                        <label class="col-md-4 col-form-label ">Email Saat Ini</label>
-	                        <div class="col-md-8">
-	                            <input type="email" readonly class="form-control-plaintext" value="example@gmail.com">
-	                        </div>
-	                    </div>
-	                    <div class="row my-3">
-	                        <label class="col-md-4 col-form-label ">Email Baru</label>
-	                        <div class="col-md-8">
-	                            <input type="email" class="form-control" placeholder="Masukan Email baru Anda">
-	                        </div>
-	                    </div>
-	                    <div class="row my-3">
-	                        <label class="col-md-4 col-form-label ">Password</label>
-	                        <div class="col-md-8">
-	                            <input type="password" class="form-control">
-	                        </div>
-	                    </div>
-	                    <div class="row my-3">
-	                        <label class="col-md-4 col-form-label ">Confirm Password</label>
-	                        <div class="col-md-8">
-	                            <input type="password" class="form-control">
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="modal-footer">
-	                    <button type="button" class="btn btn-custom">Simpan</button>
-	                </div>
+	                <form action="<?= base_url('user/changeEmail') ?>" method="post">
+		                <div class="modal-body">
+		                    <p>Untuk mengubah email, silahkan masukkan password akun Anda.</p>
+		                    <hr>
+		                    <div class="row my-3">
+		                        <label class="col-md-4 col-form-label ">Email Baru</label>
+		                        <div class="col-md-8">
+		                            <input type="text" class="form-control" placeholder="Masukan Email baru Anda" value="<?= set_value('email') ?>" name="email">
+		                            <?= form_error('email', '<small class="text-danger">', '</small>') ?>
+		                        </div>
+		                    </div>
+		                    <div class="row my-3">
+		                        <label class="col-md-4 col-form-label ">Password</label>
+		                        <div class="col-md-8">
+		                            <input type="password" class="form-control" name="password">
+		                            <?= form_error('password', '<small class="text-danger">', '</small>') ?>
+		                        </div>
+		                    </div>
+		                    <div class="row my-3">
+		                        <label class="col-md-4 col-form-label ">Confirm Password</label>
+		                        <div class="col-md-8">
+		                            <input type="password" class="form-control" name="confirm_pass">
+		                            <?= form_error('confirm_pass', '<small class="text-danger">', '</small>') ?>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="modal-footer">
+		                    <button type="submit" class="btn btn-custom">Simpan</button>
+		                </div>
+		            </form>
 	            </div>
 	        </div>
 	    </div>
