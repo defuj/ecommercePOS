@@ -13,6 +13,10 @@ class Auth extends CI_Controller
 
 	public function index()
 	{
+		if ($this->session->userdata('email')) {
+        	redirect(base_url());
+        }
+
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email', [
 			'required' => 'Email tidak boleh kosong',
 			'trim' => 'Email tidak boleh ada spasi',
@@ -111,6 +115,10 @@ class Auth extends CI_Controller
 
 	public function register()
 	{
+		if ($this->session->userdata('email')) {
+        	redirect(base_url());
+        }
+        
 		// Validation Rules
 		$this->form_validation->set_rules('username', 'Username', 'required|trim|max_length[30]', [
 			'required' => 'Username tidak boleh kosong',
@@ -178,7 +186,6 @@ class Auth extends CI_Controller
 
 	}
 
-
 	public function forgot()
 	{
 		$data = [
@@ -187,5 +194,14 @@ class Auth extends CI_Controller
 
 		$this->load->view('auth/forgot', $data);
 	}
+
+ 	public function reset()
+ 	{
+ 		$data = [
+			'title' => 'Reset Password | Megakomputer',
+		];
+
+		$this->load->view('auth/reset', $data);
+ 	}
 
 }

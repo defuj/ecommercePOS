@@ -27,7 +27,7 @@
       <div class="col-lg-6 col-12 m-auto">
         <div class="card p-4">
           <div class="card-body">
-            <form action="" method="post" class="row">
+            <form action="<?= base_url('auth/reset') ?>" method="post" class="row">
               <h1 class="h3 mb-3 fw-normal">Forgot Password</h1>
               <p>Masukan Email akun anda yang ingin anda reset dan Kami akan mengirimkan anda link untuk mereset password anda.</p>
               <div class="col-12 mb-3">

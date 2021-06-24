@@ -31,14 +31,12 @@
               <img class="mb-4 d-block m-auto" src="<?= base_url('assets/img/logo.png') ?>" alt="" width="80" height="70">
               <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
               <?= $this->session->flashdata('message') ?>
-              <div class="form-floating mb-1">
-                <input type="text" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" value="<?= set_value('email') ?>">
-                <label for="floatingInput">Email address</label>
+              <div class="form-group mb-1">
+                <input type="text" name="email" class="form-control p-3" placeholder="Email" value="<?= set_value('email') ?>">
                 <?= form_error('email', '<small class="text-danger">', '</small>') ?>
               </div>
-              <div class="form-floating">
-                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
+              <div class="form-group">
+                <input type="password" name="password" class="form-control p-3" placeholder="Password">
                 <?= form_error('password', '<small class="text-danger">', '</small>') ?>
               </div>
               <div class="forgot my-3 float-start ">
@@ -49,10 +47,10 @@
               <button class="w-100 btn btn-custom p-3" type="submit">Login</button>
               <div class="my-2 float-center ">
                 <div class="text-center mt-3">
-                  Belum punya akun?<a href="<?= base_url('index.php/auth/register') ?>" class="text-decoration-none ms-1 text-custom">Daftar</a>
+                  Belum punya akun?<a href="<?= base_url('auth/register') ?>" class="text-decoration-none ms-1 text-custom">Daftar</a>
                 </div>
                 <div class="text-center mt-2">
-                  <a href="<?= base_url('index.php/auth/forgot') ?>" class="text-decoration-none text-custom">Lupa Password?</a>
+                  <a href="<?= base_url('auth/forgot') ?>" class="text-decoration-none text-custom">Lupa Password?</a>
                 </div>
               </div>
             </form>

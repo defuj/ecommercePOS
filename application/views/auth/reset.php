@@ -27,32 +27,31 @@
       <div class="col-lg-6 col-12 m-auto">
         <div class="card p-2">
           <div class="card-body">
-            <h1 class="h3 mb-2 fw-normal text-center">Register</h1>
+            <h1 class="h3 mb-2 fw-normal text-center">Reset Password</h1>
+            <p class="text-center">Masukan token yang telah Kami kirim ke email anda. Dan masukan password baru anda.</p>
             <form class="row g-3 mt-3">
-              <div class="col-md-6">
-                <input type="text" class="form-control p-3" placeholder="Username">
+              <div class="col-md-12">
+                <input type="text" class="form-control p-3" name="token" placeholder="Token">
+              </div>
+              <div class="col-md-12">
+                <input type="text" class="form-control p-3" name="email" placeholder="Email">
               </div>
               <div class="col-md-6">
-                <input type="text" class="form-control p-3" placeholder="No. Telp">
+                <input type="password" class="form-control p-3" name="password" placeholder="Password">
               </div>
+              <div class="col-md-6">
+                <input type="password" class="form-control p-3" name="confirm-pass" placeholder="Confirm Password">
+              </div>
+              
               <div class="col-12">
-                <input type="email" class="form-control p-3" placeholder="Email">
-              </div>
-              <div class="col-md-6">
-                <input type="password" class="form-control p-3" placeholder="Password">
-              </div>
-              <div class="col-md-6">
-                <input type="password" class="form-control p-3" placeholder="Confirm Password">
-              </div>
-              <div class="col-12">
-                <button class="w-100 btn btn-custom p-3" type="submit">Register</button>
+                <button class="w-100 btn btn-custom p-3" type="submit">Reset</button>
               </div>
               <div class="my-2 float-center ">
                 <div class="text-center mt-3">
-                  Sudah punya Akun?<a href="<?= base_url('index.php/auth/login') ?>" class="text-decoration-none ms-1 text-custom">Login</a>
+                  Sudah punya Akun?<a href="<?= base_url('auth') ?>" class="text-decoration-none ms-1 text-custom">Login</a>
                 </div>
-                <div class="text-center mt-2">
-                  <a href="<?= base_url('index.php/auth/forgot') ?>" class="text-decoration-none text-custom">Lupa Password?</a>
+                <div class="text-center mt-3">
+                  Belum punya akun?<a href="<?= base_url('auth/register') ?>" class="text-decoration-none ms-1 text-custom">Daftar</a>
                 </div>
               </div>
             </form>

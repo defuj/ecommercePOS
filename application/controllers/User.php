@@ -9,6 +9,10 @@ class User extends CI_Controller {
     {
         parent::__construct();
 
+        if (!$this->session->userdata('email')) {
+        	redirect('auth');
+        }
+
         // Get user data
 		$this->user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 

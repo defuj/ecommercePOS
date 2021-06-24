@@ -32,6 +32,7 @@
                                             <a class="nav-link active list-group-item border-0" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="true">Profile</a>
                                             <a class="nav-link list-group-item border-0" id="v-pills-alamat-tab" data-bs-toggle="pill" data-bs-target="#v-pills-alamat" type="button" role="tab" aria-controls="v-pills-alamat" aria-selected="false">Alamat</a>
                                             <a class="nav-link list-group-item border-0" id="v-pills-bank-tab" data-bs-toggle="pill" data-bs-target="#v-pills-bank" type="button" role="tab" aria-controls="v-pills-bank" aria-selected="false">Bank Kartu</a>
+                                            <a class="nav-link list-group-item border-0" id="v-pills-change-pass-tab" data-bs-toggle="pill" data-bs-target="#v-pills-change-pass" type="button" role="tab" aria-controls="v-pills-change-pass" aria-selected="false">Ubah Password</a>
                                         </div>
                                     </div>
                                 </div>
@@ -207,6 +208,34 @@
 				                            </form>
 	                                    </div>
 	                                </div>
+							    </div>
+							    <div class="tab-pane fade" id="v-pills-change-pass" role="tabpanel" aria-labelledby="v-pills-change-pass-tab">
+							    	<div class=" bd-highlight">
+					                    <h4 class="mt-3 mb-3">Atur Password</h4>
+					                    <p>Untuk keamanan akun Anda, mohon untuk tidak menyebarkan password Anda ke orang lain.</p>
+					                </div>
+					                <hr>
+					                <div class="mb-3 row">
+					                   	<label class="col-sm-4 col-form-label">Password Baru</label>
+					                    <div class="col-sm-8">
+					                    	<input type="password" class="form-control" >
+					                    </div>
+					                </div>
+					                <div class="mb-3 row">
+					                    <label class="col-sm-4 col-form-label">Konfirmasi Password</label>
+					                    <div class="col-sm-8">
+					                      <input type="password" class="form-control">
+					                    </div>
+					                </div>
+					                <div class="mb-3 row">
+					                    <label class="col-sm-4 col-form-label ">Kode Verifikasi</label>
+					                    <div class="col-sm-8">
+					                      <input type="text"  class="form-control">
+					                    </div>
+					                </div>
+					                <div class="d-grid d-md-block">
+						                <button type="submit" class="btn btn-custom float-end"><i class="fas fa-share me-1"></i> Konfirmasi</button>
+					                </div>
 							    </div>
 							</div>
                         </div>
