@@ -40,74 +40,12 @@
                         </div>
                         <div class="col-lg-8">
                         	<div class="tab-content" id="v-pills-tabContent">
-							    <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-							    	<div class="bd-highlight">
-	                                    <h4 class="mt-3">Profile Saya</h4>
-	                                    <p class="mt-3">Kelola informasi profil Anda untuk mengontrol, melindungi dan mengamankan
-	                                    akun
-	                                    </p>
-	                                </div>
-	                                <hr>
-	                                <form action="<?= base_url('user') ?>" method="post">	
-	                                	<?= $this->session->flashdata('message') ?> 
-	                                	<input type="hidden" name="id" value="<?= $user['id'] ?>">   
-		                                <div class="mb-3 row">
-		                                    <label class="col-sm-3 col-form-label">Username</label>
-		                                    <div class="col-sm-9">
-											  <input type="text" class="form-control" placeholder="Username" value="<?= ($user['username']) ? $user['username'] : set_value('username') ?>" name="username">
-											  <?= form_error('username', '<small class="text-danger">', '</small>') ?>
-		                                    </div>
-		                                </div>
-		                                <div class="mb-3 row">
-		                                    <label class="col-sm-3 col-form-label">Nama Lengkap</label>
-		                                    <div class="col-sm-9">
-		                                        <input type="text" class="form-control" value="<?= ($user['name']) ? $user['name'] : set_value('name') ?>" placeholder="Masukan Nama Lengkap Anda" name="name">
-		                                        <?= form_error('name', '<small class="text-danger">', '</small>') ?>
-		                                    </div>
-		                                </div>
-		                                <div class="mb-3 row">
-		                                    <label class="col-sm-3 col-form-label ">Email</label>
-		                                    <div class="col-sm-9">
-												<div class="input-group mb-3">
-												  <input type="text" class="form-control" placeholder="Email" value="<?= $user['email'] ?>" readonly>
-												  <button class="btn btn-outline-custom" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#modal-email"><i class="fas fa-user-edit "></i></button>
-												</div>
-		                                    </div>
-		                                </div>
-		                                <div class="mb-3 row">
-		                                    <label class="col-sm-3 col-form-label">No. Telp</label>
-		                                    <div class="col-sm-9">
-		                                        <input type="text" class="form-control" value="<?= ($user['no_telp']) ? $user['no_telp'] : set_value('no_telp') ?>" placeholder="Masukan No. Telp Anda" name="no_telp">
-		                                        <?= form_error('no_telp', '<small class="text-danger">', '</small>') ?>
-		                                    </div>
-		                                </div>
-		                                <div class="mb-3 row">
-		                                    <label class="col-sm-3 col-form-label">Jenis Kelamin</label>
-		                                    <div class="col-sm-9 mt-2">
-		                                        <div class="form-check  form-check-inline">
-		                                            <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki">
-		                                            <label class="form-check-label">Laki - laki</label>
-		                                        </div>
-		                                        <div class="form-check  form-check-inline">
-		                                            <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan">
-		                                            <label class="form-check-label">Perempuan</label>
-		                                        </div>
-		                                        <div class="form-check  form-check-inline">
-		                                            <input class="form-check-input" type="radio" name="jenis_kelamin" value="lainnya">
-		                                            <label class="form-check-label">Lainnya</label>
-		                                        </div>
-		                                    </div>
-		                                </div>
-		                                <div class="mb-3 row">
-		                                    <label class="col-sm-3 col-form-label">Tanggal Lahir</label>
-		                                    <div class="col-sm-9">
-		                                        <input type="date" class="form-control" value="<?= ($user['tgl_lahir']) ? $user['tgl_lahir'] : set_value('tgl_lahir') ?>" name="tgl_lahir">
-		                                    </div>
-		                                </div>
-		                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-		                                	<button class="btn btn-custom shadow text-center p-2" type="submit"><i class="fas fa-cloud-download-alt me-2"></i>Simpan</button>
-		                                </div>
-		                            </form>
+							    <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" data-href="<?= base_url('user/loadProfile') ?>">
+							    	<div class="text-center loading mt-3">
+									  <div class="spinner-border text-custom" role="status" style="width: 3rem; height: 3rem;">
+									    <span class="visually-hidden">Loading...</span>
+									  </div>
+									</div>
 							    </div>
 
 							    <div class="tab-pane fade" id="v-pills-alamat" role="tabpanel" aria-labelledby="v-pills-alamat-tab">
@@ -244,7 +182,8 @@
             </div>
         </div>
 
-	    <!-- Email Modal -->
+
+        <!-- Email Modal -->
 	    <div class="modal fade" id="modal-email" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	        <div class="modal-dialog modal-lg">
 	            <div class="modal-content">
@@ -254,39 +193,47 @@
 	                    </h4>
 	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	                </div>
-	                <form action="<?= base_url('user/changeEmail') ?>" method="post">
+	                <form action="<?= base_url('user/changeEmail') ?>" method="post" id="form-email" data-href="<?= base_url('user') ?>">
+	                	<input type="hidden" name="id" value="<?= $user['id'] ?>">
+	                	<input type="hidden" name="emailOld" value="<?= $user['email'] ?>">    
 		                <div class="modal-body">
 		                    <p>Untuk mengubah email, silahkan masukkan password akun Anda.</p>
 		                    <hr>
+		                    <span id="message-email"></span> 
 		                    <div class="row my-3">
 		                        <label class="col-md-4 col-form-label ">Email Baru</label>
 		                        <div class="col-md-8">
-		                            <input type="text" class="form-control" placeholder="Masukan Email baru Anda" value="<?= set_value('email') ?>" name="email">
-		                            <?= form_error('email', '<small class="text-danger">', '</small>') ?>
+		                            <input type="text" class="form-control" placeholder="Masukan email baru Anda" value="<?= set_value('email') ?>" name="emailNew">
+		                            <span id="email_error"></span>
 		                        </div>
 		                    </div>
 		                    <div class="row my-3">
 		                        <label class="col-md-4 col-form-label ">Password</label>
 		                        <div class="col-md-8">
-		                            <input type="password" class="form-control" name="password">
-		                            <?= form_error('password', '<small class="text-danger">', '</small>') ?>
+		                            <input type="password" class="form-control" name="password" placeholder="Masukan password Anda">
+		                            <span id="password_error"></span>
 		                        </div>
 		                    </div>
 		                    <div class="row my-3">
 		                        <label class="col-md-4 col-form-label ">Confirm Password</label>
 		                        <div class="col-md-8">
-		                            <input type="password" class="form-control" name="confirm_pass">
-		                            <?= form_error('confirm_pass', '<small class="text-danger">', '</small>') ?>
+		                            <input type="password" class="form-control" name="confirm_pass" placeholder="Ulang password">
+		                            <span id="confirm_error"></span>
 		                        </div>
 		                    </div>
 		                </div>
 		                <div class="modal-footer">
-		                    <button type="submit" class="btn btn-custom">Simpan</button>
+		                	<button class="btn btn-custom" id="btn-loading-email" type="button" disabled>
+							  <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+							  Loading
+							</button>
+		                    <button type="submit" class="btn btn-custom" id="btn-email"><i class="fas fa-cloud-download-alt me-2"></i>Simpan</button>
 		                </div>
 		            </form>
 	            </div>
 	        </div>
 	    </div>
+	    
 
 	    <!-- Tambah Alamat  -->
 	    <div class="modal fade" id="modal-tambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

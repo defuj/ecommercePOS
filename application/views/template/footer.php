@@ -54,6 +54,8 @@
     <script type="text/javascript" src="<?= base_url('assets/js/script.js'); ?>"></script>
     <!-- Cart Js -->
     <script type="text/javascript" src="<?= base_url('assets/js/cart-script.js'); ?>"></script>
+    <!-- User Js -->
+    <script type="text/javascript" src="<?= base_url('assets/js/user-script.js'); ?>"></script>
     <!-- Number Js -->
     <script type="text/javascript" src="<?= base_url('assets/js/number-script.js'); ?>"></script>
     <!-- FancyBox -->
