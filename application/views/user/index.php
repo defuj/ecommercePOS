@@ -41,68 +41,22 @@
                         <div class="col-lg-8">
                         	<div class="tab-content" id="v-pills-tabContent">
 							    <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" data-href="<?= base_url('user/loadProfile') ?>">
-							    	<div class="text-center loading mt-3">
+							    	<div class="text-center loading-profile mt-3">
 									  <div class="spinner-border text-custom" role="status" style="width: 3rem; height: 3rem;">
 									    <span class="visually-hidden">Loading...</span>
 									  </div>
 									</div>
+
 							    </div>
 
-							    <div class="tab-pane fade" id="v-pills-alamat" role="tabpanel" aria-labelledby="v-pills-alamat-tab">
-							    	<div class=" bd-highlight">
-	                                    <h4 class="mt-3 mb-0">Alamat Saya
-	                                        <button type="button" class="btn btn-custom btn-sm float-end"
-                                            data-bs-toggle="modal" data-bs-target="#modal-tambah">Tambah Alamat<i class="fas fa-plus-circle ms-2"></i>
-                                        </button>
-	                                    </h4>
-	                                    <hr>
-	                                </div>
-	                                <div class="card border-0 shadow position-relative">
-					                    <a class="btn-close btn-close-card p-3 rounded-circle bg-white shadow"></a>
-	                                	<div class="card-body">
-	                                		<form class="row g-3">
-						                        <div class="col-md-6">
-						                            <label class="form-label">Nama</label>
-						                            <input type="text" class="form-control" placeholder="Masukan Nama" value="Cep Imam">
-						                        </div>
-						                        <div class="col-md-6">
-						                            <label class="form-label">No. Telp</label>
-						                            <input type="text" class="form-control" placeholder="Masukan No. Telp" value="085524569631">
-						                        </div>
-						                        <div class="col-lg-3">
-						                            <label for="inputAddress" class="form-label">Provinsi</label>
-						                            <select class="form-select">
-						                                <option value="jawa-barat">Jawa Barat</option>
-						                            </select>
-						                        </div>
-						                        <div class="col-lg-3">
-						                            <label for="inputAddress" class="form-label">Kota/Kabupaten</label>
-						                            <select class="form-select">
-						                                <option value="sumedang">Sumedang</option>
-						                            </select>
-						                        </div>
-						                        <div class="col-lg-3">
-						                            <label for="inputAddress" class="form-label">Kecamatan</label>
-						                            <input class="form-control" type="text" name="kecamatan" placeholder="..." value="Darmaraja">
-						                        </div>
-						                        <div class="col-lg-3">
-						                            <label for="inputAddress" class="form-label">Desa</label>
-						                            <input class="form-control" type="text" name="desa" placeholder="..." value="Cikeusi">
-						                        </div>
-						                        <div class="col-md-12">
-						                            <label for="inputAddress" class="form-label">Alamat Lengkap</label>
-						                            <textarea name="alamat" class="form-control" placeholder="Nama Jalan, Blok, No.Rumah, Gedung" rows="5">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</textarea>
-						                        </div>
-						                        <div class="col-md-12">
-						                            <label for="inputZip" class="form-label">Kode Pos</label>
-						                            <input type="text" class="form-control" placeholder="Masukan Kode Pos" value="45363">
-						                        </div>
-						                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				                                	<button class="btn btn-custom shadow text-center p-2" type="submit"><i class="fas fa-cloud-download-alt me-2"></i>Simpan</button>
-				                                </div>
-						                    </form>
-	                                	</div>
-	                                </div>
+							    <div class="tab-pane fade" id="v-pills-alamat" role="tabpanel" aria-labelledby="v-pills-alamat-tab" data-href="<?= base_url('user/loadAlamat') ?>">
+
+							    	<div class="text-center loading-alamat mt-3">
+									  <div class="spinner-border text-custom" role="status" style="width: 3rem; height: 3rem;">
+									    <span class="visually-hidden">Loading...</span>
+									  </div>
+									</div>
+
 							    </div>
 							    <div class="tab-pane fade" id="v-pills-bank" role="tabpanel" aria-labelledby="v-pills-bank-tab">
 							    	<div class="row">
@@ -172,7 +126,7 @@
 					                    </div>
 					                </div>
 					                <div class="d-grid d-md-block">
-						                <button type="submit" class="btn btn-custom float-end"><i class="fas fa-share me-1"></i> Konfirmasi</button>
+						                <button type="submit" class="btn btn-custom float-end"><i class="fas fa-share me-2"></i>Konfirmasi</button>
 					                </div>
 							    </div>
 							</div>
@@ -245,40 +199,96 @@
 	                    </h5>
 	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	                </div>
+	                <form class="row g-3" action="<?= base_url('user/addAlamat') ?>" method="post" id="form-add-alamat">
+		                <div class="modal-body">
+		                	<div class="row g-3">
+		                        <div class="col-lg-3">
+		                            <label class="form-label">Provinsi</label>
+		                            <select class="form-select" name="provinsi" id="add-provinsi">
+		                                <option value="">...</option>
+		                                <option value="Jawa Barat">Jawa Barat</option>
+		                            </select>
+		                            <span id="provinsi_add_alamat_error"></span>
+		                        </div>
+		                        <div class="col-lg-3">
+		                            <label class="form-label">Kota/Kabupaten</label>
+		                            <select class="form-select" name="kota" id="add-kota">
+		                                <option value="">...</option>
+		                                <option value="Sumedang">Sumedang</option>
+		                            </select>
+		                            <span id="kota_add_alamat_error"></span>
+		                        </div>
+		                        <div class="col-lg-3">
+		                            <label class="form-label">Kecamatan</label>
+		                            <input class="form-control" type="text" name="kecamatan" id="add-kecamatan" placeholder="...">
+		                            <span id="kecamatan_add_alamat_error"></span>
+		                        </div>
+		                        <div class="col-lg-3">
+		                            <label class="form-label">Desa</label>
+		                            <input class="form-control" type="text" name="desa" id="add-desa" placeholder="...">
+		                            <span id="desa_add_alamat_error"></span>
+		                        </div>
+		                        <div class="col-md-12">
+		                            <label class="form-label">Alamat Lengkap</label>
+		                            <textarea name="alamat" id="add-alamat" class="form-control" placeholder="Nama Jalan, Blok, No.Rumah, Gedung"></textarea>
+		                            <span id="alamat_add_alamat_error"></span>
+		                        </div>
+		                        <div class="col-md-12">
+		                            <label class="form-label">Kode Pos</label>
+		                            <input type="text" class="form-control" name="kode-pos" id="add-kode-pos" placeholder="Masukan Kode Pos">
+		                            <span id="kode_pos_add_alamat_error"></span>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="modal-footer">
+		                	<button class="btn btn-custom" id="btn-loading-add-alamat" type="button" disabled>
+								  <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+								  Loading
+							</button>
+		                    <button type="submit" class="btn btn-custom" id="btn-add-alamat"><i class="fas fa-share me-2"></i>Kirim</button>
+		                </div>
+		            </form>
+	            </div>
+	        </div>
+	    </div>
+
+
+	    <!-- Ubah Alamat  -->
+	    <div class="modal fade" id="modal-ubah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	        <div class="modal-dialog modal-lg">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h5 class="modal-title" id="exampleModalLabel">
+	                        Ubah Alamat
+	                    </h5>
+	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                </div>
 	                <div class="modal-body">
 	                    <form class="row g-3">
-	                        <div class="col-md-6">
-	                            <label class="form-label">Nama</label>
-	                            <input type="text" class="form-control" placeholder="Masukan Nama">
-	                        </div>
-	                        <div class="col-md-6">
-	                            <label class="form-label">No. Telp</label>
-	                            <input type="text" class="form-control" placeholder="Masukan No. Telp">
-	                        </div>
 	                        <div class="col-lg-3">
-	                            <label for="inputAddress" class="form-label">Provinsi</label>
+	                            <label class="form-label">Provinsi</label>
 	                            <select class="form-select">
 	                                <option>...</option>
 	                                <option value="jawa-barat">Jawa Barat</option>
 	                            </select>
 	                        </div>
 	                        <div class="col-lg-3">
-	                            <label for="inputAddress" class="form-label">Kota/Kabupaten</label>
+	                            <label class="form-label">Kota/Kabupaten</label>
 	                            <select class="form-select">
 	                                <option>...</option>
 	                                <option value="jawa-barat">Jawa Barat</option>
 	                            </select>
 	                        </div>
 	                        <div class="col-lg-3">
-	                            <label for="inputAddress" class="form-label">Kecamatan</label>
+	                            <label class="form-label">Kecamatan</label>
 	                            <input class="form-control" type="text" name="kecamatan" placeholder="...">
 	                        </div>
 	                        <div class="col-lg-3">
-	                            <label for="inputAddress" class="form-label">Desa</label>
+	                            <label class="form-label">Desa</label>
 	                            <input class="form-control" type="text" name="desa" placeholder="...">
 	                        </div>
 	                        <div class="col-md-12">
-	                            <label for="inputAddress" class="form-label">Alamat Lengkap</label>
+	                            <label class="form-label">Alamat Lengkap</label>
 	                            <textarea name="" id="" class="form-control"
 	                                placeholder="Nama Jalan, Blok, No.Rumah, Gedung"></textarea>
 	                        </div>
@@ -289,7 +299,7 @@
 	                    </form>
 	                </div>
 	                <div class="modal-footer">
-	                    <button type="button" class="btn btn-custom">Simpan</button>
+	                    <button type="button" class="btn btn-custom"><i class="fas fa-cloud-download-alt me-2"></i>Simpan</button>
 	                </div>
 	            </div>
 	        </div>
@@ -318,7 +328,7 @@
 	                            <input type="text" class="form-control">
 	                        </div>
 	                        <div class="col-md-12">
-	                            <label for="inputAddress" class="form-label">Bank</label>
+	                            <label class="form-label">Bank</label>
 	                            <select class="form-select">
 	                                <option></option>
 	                                <option value="bri">Bank Rakyat Indonesia</option>

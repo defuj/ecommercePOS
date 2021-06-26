@@ -26,7 +26,7 @@
 
       <!-- Footer -->
       <footer class="footer text-white text-center pb-2 pt-4">
-        <p>Copyright &copy; by Your Website - 2021</p>
+        <p>Copyright &copy; by Your Website - <?= date('Y') ?></p>
       </footer>
       <!-- End Footer -->
     </section>

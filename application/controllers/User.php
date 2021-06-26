@@ -27,7 +27,7 @@ class User extends CI_Controller {
 
 			$data = [
 				'title' => 'Profile | Megakomputer',
-				'user' => $this->user		
+				'user' => $this->user,
 			];
 
 			$this->load->view('template/header.php', $data);
@@ -63,10 +63,28 @@ class User extends CI_Controller {
 	public function loadProfile()
 	{
 		$data = [
-				'user' => $this->user		
+			'user' => $this->user		
 		];
 
 		$this->load->view('user/profile', $data);
+	}
+
+	public function loadAlamat()
+	{
+		$user = $this->user;
+
+		$alamat = $this->db->select('user.id as idUser, user.name, user.no_telp, alamat.*');
+		$alamat = $this->db->from('user');
+		$alamat = $this->db->join('alamat', 'alamat.user_id = user.id');
+		$alamat = $this->db->where('alamat.user_id', $user['id']);
+		$alamat = $this->db->order_by('id', 'ASC');
+		$alamat = $this->db->get()->result_array();
+
+		$data = [
+			'alamat' => $alamat
+		];
+
+		$this->load->view('user/alamat', $data);
 	}
 
 
@@ -105,7 +123,7 @@ class User extends CI_Controller {
 			$this->db->update('user', $data, ['id' => $id]);
 
 			$array = array(
-			    'success' => '<div class="alert alert-success">Data berhasil di simpan</div>'
+			    'success' => true
 			);
 
 		} else {
@@ -127,10 +145,11 @@ class User extends CI_Controller {
 	public function changeEmail()
 	{
 		// Validation Rules
-		$this->form_validation->set_rules('emailNew', 'Email', 'required|trim|valid_email', [
+		$this->form_validation->set_rules('emailNew', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
 			'required' => 'Email tidak boleh kosong',
 			'trim' => 'Email tidak boleh ada spasi',
-			'valid_email' => 'Email harus valid'
+			'valid_email' => 'Email harus valid',
+			'is_unique' => 'Email sudah terdaftar'
 		]);
 		$this->form_validation->set_rules('password', 'Password', 'required|trim|matches[confirm_pass]', [
 			'required' => 'Password tidak boleh kosong',
@@ -188,6 +207,91 @@ class User extends CI_Controller {
 
 	 	echo json_encode($array);
 	}
+
+
+	public function addAlamat()
+	{
+		// Validation Rules
+		$this->form_validation->set_rules('provinsi', 'Provinsi', 'required', [
+			'required' => 'Provinsi tidak boleh kosong',
+		]);
+		$this->form_validation->set_rules('kota', 'Kota', 'required', [
+			'required' => 'Kota tidak boleh kosong',
+		]);
+		$this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required', [
+			'required' => 'Kecamatan tidak boleh kosong',
+		]);
+		$this->form_validation->set_rules('desa', 'Desa', 'required', [
+			'required' => 'Desa tidak boleh kosong',
+		]);
+		$this->form_validation->set_rules('alamat', 'Alamat', 'required', [
+			'required' => 'Alamat tidak boleh kosong',
+		]);
+		$this->form_validation->set_rules('kode-pos', 'Kode Pos', 'required', [
+			'required' => 'Kode Pos tidak boleh kosong',
+		]);
+
+		if ($this->form_validation->run()) {
+
+			$user = $this->user;
+
+			$data = [
+				'user_id' => $user['id'],
+				'provinsi' => htmlspecialchars($this->input->post('provinsi', true)),
+				'kota' => htmlspecialchars($this->input->post('kota', true)),
+				'kecamatan' => htmlspecialchars($this->input->post('kecamatan', true)),
+				'desa' => htmlspecialchars($this->input->post('desa', true)),
+				'alamat' => htmlspecialchars($this->input->post('alamat', true)),
+				'kode_pos' => htmlspecialchars($this->input->post('kode-pos', true)),
+			];
+
+			$this->db->insert('alamat', $data);
+
+			$array = array(
+			    'success' => true
+			);
+
+		} else {
+
+			$array = array(
+			    'error'   => true,
+			    'name_add_alamat_error' => form_error('name', '<small class="text-danger">', '</small>'),
+			    'no_telp_add_alamat_error' => form_error('no_telp', '<small class="text-danger">', '</small>'),
+			    'provinsi_add_alamat_error' => form_error('provinsi', '<small class="text-danger">', '</small>'),
+			    'kota_add_alamat_error' => form_error('kota', '<small class="text-danger">', '</small>'),
+			    'kecamatan_add_alamat_error' => form_error('kecamatan', '<small class="text-danger">', '</small>'),
+			    'desa_add_alamat_error' => form_error('desa', '<small class="text-danger">', '</small>'),
+			    'alamat_add_alamat_error' => form_error('alamat', '<small class="text-danger">', '</small>'),
+			    'kode_pos_add_alamat_error' => form_error('kode-pos', '<small class="text-danger">', '</small>'),
+			);
+
+		}
+
+	 	echo json_encode($array);
+
+	}
+
+	public function activeAlamat()
+	{
+		$id = $this->input->post('id');
+
+		$user = $this->user;
+
+		$reset = $this->db->update('alamat', ['is_active' => 0], ['user_id' => $user['id']]);
+
+		$update = $this->db->update('alamat', ['is_active' => 1], ['id' => $id]);
+	}
+
+
+	public function deleteAlamat()
+	{
+		$id = $this->input->post('id');
+
+		$this->db->where('id', $id);
+		$this->db->delete('alamat');
+	}
+
+
 
 
 	public function pesanan()

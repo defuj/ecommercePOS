@@ -6,8 +6,7 @@
                     </p>
                 </div>
                 <hr>
-                <form action="<?= base_url('user/updateProfile') ?>" method="post" id="form-profile">	
-                	<span id="message-profile"></span> 
+                <form action="<?= base_url('user/updateProfile') ?>" method="post" id="form-profile">
                 	<input type="hidden" name="id" value="<?= $user['id'] ?>">   
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Username</label>
@@ -24,7 +23,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label class="col-sm-3 col-form-label ">Email</label>
+                        <label class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
 							<div class="input-group mb-3">
 							  <input id="email-profile" type="text" class="form-control" placeholder="Email" value="<?= $user['email'] ?>" readonly>
@@ -43,15 +42,18 @@
                         <label class="col-sm-3 col-form-label">Jenis Kelamin</label>
                         <div class="col-sm-9 mt-2">
                             <div class="form-check  form-check-inline">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki" 
+                                <?= ($user['jenis_kelamin'] == 'laki-laki') ? 'checked="checked"' : ''; ?>>
                                 <label class="form-check-label">Laki - laki</label>
                             </div>
                             <div class="form-check  form-check-inline">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan" 
+                                <?= ($user['jenis_kelamin'] == 'perempuan') ? 'checked="checked"' : ''; ?>>
                                 <label class="form-check-label">Perempuan</label>
                             </div>
                             <div class="form-check  form-check-inline">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="lainnya">
+                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="lainnya" 
+                                <?= ($user['jenis_kelamin'] == 'lainnya') ? 'checked="checked"' : ''; ?>>
                                 <label class="form-check-label">Lainnya</label>
                             </div>
                         </div>
@@ -90,13 +92,13 @@
 						        showCancelButton: true,
 						        confirmButtonColor: '#06207e',
 						        cancelButtonColor: '#dc0000',
-						        confirmButtonText: 'Pesan',
+						        confirmButtonText: 'Simpan',
 						        cancelButtonText: 'Tidak'
 						    }).then((result) => {
 
 						    	if (result.isConfirmed) {
 
-						          $.ajax({
+						            $.ajax({
 								      url: href,
 								      method:"POST",
 								      data: $(this).serialize(),
@@ -118,26 +120,37 @@
 
 								            $('#username_error').html(data.username_error);
 
-								          }
+								          } else {
+
+                                            $('#username_error').html('');
+
+                                          }
 
 								          if (data.name_error != '') {
 
 								            $('#name_error').html(data.name_error);
 
-								          }
+								          } else {
+
+                                            $('#name_error').html('');
+
+                                          }
 
 
 								          if (data.noTelp_error != '') {
 
 								            $('#noTelp_error').html(data.noTelp_error);
 
-								          }
+								          } else {
+
+                                            $('#noTelp_error').html('');
+
+                                          }
 
 								        }
 
 								        // Form validation success
 								        if(data.success) {
-								          $('#message-profile').html(data.success);
 								          $('#username_error').html('');
 								          $('#name_error').html('');
 								          $('#noTelp_error').html('');
@@ -145,6 +158,13 @@
 
 								      }
 								    })
+
+                                    Swal.fire({
+                                      icon: 'success',
+                                      title: 'Berhasil Disimpan',
+                                      showConfirmButton: false,
+                                      timer: 1500
+                                    })
 						        }
 							    
 							})

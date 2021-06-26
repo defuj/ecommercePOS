@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2021 at 03:51 PM
+-- Generation Time: Jun 26, 2021 at 02:52 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -21,6 +21,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_megacom`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alamat`
+--
+
+CREATE TABLE `alamat` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `alamat` text NOT NULL,
+  `provinsi` varchar(50) NOT NULL,
+  `kota` varchar(50) NOT NULL,
+  `kecamatan` varchar(50) NOT NULL,
+  `desa` varchar(50) NOT NULL,
+  `kode_pos` int(11) NOT NULL,
+  `is_active` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `alamat`
+--
+
+INSERT INTO `alamat` (`id`, `user_id`, `alamat`, `provinsi`, `kota`, `kecamatan`, `desa`, `kode_pos`, `is_active`) VALUES
+(16, 7, 'Dusun Citembong Girang, RT01/RW03, Ds.Cikeusi, Kec.Daramaraja, Kab.Sumedang', 'Jawa Barat', 'Sumedang', 'Cibugel', 'Ciputat', 45372, 1),
+(17, 7, 'Perum pesona gading blok E4 no 21, RT003/RW016, Desa Wanajaya, Kec Cibitung, Kab Bekasi, Jawa Barat', 'Jawa Barat', 'Sumedang', 'Cikarang', 'Cibeureum', 45372, 0);
 
 -- --------------------------------------------------------
 
@@ -126,7 +152,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `username`, `email`, `image`, `no_telp`, `tgl_lahir`, `jenis_kelamin`, `password`, `role_id`, `is_active`, `date_created`) VALUES
-(6, 'Andi Muhyi Mayapada', 'Prommpd830', 'andimayapada04@gmail.com', 'user.png', '085524569631', '2021-06-17', 'laki-laki', '$2y$10$Q49tPCHuHPmHPaRwPI3HVesM9.p81U69ny0ZMt6VpyefmsKkinpv2', 2, 1, 1624359785),
+(6, 'Andi Muhyi Mayapada', 'Prommpd830', 'andimayapada04@gmail.com', 'user.png', '085524569631', '2021-06-10', 'laki-laki', '$2y$10$Q49tPCHuHPmHPaRwPI3HVesM9.p81U69ny0ZMt6VpyefmsKkinpv2', 2, 1, 1624359785),
 (7, 'Andi Muhyi Mayapada', 'prommpd830', 'proandimmpd327@gmail.com', 'user.png', '08552456963', '2003-07-18', 'laki-laki', '$2y$10$v275ZqbjwTUulr9ieDbieebIN2AcsVBR9HtyRY8MSl731JAIDUxgm', 2, 1, 1624359846);
 
 -- --------------------------------------------------------
@@ -151,6 +177,13 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `alamat`
+--
+ALTER TABLE `alamat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `dat_produk`
@@ -190,6 +223,12 @@ ALTER TABLE `user_role`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `alamat`
+--
+ALTER TABLE `alamat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `dat_produk`
