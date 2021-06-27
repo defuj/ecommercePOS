@@ -1,6 +1,6 @@
     
     <main>
-        <div class="container">
+        <div class="container"> 
             <div class="card mt-5 h-100 shadow border-0">
                 <div class="card-body">
                     <div class="row">
@@ -41,7 +41,7 @@
                         <div class="col-lg-8">
                         	<div class="tab-content" id="v-pills-tabContent">
 							    <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" data-href="<?= base_url('user/loadProfile') ?>">
-							    	<div class="text-center loading-profile mt-3">
+							    	<div class="text-center loading mt-3">
 									  <div class="spinner-border text-custom" role="status" style="width: 3rem; height: 3rem;">
 									    <span class="visually-hidden">Loading...</span>
 									  </div>
@@ -51,7 +51,7 @@
 
 							    <div class="tab-pane fade" id="v-pills-alamat" role="tabpanel" aria-labelledby="v-pills-alamat-tab" data-href="<?= base_url('user/loadAlamat') ?>">
 
-							    	<div class="text-center loading-alamat mt-3">
+							    	<div class="text-center loading mt-3">
 									  <div class="spinner-border text-custom" role="status" style="width: 3rem; height: 3rem;">
 									    <span class="visually-hidden">Loading...</span>
 									  </div>
@@ -102,32 +102,48 @@
 	                                </div>
 							    </div>
 							    <div class="tab-pane fade" id="v-pills-change-pass" role="tabpanel" aria-labelledby="v-pills-change-pass-tab">
+
 							    	<div class=" bd-highlight">
 					                    <h4 class="mt-3 mb-3">Atur Password</h4>
 					                    <p>Untuk keamanan akun Anda, mohon untuk tidak menyebarkan password Anda ke orang lain.</p>
 					                </div>
 					                <hr>
-					                <div class="mb-3 row">
-					                   	<label class="col-sm-4 col-form-label">Password Baru</label>
-					                    <div class="col-sm-8">
-					                    	<input type="password" class="form-control" >
-					                    </div>
-					                </div>
-					                <div class="mb-3 row">
-					                    <label class="col-sm-4 col-form-label">Konfirmasi Password</label>
-					                    <div class="col-sm-8">
-					                      <input type="password" class="form-control">
-					                    </div>
-					                </div>
-					                <div class="mb-3 row">
-					                    <label class="col-sm-4 col-form-label ">Kode Verifikasi</label>
-					                    <div class="col-sm-8">
-					                      <input type="text"  class="form-control">
-					                    </div>
-					                </div>
-					                <div class="d-grid d-md-block">
-						                <button type="submit" class="btn btn-custom float-end"><i class="fas fa-share me-2"></i>Konfirmasi</button>
-					                </div>
+					                <form action="<?= base_url('user/changePass') ?>" method="post" id="form-change-pass">
+						                <div class="mb-3 row">
+						                   	<label class="col-sm-4 col-form-label">Password Lama</label>
+						                    <div class="col-sm-8">
+						                    	<input type="password" class="form-control" placeholder="Masukan Password lama Anda" name="passwordOld">
+						                    	<span id="passwordOld_change_error"></span>
+						                    </div>
+						                </div>
+						                <div class="mb-3 row">
+						                    <label class="col-sm-4 col-form-label">Konfirmasi Password Lama</label>
+						                    <div class="col-sm-8">
+						                      <input type="password" class="form-control" placeholder="Ulang Password" name="confirm_pass1">
+						                      <span id="confirm_pass1_change_error"></span>
+						                    </div>
+						                </div>
+						                <div class="mb-3 row">
+						                    <label class="col-sm-4 col-form-label ">Password Baru</label>
+						                    <div class="col-sm-8">
+						                      <input type="password" class="form-control" placeholder="Masukan Password baru anda" name="passwordNew">
+						                      <span id="passwordNew_change_error"></span>
+						                    </div>
+						                </div>
+						                <div class="mb-3 row">
+						                    <label class="col-sm-4 col-form-label">Konfirmasi Password Baru</label>
+						                    <div class="col-sm-8">
+						                      <input type="password" class="form-control" placeholder="Ulang Password" name="confirm_pass2">
+						                      <span id="confirm_pass2_change_error"></span>
+						                    </div>
+						                </div>
+						                <div class="d-grid d-md-block">
+						                	<button class="btn btn-custom float-end" id="btn-loading-change-pass" type="button" disabled>
+												<span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>Loading
+											</button>
+							                <button type="submit" class="btn btn-custom float-end" id="btn-change-pass"><i class="fas fa-share me-2"></i>Ubah</button>
+						                </div>
+						            </form>
 							    </div>
 							</div>
                         </div>
@@ -148,12 +164,11 @@
 	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	                </div>
 	                <form action="<?= base_url('user/changeEmail') ?>" method="post" id="form-email" data-href="<?= base_url('user') ?>">
-	                	<input type="hidden" name="id" value="<?= $user['id'] ?>">
-	                	<input type="hidden" name="emailOld" value="<?= $user['email'] ?>">    
+	                	<input type="hidden" name="id">
+	                	<input type="hidden" name="emailOld">    
 		                <div class="modal-body">
 		                    <p>Untuk mengubah email, silahkan masukkan password akun Anda.</p>
-		                    <hr>
-		                    <span id="message-email"></span> 
+		                    <hr> 
 		                    <div class="row my-3">
 		                        <label class="col-md-4 col-form-label ">Email Baru</label>
 		                        <div class="col-md-8">
@@ -207,6 +222,7 @@
 		                            <select class="form-select" name="provinsi" id="add-provinsi">
 		                                <option value="">...</option>
 		                                <option value="Jawa Barat">Jawa Barat</option>
+		                                <option value="Jawa Timur">Jawa Timur</option>
 		                            </select>
 		                            <span id="provinsi_add_alamat_error"></span>
 		                        </div>
@@ -215,6 +231,7 @@
 		                            <select class="form-select" name="kota" id="add-kota">
 		                                <option value="">...</option>
 		                                <option value="Sumedang">Sumedang</option>
+		                                <option value="Bandung">Bandung</option>
 		                            </select>
 		                            <span id="kota_add_alamat_error"></span>
 		                        </div>
@@ -263,44 +280,58 @@
 	                    </h5>
 	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	                </div>
-	                <div class="modal-body">
-	                    <form class="row g-3">
-	                        <div class="col-lg-3">
-	                            <label class="form-label">Provinsi</label>
-	                            <select class="form-select">
-	                                <option>...</option>
-	                                <option value="jawa-barat">Jawa Barat</option>
-	                            </select>
-	                        </div>
-	                        <div class="col-lg-3">
-	                            <label class="form-label">Kota/Kabupaten</label>
-	                            <select class="form-select">
-	                                <option>...</option>
-	                                <option value="jawa-barat">Jawa Barat</option>
-	                            </select>
-	                        </div>
-	                        <div class="col-lg-3">
-	                            <label class="form-label">Kecamatan</label>
-	                            <input class="form-control" type="text" name="kecamatan" placeholder="...">
-	                        </div>
-	                        <div class="col-lg-3">
-	                            <label class="form-label">Desa</label>
-	                            <input class="form-control" type="text" name="desa" placeholder="...">
-	                        </div>
-	                        <div class="col-md-12">
-	                            <label class="form-label">Alamat Lengkap</label>
-	                            <textarea name="" id="" class="form-control"
-	                                placeholder="Nama Jalan, Blok, No.Rumah, Gedung"></textarea>
-	                        </div>
-	                        <div class="col-md-12">
-	                            <label for="inputZip" class="form-label">Kode Pos</label>
-	                            <input type="text" class="form-control" placeholder="Masukan Kode Pos">
-	                        </div>
-	                    </form>
-	                </div>
-	                <div class="modal-footer">
-	                    <button type="button" class="btn btn-custom"><i class="fas fa-cloud-download-alt me-2"></i>Simpan</button>
-	                </div>
+	                <form action="<?= base_url('user/updateAlamat') ?>" method="pos" id="form-update-alamat">
+	                	<input type="hidden" name="id">
+	                	<div class="modal-body">
+	                		<div class="row g-3">
+		                        <div class="col-lg-3">
+		                            <label class="form-label">Provinsi</label>
+		                            <select class="form-select" name="provinsi">
+		                                <option value="">...</option>
+		                                <option value="Jawa Barat">Jawa Barat</option>
+		                                <option value="Jawa Timur">Jawa Timur</option>
+		                            </select>
+		                            <span id="provinsi_update_alamat_error"></span>
+		                        </div>
+		                        <div class="col-lg-3">
+		                            <label class="form-label">Kota/Kabupaten</label>
+		                            <select class="form-select" name="kota">
+		                                <option value="">...</option>
+		                                <option value="Sumedang">Sumedang</option>
+		                                <option value="Bandung">Bandung</option>
+		                            </select>
+		                            <span id="kota_update_alamat_error"></span>
+		                        </div>
+		                        <div class="col-lg-3">
+		                            <label class="form-label">Kecamatan</label>
+		                            <input class="form-control" type="text" name="kecamatan" placeholder="...">
+		                            <span id="kecamatan_update_alamat_error"></span>
+		                        </div>
+		                        <div class="col-lg-3">
+		                            <label class="form-label">Desa</label>
+		                            <input class="form-control" type="text" name="desa" placeholder="...">
+		                            <span id="desa_update_alamat_error"></span>
+		                        </div>
+		                        <div class="col-md-12">
+		                            <label class="form-label">Alamat Lengkap</label>
+		                            <textarea class="form-control" placeholder="Nama Jalan, Blok, No.Rumah, Gedung" name="alamat"><?= set_value('alamat') ?></textarea>
+		                            <span id="alamat_update_alamat_error"></span>
+		                        </div>
+		                        <div class="col-md-12">
+		                            <label for="inputZip" class="form-label">Kode Pos</label>
+		                            <input type="text" class="form-control" name="kode_pos" placeholder="Masukan Kode Pos">
+		                            <span id="kode_pos_update_alamat_error"></span>
+		                        </div>
+		                    </div>
+	                	</div>
+		                <div class="modal-footer">
+		                	<button class="btn btn-custom" id="btn-loading-update-alamat" type="button" disabled>
+								  <span class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+								  Loading
+							</button>
+		                    <button type="submit" class="btn btn-custom" id="btn-update-alamat"><i class="fas fa-cloud-download-alt me-2"></i>Simpan</button>
+		                </div>
+		            </form>
 	            </div>
 	        </div>
 	    </div>

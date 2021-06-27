@@ -1,6 +1,10 @@
       <!-- Main Content -->
       <main id="cart-items" data-href="<?= base_url('cart/loadItems') ?>">
-        
+        <div class="text-center loading my-5">
+          <div class="spinner-border text-custom" role="status" style="width: 5rem; height: 5rem;">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
       </main>
       <!-- End Main Content -->
 

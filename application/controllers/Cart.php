@@ -35,6 +35,14 @@ class Cart extends CI_Controller {
 
 	public function checkout()
 	{
+		$user = $this->user;
+
+		$alamat = $this->db->select('user.id as idUser, user.name, user.no_telp, alamat.*');
+		$alamat = $this->db->from('user');
+		$alamat = $this->db->join('alamat', 'alamat.user_id = user.id');
+		$alamat = $this->db->where('alamat.user_id', $user['id']);
+		$alamat = $this->db->where('alamat.is_active', 1);
+		$alamat = $this->db->get()->row_array();
 
 		$slug = $this->input->post('slug');
 		$qty = $this->input->post('qty');
@@ -43,7 +51,8 @@ class Cart extends CI_Controller {
 			'title' => 'Checkout | Product Listening',
 			'produk' => $this->produk->getData($slug, 'dat_produk')->result(),
 			'qty' => $qty,
-			'user' => $this->user
+			'user' => $user,
+			'alamat' => $alamat
 		];
 
 		$this->load->view('template/header.php', $data);

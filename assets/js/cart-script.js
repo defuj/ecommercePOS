@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    $('.loading').hide();
+
     // Load Cost Cart
     function loadCost() {
 
@@ -76,8 +78,19 @@ $(document).ready(function () {
 
       const href = $('#cart-items').data('href');
 
-      $.get(href, function (data) {
-        $('#cart-items').html(data);
+      $.ajax({
+        url: href,
+        type: 'get',
+        dataType: 'html',
+        berforeSend:function () {
+          $('.loading').show();
+        },
+        complete:function () {
+          $('.loading').hide();
+        },
+        success:function (data) {
+          $('#cart-items').html(data);
+        }
       })
 
     }

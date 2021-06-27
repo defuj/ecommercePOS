@@ -121,11 +121,24 @@
             }
 
             function loadItems() {
+
               const href = $('#cart-items').data('href');
 
-              $.get(href, function (data) {
-                $('#cart-items').html(data);
+              $.ajax({
+                url: href,
+                type: 'get',
+                dataType: 'html',
+                berforeSend:function () {
+                  $('.loading').show();
+                },
+                complete:function () {
+                  $('.loading').hide();
+                },
+                success:function (data) {
+                  $('#cart-items').html(data);
+                }
               })
+              
             }
 
             $('.remove-cart').click(function (e) {

@@ -47,13 +47,13 @@
                         			<p class="text-md-end text-muted">Kode Pos</p>
                         		</div>
                         		<div class="col-md-9">
-                        			<p class="kode_pos"><?= $data['kode_pos'] ?></p>
+                        			<p class="kode-pos"><?= $data['kode_pos'] ?></p>
                         		</div>
                         	</div>
                         	<div class="row">
                         		<div class="col-12">
                         			<div class="float-md-end">
-                        				<a href="" class="text-decoration-none text-success" data-bs-toggle="modal" data-bs-target="#modal-ubah" data-id="<?= $data['id'] ?>">Ubah</a>&nbsp;|&nbsp;
+                        				<a href="<?= base_url('user/editAlamat') ?>" class="text-decoration-none text-success ubah-alamat" data-bs-toggle="modal" data-bs-target="#modal-ubah" data-id="<?= $data['id'] ?>">Ubah</a>&nbsp;|&nbsp;
                         				<a href="<?= base_url('user/deleteAlamat') ?>" class="text-decoration-none text-danger hapus-alamat" data-id="<?= $data['id'] ?>">Hapus</a>&nbsp;
                         				<button class="btn btn-custom btn-sm atur-alamat" data-id="<?= $data['id'] ?>" <?= ($data['is_active'] == 1) ? 'disabled' : '' ?> data-href="<?= base_url('user/activeAlamat') ?>">Atur Sebagai Utama</button>
                         			</div>
@@ -162,6 +162,72 @@
 
                 		})
 
+
+                        $('.ubah-alamat').on('click', function (e) {
+    
+                            const id = $(this).data('id');
+                            const href = $(this).attr('href');
+
+                            var input_id = $('#form-update-alamat').find('input[name="id"]');
+                            var input_provinsi = $('#form-update-alamat').find('option').parent('select[name="provinsi"]');
+                            var input_kota = $('#form-update-alamat').find('option').parent('select[name="kota"]');
+                            var input_kecamatan = $('#form-update-alamat').find('input[name="kecamatan"]');
+                            var input_desa = $('#form-update-alamat').find('input[name="desa"]');
+                            var input_alamat = $('#form-update-alamat').find('textarea[name="alamat"]');
+                            var input_kode_pos = $('#form-update-alamat').find('input[name="kode_pos"]');
+
+                            input_id.val(id);
+
+                            $.ajax({
+                                url: href,
+                                type: 'post',
+                                dataType: 'json',
+                                data: {id: id},
+                                beforeSend:function(){
+                                  $('#btn-update-alamat').hide();
+                                  $('#btn-loading-update-alamat').show();
+                                },
+                                complete:function() {
+                                  $('#btn-loading-update-alamat').hide();
+                                  $('#btn-update-alamat').show();
+                                },
+                                success:function (data) {
+                                    
+                                    if (data.error) {
+                                        console.log(data.status);
+                                        Swal.fire({
+                                          icon: 'error',
+                                          title: 'Alamat gagal di load'
+                                        })
+                                    } 
+
+                                    if (data.success) {
+                                        input_provinsi.each(function (i) {
+                                            if ($(this).val(data.provinsi) == data.provinsi) {
+                                                $(this).prop('selected', true);
+                                            } else {
+                                                $(this).prop('selected', false);
+                                            }
+                                        })
+                                        input_kota.each(function (i) {
+                                            if ($(this).val(data.kota) == data.kota) {
+                                                $(this).prop('selected', true);
+                                            } else {
+                                                $(this).prop('selected', false);
+                                            }
+                                        })
+
+                                        console.log(data.alamat);
+                                        input_kecamatan.val(data.kecamatan);
+                                        input_desa.val(data.desa);
+                                        input_alamat.val(data.alamat);
+                                        input_kode_pos.val(data.kode_pos);
+                                    }
+
+                                }
+                            })
+
+                        })
 
 
                 	})

@@ -4,29 +4,49 @@
       <div class="container">
         <div class="card h-100 w-100 shadow mt-5 border-0">
           <div class="card-body">
-            <div class="row">
-              <div class="col-sm-12">
+            <div class="row mb-3">
+              <div class="col">
                 <div class="p-2 bd-highlight bg-light">Data Diri</div>
-                <div class="row pt-3">
-                  <div class="col-lg-2">
-                    <p class="card-text text-muted mt-3">No Telp</p>
-                    <p class="card-text mt-3" id="noTelp-dr">085523844630</p>
-                  </div>
-                  <div class="col-lg-2">
-                    <p class="card-text text-muted mt-3">Nama</p>
-                    <p class="card-text mt-3" id="nama-dr">Cep Imam</p>
-                  </div>
-                  <div class="col-lg-2">
-                    <p class="card-text text-muted mt-3">Kode Pos</p>
-                    <p class="card-text mt-3" id="kodePos-dr">45363</p>
-                  </div>
-                  <div class="col-lg-6">
-                    <p class="card-text text-muted mt-3">Alamat</p>
-                    <p class="card-text mt-3" id="alamat-dr">Dusun. Gunung tanjung RT01 RW08, Desa. Cinangsi, Kec. Cisitu, Kab. Sumedang</p>
-                  </div>
-                </div>
               </div>
             </div>
+            <?php if (!$alamat){ ?>
+              <p class="text-center mt-3 text-muted">Belum ada alamat yang dipilih. <a class="text-decoration-none" href="<?= base_url('user') ?>">Pilih alamat</a></p>
+            <?php }else { ?>
+            <div class="row mt-2">
+              <div class="col-lg-2 col-md-3">
+                <p class="text-md-end text-muted">Nama Lengkap</p>
+              </div>
+              <div class="col-lg-10 col-md-9">
+                <p class="name-alamat"><?= $alamat['name'] ?></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2 col-md-3">
+                <p class="text-md-end text-muted">No. Telp</p>
+              </div>
+              <div class="col-lg-10 col-md-9">
+                <p class="no-telp-alamat"><?= $alamat['no_telp'] ?></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2 col-md-3">
+                <p class="text-md-end text-muted">Alamat Lengkap</p>
+              </div>
+              <div class="col-lg-10 col-md-9">
+                <p class="alamat"><?= $alamat['alamat'] ?></p>
+                <p class="provinsi"><?= $alamat['provinsi'] ?></p>
+                <p><span class="kota"><?= $alamat['kota'] ?></span> - <span class="kecamatan"><?= $alamat['kecamatan'] ?></span> - <span class="desa"><?= $alamat['desa'] ?></span></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-2 col-md-3">
+                <p class="text-md-end text-muted">Kode Pos</p>
+              </div>
+              <div class="col-lg-10 col-md-9">
+                <p class="kode-pos"><?= $alamat['kode_pos'] ?></p>
+              </div>
+            </div>
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -96,6 +116,13 @@
                 } 
               }
             ?>
+            <?php if (!$produk | !$this->cart->contents()) { ?>
+            <div class="row">
+              <div class="col">
+                <p class="text-muted text-center mt-3">Tidak ada produk yang ingin dipesan</p>
+              </div>
+            </div>
+            <?php } ?>
             <hr>
             <?php 
               if ($produk) {
@@ -131,6 +158,7 @@
       </div>
       <!-- List Produk -->
 
+      <?php if ($produk | $this->cart->contents()) { ?>
       <!-- Voucher -->
       <div class="container">
         <div class="card h-100 w-100 shadow mt-3 border-0">
@@ -147,8 +175,11 @@
           </div>
         </div>
       </div>
+      <?php } ?>
       <!-- End Voucher -->
 
+
+      <?php if ($produk | $this->cart->contents()) { ?>
       <!-- Method Payment -->
       <div class="container">
         <div class="card h-100 w-100 shadow mt-3 border-0">
@@ -231,42 +262,7 @@
       </div>
     </div>
     <!-- End Method Payment -->
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title text-custom" id="exampleModalLabel">Form Ubah Data Diri</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <form action="">
-            <div class="modal-body">
-              <div class="mb-3">
-                <label class="form-label">No. Telp</label>
-                <input type="text" class="form-control" id="noTelp-form" value="" placeholder="Masukan No. Telp...">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Nama</label>
-                <input type="text" class="form-control" id="nama-form" value="" placeholder="Masukan Nama..." disabled>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Kode Pos</label>
-                <input type="text" class="form-control" id="kodePos-form" value="" placeholder="Masukan Kode Pos..." disabled>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Alamat</label>
-                <textarea class="form-control" id="alamat-form" rows="3"></textarea>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-custom" data-bs-dismiss="modal">Simpan</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Modal -->
+    <?php } ?>
 
     <!-- Btn Back -->
     <div class="container mt-3">

@@ -26,8 +26,8 @@
                         <label class="col-sm-3 col-form-label">Email</label>
                         <div class="col-sm-9">
 							<div class="input-group mb-3">
-							  <input id="email-profile" type="text" class="form-control" placeholder="Email" value="<?= $user['email'] ?>" readonly>
-							  <button class="btn btn-outline-custom" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#modal-email"><i class="fas fa-user-edit "></i></button>
+							  <input type="text" class="form-control" name="email" placeholder="Email" value="<?= $user['email'] ?>" disabled>
+							  <button class="btn btn-outline-custom" type="button" id="btn-getEmail" data-bs-toggle="modal" data-bs-target="#modal-email"><i class="fas fa-user-edit "></i></button>
 							</div>
                         </div>
                     </div>
@@ -154,21 +154,40 @@
 								          $('#username_error').html('');
 								          $('#name_error').html('');
 								          $('#noTelp_error').html('');
+                                          Swal.fire({
+                                              icon: 'success',
+                                              title: 'Berhasil Disimpan',
+                                              showConfirmButton: false,
+                                              timer: 1500
+                                          })
 								        }
 
 								      }
+                                      
 								    })
-
-                                    Swal.fire({
-                                      icon: 'success',
-                                      title: 'Berhasil Disimpan',
-                                      showConfirmButton: false,
-                                      timer: 1500
-                                    })
 						        }
 							    
 							})
 						})
+
+
+                        $('#btn-getEmail').on('click', function (e) {
+                            var id = $('#form-profile').find('input[name="id"]').val();
+                            var email = $(this).parent().find('input[name="email"]').val();
+                            var input_id = $('#form-email').find('input[name="id"]');
+                            var input_email = $('#form-email').find('input[name="emailOld"]');
+
+                            input_id.val(id);
+                            input_email.val(email)
+
+                        })
+
+
+
+
+
+
+
 
                 	})
 

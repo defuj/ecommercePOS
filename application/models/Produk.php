@@ -11,7 +11,7 @@ class Produk extends CI_Model
 
         function findLimit()
         {
-                return $this->db->get('dat_produk', 10);
+                return $this->db->order_by('nama_item', 'RANDOM')->get('dat_produk', 10);
         }
 
         // Insert Data
