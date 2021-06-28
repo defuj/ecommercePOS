@@ -17,7 +17,7 @@
                 <p class="text-md-end text-muted">Nama Lengkap</p>
               </div>
               <div class="col-lg-10 col-md-9">
-                <p class="name-alamat"><?= $alamat['name'] ?></p>
+                <p class="name-alamat"><?= $alamat['nama'] ?></p>
               </div>
             </div>
             <div class="row">
@@ -25,7 +25,7 @@
                 <p class="text-md-end text-muted">No. Telp</p>
               </div>
               <div class="col-lg-10 col-md-9">
-                <p class="no-telp-alamat"><?= $alamat['no_telp'] ?></p>
+                <p class="no-telp-alamat"><?= $alamat['telepon'] ?></p>
               </div>
             </div>
             <div class="row">
@@ -67,7 +67,7 @@
              ?>
               <div class="row">
                 <div class="col-md-2 col-sm-12 mt-3">
-                  <img src="<?= base_url('assets/img/'.$data->cover_img) ?>" class="img-fluid rounded">
+                  <img src="<?= base_url('assets/img/'.$data->nama_file) ?>" class="img-fluid rounded">
                 </div>
                 <div class="col-md-3 col-sm-12 mt-3">
                   <p class="text-muted">Nama Produk</p>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-md-3 col-sm-12 mt-3">
                   <p class="text-muted">Harga</p>
-                  <p class="card-text"><?= $data->satuan_dasar ?></p>
+                  <p class="card-text">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></p>
                 </div>
                 <div class="col-md-2 col-sm-12 mt-3">
                   <p class="text-muted">Jumlah</p>
@@ -83,17 +83,17 @@
                 </div>
                 <div class="col-md-2 col-sm-12 mt-3">
                   <p class="text-muted">Sub Total</p>
-                  <p class="card-text ">Rp.&nbsp;<?= number_format(($data->satuan_dasar * $qty), 0,',','.') ?></p>
+                  <p class="card-text ">Rp.&nbsp;<?= number_format(($data->harga_akhir * $qty), 0,',','.') ?></p>
                 </div>
               </div>
             <?php 
                 }
-              } else {
+              } elseif ($this->cart->contents()) {
                 foreach ($this->cart->contents() as $data) {
             ?>
               <div class="row">
                 <div class="col-md-2 col-sm-12 mt-3">
-                  <img src="<?= base_url('assets/img/'.$data['img']) ?>" class="img-fluid rounded">
+                  <img src="<?= base_url('assets/img/'.$data['nama_file']) ?>" class="img-fluid rounded">
                 </div>
                 <div class="col-md-3 col-sm-12 mt-3">
                   <p class="text-muted">Nama Produk</p>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-md-3 col-sm-12 mt-3">
                   <p class="text-muted">Harga</p>
-                  <p class="card-text"><?= $data['price'] ?></p>
+                  <p class="card-text">Rp.&nbsp;<?= number_format(($data['price']), 0,',','.') ?></p>
                 </div>
                 <div class="col-md-2 col-sm-12 mt-3">
                   <p class="text-muted">Jumlah</p>
@@ -114,9 +114,8 @@
               </div>
             <?php
                 } 
-              }
+              } else {
             ?>
-            <?php if (!$produk | !$this->cart->contents()) { ?>
             <div class="row">
               <div class="col">
                 <p class="text-muted text-center mt-3">Tidak ada produk yang ingin dipesan</p>
@@ -135,12 +134,12 @@
                 </div>
                 <div class="col-md-2 col-sm-12 mt-md-0 mt-3">
                   <p class="text-muted">Total Harga</p>
-                  <p class="card-text ">Rp.&nbsp;<?= number_format(($data->satuan_dasar * $qty), 0,',','.') ?></p>
+                  <p class="card-text ">Rp.&nbsp;<?= number_format(($data->harga_akhir * $qty), 0,',','.') ?></p>
                 </div>
               </div>
             <?php
                 }
-              } else { 
+              } elseif ($this->cart->contents()) { 
              ?>
               <div class="row justify-content-end">
                 <div class="col-md-2 col-sm-12">

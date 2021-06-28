@@ -16,13 +16,27 @@
 
                     <?php foreach ($produkLimit as $data) { ?>
                     <div class="owl-item">
-                      <div class="card">
+                      <div class="card <?= ($data->status_jual == 0) ? 'border border-danger' : ''; ?>">
                         <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
-                          <img src="<?= base_url('assets/img/'.$data->cover_img) ?>" class="card-img-top" alt="...">
+                          <img src="<?= base_url('assets/img/'.$data->nama_file) ?>" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                           <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
-                          <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h5>
+                          <?php if ($data->tipe_diskon == 'persen') { ?>
+                          <h5 class="card-title">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
+                            <span class="badge rounded-pill bg-danger"><?= $data->diskon ?>%</span>
+                          </h5>
+                          <?php } elseif ($data->tipe_diskon == 'nominal') { ?>
+                          <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
+                          </h5>
+                          <?php } elseif ($data->tipe_diskon == 'no_diskon') { ?>
+                            <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>
+                          <?php } ?>
+                          <?php if ($data->status_jual == 0) { ?>
+                            <span class="text-danger fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+                          <?php } else { ?>
+                            <span class="text-success fw-bold"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</span>
+                          <?php } ?>
                         </div>
                       </div>
                     </div>
@@ -44,28 +58,39 @@
                 <div class="col-lg-6">
                   <div class="product-image me-lg-3 me-0">
                     <a href="<?= base_url('pages/detail/'.$data['slug']) ?>">
-                      <img src="<?= base_url('assets/img/'.$data['img']) ?>" class="img-fluid rounded w-100"  width="500px" height="500px">
+                      <img src="<?= base_url('assets/img/'.$data['nama_file']) ?>" class="img-fluid rounded w-100 thumb">
                     </a>
                   </div>
                 </div>
                 <div class="col-lg-6 ms-none">
-                  <?php if ($data['stok'] == 0) { ?>
-                    <span class="text-danger mt-5 fw-bold d-inline d-sm-none"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+                  <?php if ($data['status_jual'] == 0) { ?>
+                    <span class="text-danger fw-bold d-inline d-sm-none"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
                   <?php } else { ?>
-                    <span class="text-success fw-bold d-inline d-sm-none"><i class="fas fa-check-circle me-1 mt-5"></i>Stok Barang <?= $data['stok'] ?></span>
+                    <span class="text-success fw-bold d-inline d-sm-none"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</span>
                   <?php } ?>
                   <div class="d-flex flex-column bd-highlight product-box">
                     <h3 class="card-title mt-3 mb-2 mt-lg-0 text-hidden">
                       <a href="<?= base_url('pages/detail/'.$data['slug']) ?>" class="text-decoration-none text-dark"><?= $data['name']; ?></a>
                       <a class="float-end btn-close remove-cart" href="<?= base_url('cart/remove') ?>" data-id="<?= $data['rowid']; ?>"></a>
                     </h3>
-                    <h4 class="text-hidden">Rp.&nbsp;<?= number_format(($data['price']), 0,',','.') ?></h4>
-                    <div class="bd-highlight">Terjual <small class="badge badge-sm bg-warning"><?= $data['terjual'] ?></small>
-                      <span class="text-warning ms-5 me-1">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                      <?php if ($data['stok'] == 0) { ?>
+                    <?php if ($data['tipe_diskon'] == 'persen') { ?>
+                    <h4 class="text-hidden">Rp.&nbsp;<?= number_format((($data['diskon']/100)*$data['price']), 0,',','.') ?>
+                      <span class="badge rounded-pill bg-danger"><?= $data['diskon'] ?>%</span>
+                      <sub><s>Rp.&nbsp;<?= number_format(($data['price']), 0,',','.') ?></s></sub>
+                    </h4>
+                    <?php } elseif ($data['tipe_diskon'] == 'nominal') { ?>
+                    <h4 class="text-hidden">Rp.&nbsp;<?= number_format(($data['price']-($data['diskon'])), 0,',','.') ?>
+                      <sub><s>Rp.&nbsp;<?= number_format(($data['price']), 0,',','.') ?></s></sub>
+                    </h4>
+                    <?php } elseif ($data['tipe_diskon'] == 'no_diskon') { ?>
+                      <h4 class="text-hidden">Rp.&nbsp;<?= number_format(($data['price']), 0,',','.') ?></h5>  
+                    <?php } ?>
+                    <div class="bd-highlight">
+                      <span class="text-warning me-1">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                      <?php if ($data['status_jual'] == 0) { ?>
                         <span class="text-danger ms-2 fw-bold d-none d-sm-inline"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
                       <?php } else { ?>
-                        <span class="text-success ms-2 fw-bold d-none d-sm-inline"><i class="fas fa-check-circle me-1"></i>Stok Barang <?= $data['stok'] ?></span>
+                        <span class="text-success ms-2 fw-bold d-none d-sm-inline"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</span>
                       <?php } ?>
                     </div>
                     <hr/>
@@ -84,7 +109,7 @@
                       <button type="button" class="btn btn-sm btn-custom minus">
                         <i class="fas fa-minus"></i>
                       </button>
-                      <input type="text" class="form-number" data-id="<?= $data['rowid'] ?>" data-stok="<?= $data['stok'] ?>" data-kode="<?= $data['id'] ?>" data-href="<?= base_url('cart/changeCost') ?>" value="<?= $data['qty'] ?>"/>
+                      <input type="text" class="form-number" data-id="<?= $data['rowid'] ?>" data-stok="99" data-kode="<?= $data['id'] ?>" data-href="<?= base_url('cart/changeCost') ?>" value="<?= $data['qty'] ?>"/>
                       <button class="btn btn-sm btn-custom plus">
                         <i class="fas fa-plus"></i>
                       </button>

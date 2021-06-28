@@ -9,12 +9,10 @@ class Pages extends CI_Controller
     {
         parent::__construct();
 
-        if (!$this->session->userdata('email')) {
-        	redirect('auth');
+        if ($this->session->userdata('email')) {
+        	$this->user = $this->db->get_where('dat_pelanggan', ['email' => $this->session->userdata('email')])->row_array();
+        	// redirect('auth');
         }
-
-        // Get user data
-		$this->user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 	    
         $this->load->model('produk');
 
@@ -22,7 +20,8 @@ class Pages extends CI_Controller
 
 	public function index()
 	{
-
+		// var_dump([$this->produk->findAll()->result(), $this->produk->findLimit()->result()]);
+		// die();
 		$data = [
 			'title' => 'Beranda | Megakomputer',
 			'produk' => $this->produk->findAll()->result(),
@@ -35,8 +34,9 @@ class Pages extends CI_Controller
 		$this->load->view('template/footer.php');
 	}
 
-	public function detail($slug)
+	public function detail($slug = null)
 	{
+
 		$data = [
 			'title' => 'Detail Produk | Megakomputer',
 			'produk' => $this->produk->getData($slug, 'dat_produk')->result(),
@@ -68,13 +68,15 @@ class Pages extends CI_Controller
 
 		if ($key) {
 
-			$this->db->select('kategori.id as idKategori, nama_kategori, dat_produk.*');
+			$this->db->select('ref_jenis.jenis, dat_produk.*, dat_img_produk.nama_file, dat_konversi_satuan.harga_akhir, dat_konversi_satuan.diskon, dat_konversi_satuan.tipe_diskon');
 			$this->db->from('dat_produk');
-			$this->db->join('kategori', 'kategori.id = dat_produk.id_kategori');
+			$this->db->join('ref_jenis', 'ref_jenis.id = dat_produk.id_jenis');
+			$this->db->join('dat_img_produk', 'dat_img_produk.id = dat_produk.id_cover_img');
+			$this->db->join('dat_konversi_satuan', 'dat_konversi_satuan.id = dat_produk.satuan_dasar');
 			$this->db->like('dat_produk.nama_item', $key);
-			$this->db->or_like('kategori.nama_kategori', $key);
+			$this->db->or_like('ref_jenis.jenis', $key);
 
-			$count = $this->db->query("SELECT COUNT(*) FROM `dat_produk` INNER JOIN `kategori` ON `kategori`.id = `dat_produk`.id_kategori WHERE `dat_produk`.nama_item LIKE '%$key%' OR `kategori`.nama_kategori LIKE '%$key%'");
+			$count = $this->db->query("SELECT COUNT(*) FROM `dat_produk` INNER JOIN `ref_jenis` ON `ref_jenis`.id = `dat_produk`.id_jenis WHERE `dat_produk`.nama_item LIKE '%$key%' OR `ref_jenis`.jenis LIKE '%$key%'");
 
 			$data = [
 				'title' => 'Kategori Produk | Megakomputer',

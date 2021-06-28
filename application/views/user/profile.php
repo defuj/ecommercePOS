@@ -18,7 +18,7 @@
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" value="<?= ($user['name']) ? $user['name'] : set_value('name') ?>" placeholder="Masukan Nama Lengkap Anda" name="name">
+                            <input type="text" class="form-control" value="<?= ($user['nama']) ? $user['nama'] : set_value('name') ?>" placeholder="Masukan Nama Lengkap Anda" name="name">
                             <span id="name_error"></span>
                         </div>
                     </div>
@@ -34,34 +34,8 @@
                     <div class="mb-3 row">
                         <label class="col-sm-3 col-form-label">No. Telp</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" value="<?= ($user['no_telp']) ? $user['no_telp'] : set_value('no_telp') ?>" placeholder="Masukan No. Telp Anda" name="no_telp">
+                            <input type="text" class="form-control" value="<?= ($user['telepon']) ? $user['telepon'] : set_value('no_telp') ?>" placeholder="Masukan No. Telp Anda" name="no_telp">
                             <span id="noTelp_error"></span>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-3 col-form-label">Jenis Kelamin</label>
-                        <div class="col-sm-9 mt-2">
-                            <div class="form-check  form-check-inline">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="laki-laki" 
-                                <?= ($user['jenis_kelamin'] == 'laki-laki') ? 'checked="checked"' : ''; ?>>
-                                <label class="form-check-label">Laki - laki</label>
-                            </div>
-                            <div class="form-check  form-check-inline">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="perempuan" 
-                                <?= ($user['jenis_kelamin'] == 'perempuan') ? 'checked="checked"' : ''; ?>>
-                                <label class="form-check-label">Perempuan</label>
-                            </div>
-                            <div class="form-check  form-check-inline">
-                                <input class="form-check-input" type="radio" name="jenis_kelamin" value="lainnya" 
-                                <?= ($user['jenis_kelamin'] == 'lainnya') ? 'checked="checked"' : ''; ?>>
-                                <label class="form-check-label">Lainnya</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-3 col-form-label">Tanggal Lahir</label>
-                        <div class="col-sm-9">
-                            <input type="date" class="form-control" value="<?= ($user['tgl_lahir']) ? $user['tgl_lahir'] : set_value('tgl_lahir') ?>" name="tgl_lahir">
                         </div>
                     </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">

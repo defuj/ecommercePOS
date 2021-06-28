@@ -55,7 +55,7 @@
                                  </select>
                              </div>
                          </div>
-                         <div class="row ">
+                         <div class="row">
 
                              <?php if (!$produk) { ?>
                                 <div class="text-center text-muted my-5">Tidak ada item yang dapat ditampilkan. Silahkan cari keyword atau kategori yang benar!</div>
@@ -64,14 +64,16 @@
                              <div class="col-md-3 col-sm-4 col-12 mb-4">
                                  <div class="card shadow">
                                     <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
-                                        <img src="<?= base_url('assets/img/'.$data->cover_img) ?>" class="card-img-top" alt="...">
+                                        <img src="<?= base_url('assets/img/'.$data->nama_file) ?>" class="card-img-top" alt="...">
                                     </a>
                                     <div class="card-body">
-                                         <h6 class="card-subtitle mb-2 nama-produk"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
-                                         <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->satuan_dasar), 0,',','.') ?></h5>
-                                         <footer class="blockquote-footer mt-2">
-                                          <span>Terjual <?= $data->status_jual ?></span>
-                                         </footer>
+                                        <h6 class="card-subtitle mb-2 nama-produk"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
+                                        <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>
+                                        <?php if ($data->status_jual == 0) { ?>
+                                        <span class="text-danger ms-2 fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+                                        <?php } else { ?>
+                                        <span class="text-success ms-2 fw-bold"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</span>
+                                        <?php } ?> 
                                     </div>
                                  </div>
                              </div>

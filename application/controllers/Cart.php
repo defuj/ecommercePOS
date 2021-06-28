@@ -9,12 +9,10 @@ class Cart extends CI_Controller {
     {
         parent::__construct();
 
-        if (!$this->session->userdata('email')) {
-        	redirect('auth');
+        if ($this->session->userdata('email')) {
+        	$this->user = $this->db->get_where('dat_pelanggan', ['email' => $this->session->userdata('email')])->row_array();
+        	// redirect('auth');
         }
-
-        // Get user data
-		$this->user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 	    
         $this->load->model('produk');
 
@@ -22,6 +20,9 @@ class Cart extends CI_Controller {
 
 	public function index()
 	{
+		if (!$this->user) {
+			redirect('pages');
+		}
 
 		$data = [
 			'title' => 'Keranjang | Product Listening',
@@ -35,11 +36,15 @@ class Cart extends CI_Controller {
 
 	public function checkout()
 	{
+		if (!$this->user) {
+			redirect('pages');
+		}
+		
 		$user = $this->user;
 
-		$alamat = $this->db->select('user.id as idUser, user.name, user.no_telp, alamat.*');
-		$alamat = $this->db->from('user');
-		$alamat = $this->db->join('alamat', 'alamat.user_id = user.id');
+		$alamat = $this->db->select('dat_pelanggan.id as idUser, dat_pelanggan.nama, dat_pelanggan.telepon, alamat.*');
+		$alamat = $this->db->from('dat_pelanggan');
+		$alamat = $this->db->join('alamat', 'alamat.user_id = dat_pelanggan.id');
 		$alamat = $this->db->where('alamat.user_id', $user['id']);
 		$alamat = $this->db->where('alamat.is_active', 1);
 		$alamat = $this->db->get()->row_array();
@@ -82,6 +87,9 @@ class Cart extends CI_Controller {
 
 	public function insert()
 	{
+		if (!$this->input->post('id')) {
+			show_404();
+		}
 
 		$id = $this->input->post('id');
 
@@ -90,13 +98,14 @@ class Cart extends CI_Controller {
 		$data = [
 			'id'      => $id,
 	        'qty'     => 1,
-	        'price'   => $produk->satuan_dasar,
-	        'terjual' => $produk->status_jual,
+	        'price'   => $produk->harga_akhir,
+	        'status_jual' => $produk->status_jual,
 	        'ket'	  => $produk->ket,
 	        'name'    => $produk->nama_item,
-	        'img'	  => $produk->cover_img,
+	        'nama_file'	  => $produk->nama_file,
 	        'slug' 	  => $produk->slug,
-	        'stok' 	  => $produk->stok
+	        'diskon' 	  => $produk->diskon,
+	        'tipe_diskon' => $produk->tipe_diskon
 		];
 
 		$this->cart->insert($data);
@@ -104,6 +113,9 @@ class Cart extends CI_Controller {
 
 	public function changeCost()
 	{
+		if (!$this->input->post('id')) {
+			show_404();
+		}
 
 		$id = $this->input->post('id');
 		$kode = $this->input->post('kode');
@@ -126,7 +138,11 @@ class Cart extends CI_Controller {
 			$id = $this->input->post('id');
 			return $this->cart->remove($id);
 
-		}	
+		} else {
+
+			show_404();
+
+		}
 	}
 
 	public function destroy()

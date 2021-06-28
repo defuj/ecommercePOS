@@ -21,7 +21,7 @@
                         			<p class="text-md-end text-muted">Nama Lengkap</p>
                         		</div>
                         		<div class="col-md-9">
-                        			<p class="name-alamat"><?= $data['name'] ?></p>
+                        			<p class="name-alamat"><?= $data['nama'] ?></p>
                         		</div>
                         	</div>
                         	<div class="row">
@@ -29,7 +29,7 @@
                         			<p class="text-md-end text-muted">No. Telp</p>
                         		</div>
                         		<div class="col-md-9">
-                        			<p class="no-telp-alamat"><?= $data['no_telp'] ?></p>
+                        			<p class="no-telp-alamat"><?= $data['telepon'] ?></p>
                         		</div>
                         	</div>
                         	<div class="row">

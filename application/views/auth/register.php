@@ -29,6 +29,10 @@
           <div class="card-body">
             <h1 class="h3 mb-2 fw-normal text-center">Register</h1>
             <form class="row g-3 mt-3" action="<?= base_url('auth/register') ?>" method="post">
+              <div class="col-12">
+                <input type="text" class="form-control p-3" placeholder="Nama Lengkap" name="nama" value="<?= set_value('nama') ?>">
+                <?= form_error('nama', '<small class="text-danger">', '</small>') ?>
+              </div>
               <div class="col-md-6">
                 <input type="text" class="form-control p-3" placeholder="Username" name="username" value="<?= set_value('username') ?>">
                 <?= form_error('username', '<small class="text-danger">', '</small>') ?>

@@ -14,7 +14,7 @@ class User extends CI_Controller {
         }
 
         // Get user data
-		$this->user = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$this->user = $this->db->get_where('dat_pelanggan', ['email' => $this->session->userdata('email')])->row_array();
 
 		$this->load->library('form_validation');
 
@@ -73,11 +73,11 @@ class User extends CI_Controller {
 	{
 		$user = $this->user;
 
-		$alamat = $this->db->select('user.id as idUser, user.name, user.no_telp, alamat.*');
-		$alamat = $this->db->from('user');
-		$alamat = $this->db->join('alamat', 'alamat.user_id = user.id');
+		$alamat = $this->db->select('dat_pelanggan.id as idUser, dat_pelanggan.nama, dat_pelanggan.telepon, alamat.*');
+		$alamat = $this->db->from('dat_pelanggan');
+		$alamat = $this->db->join('alamat', 'alamat.user_id = dat_pelanggan.id');
 		$alamat = $this->db->where('alamat.user_id', $user['id']);
-		$alamat = $this->db->order_by('id', 'DESC');
+		$alamat = $this->db->order_by('alamat.id', 'DESC');
 		$alamat = $this->db->get()->result_array();
 
 		$data = [
@@ -114,13 +114,11 @@ class User extends CI_Controller {
 
 			$data = [
 				'username' => htmlspecialchars($this->input->post('username', true)),
-				'name' => htmlspecialchars($this->input->post('name', true)),
-				'no_telp' => htmlspecialchars($this->input->post('no_telp', true)),
-				'jenis_kelamin' => htmlspecialchars($this->input->post('jenis_kelamin', true)),
-				'tgl_lahir' => htmlspecialchars($this->input->post('tgl_lahir', true))
+				'nama' => htmlspecialchars($this->input->post('name', true)),
+				'telepon' => htmlspecialchars($this->input->post('no_telp', true)),
 			];
 
-			$this->db->update('user', $data, ['id' => $id]);
+			$this->db->update('dat_pelanggan', $data, ['id' => $id]);
 
 			$array = array(
 			    'success' => true
@@ -145,7 +143,7 @@ class User extends CI_Controller {
 	public function changeEmail()
 	{
 		// Validation Rules
-		$this->form_validation->set_rules('emailNew', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
+		$this->form_validation->set_rules('emailNew', 'Email', 'required|trim|valid_email|is_unique[dat_pelanggan.email]', [
 			'required' => 'Email tidak boleh kosong',
 			'trim' => 'Email tidak boleh ada spasi',
 			'valid_email' => 'Email harus valid',
@@ -169,7 +167,7 @@ class User extends CI_Controller {
 			$emailNew = htmlspecialchars($this->input->post('emailNew', true));
 			$password = $this->input->post('password');
 
-			$user = $this->db->get_where('user', ['email' => $emailOld])->row_array();
+			$user = $this->db->get_where('dat_pelanggan', ['email' => $emailOld])->row_array();
 
 			// Cek jika user ada
 			if ($user) {
@@ -185,7 +183,7 @@ class User extends CI_Controller {
 					$this->session->set_userdata($data);
 
 
-					$this->db->update('user', $data, ['id' => $id]);
+					$this->db->update('dat_pelanggan', $data, ['id' => $id]);
 
 					$array = array(
 					    'success' => '<div class="alert alert-success text-center">Email berhasil diubah</div>'
@@ -423,7 +421,7 @@ class User extends CI_Controller {
 						'password' => $passwordNew
 					];
 
-					$this->db->update('user', $data, ['id' => $user['id']]);
+					$this->db->update('dat_pelanggan', $data, ['id' => $user['id']]);
 
 					$array = array(
 					    'success' => true

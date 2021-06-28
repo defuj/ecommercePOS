@@ -121,7 +121,8 @@ body{
 }
 
 #produk .card img {
-	max-height: 271px;
+	height: 270px;
+	max-height: 270px;
 }
 
 #search .card img {
@@ -147,8 +148,8 @@ body{
 }
 
 #slider .card img {
-	height: 209px;
-	max-height: 209px;
+	height: 250px;
+	max-height: 250px;
 	overflow: hidden;
 }
 
@@ -285,6 +286,8 @@ body{
 }
 .img-thumb{
 	width: 120px;
+	height: 100px;
+	max-height: 100px;
 }
 .img-thumb:hover{
 	opacity: 0.5;
@@ -330,7 +333,7 @@ body{
 	}
 
 	#slider .card img {
-		max-height: 130px;
+		max-height: 160px;
 	}
 
 	.main-contact .row .spacing-contact-1,
