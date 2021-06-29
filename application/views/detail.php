@@ -53,14 +53,14 @@
                     <?php } ?>
                   </div>
                   <hr />
-                  <p class="card-text"><?= $data->ket ?></p>
+                  <p class="card-text mb-3"><?= $data->ket ?></p>
                   <!-- Varian -->
-                  <div class="d-flex mb-3" id="varian">
+                  <!-- <div class="d-flex mb-3" id="varian">
                     <input type="radio" class="btn-check" name="varian" id="danger-outlined" autocomplete="off">
                     <label class="btn btn-outline-danger me-2 lh-base" for="danger-outlined">Hitam</label>
                     <input type="radio" class="btn-check" name="varian" id="danger-outlined-2" autocomplete="off">
                     <label class="btn btn-outline-danger lh-base" for="danger-outlined-2">Putih</label>
-                  </div>
+                  </div> -->
                   <!-- End Varian -->
                   <div class="number">
                     <label class="me-2">Kuantitas</label>
