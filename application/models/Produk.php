@@ -20,7 +20,6 @@ class Produk extends CI_Model
                 $this->db->from('dat_produk');
                 $this->db->join('dat_konversi_satuan', 'dat_konversi_satuan.id = dat_produk.satuan_dasar');
                 $this->db->join('dat_img_produk', 'dat_img_produk.id = dat_produk.id_cover_img ');
-                $this->db->order_by('dat_produk.satuan_dasar', 'ASC');
                 $this->db->order_by('nama_item', 'RANDOM');
                 $this->db->limit(10);
                 return $this->db->get();

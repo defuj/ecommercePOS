@@ -11,10 +11,10 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="<?= base_url('assets/img/solid-1.jpg') ?>" class="d-block w-100" alt="...">
+                <img src="<?= base_url($direktori->banner_direktori.'solid-1.jpg') ?>" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="<?= base_url('assets/img/solid-2.jpg') ?>" class="d-block w-100" alt="...">
+                <img src="<?= base_url($direktori->banner_direktori.'solid-2.jpg') ?>" class="d-block w-100" alt="...">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -29,8 +29,8 @@
         </div>
         <div class="col-md-4 d-md-block d-none">
           <div class="image-header">
-            <img src="<?= base_url('assets/img/solid-1.jpg') ?>" class="d-block w-100 mb-2 mb-md-0" alt="...">
-            <img src="<?= base_url('assets/img/solid-2.jpg') ?>" class="d-block w-100 mb-2 mb-md-0" alt="...">
+            <img src="<?= base_url($direktori->banner_direktori.'solid-1.jpg') ?>" class="d-block w-100 mb-2 mb-md-0" alt="...">
+            <img src="<?= base_url($direktori->banner_direktori.'solid-2.jpg') ?>" class="d-block w-100 mb-2 mb-md-0" alt="...">
           </div>
         </div>
       </div>
@@ -151,21 +151,21 @@
           <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
             <div class="card shadow <?= ($data->status_jual == 0) ? 'border border-danger' : ''; ?>">
               <a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="position-relative">
-                <img src="<?= base_url('assets/img/'.$data->nama_file) ?>" class="card-img-top" alt="...">
+                <img src="<?= base_url($direktori->produk_direktori.$data->nama_file) ?>" class="card-img-top" alt="...">
               </a>
               <div class="card-body position-relative">
                 <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
                 <?php if ($data->tipe_diskon == 'persen') { ?>
-                <h5 class="card-title">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
+                <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
                   <span class="badge rounded-pill bg-danger"><?= $data->diskon ?>%</span>
                   <sub><s>Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></s></sub>
                 </h5>
                 <?php } elseif ($data->tipe_diskon == 'nominal') { ?>
-                <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
+                <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
                   <sub><s>Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></s></sub>
                 </h5>
                 <?php } elseif ($data->tipe_diskon == 'no_diskon') { ?>
-                  <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>  
+                  <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>  
                 <?php } ?>
                 <footer class="blockquote-footer mt-2">
                   <?php if ($data->status_jual == 0) { ?>
@@ -207,24 +207,24 @@
             <div class="owl-item">
               <div class="card <?= ($data->status_jual == 0) ? 'border border-danger' : ''; ?>">
                 <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
-                  <img src="<?= base_url('assets/img/'.$data->nama_file) ?>" class="card-img-top" alt="...">
+                  <img src="<?= base_url($direktori->produk_direktori.$data->nama_file) ?>" class="card-img-top" alt="...">
                 </a>
                 <div class="card-body">
                   <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
                   <?php if ($data->tipe_diskon == 'persen') { ?>
-                  <h5 class="card-title">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
+                  <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
                     <span class="badge rounded-pill bg-danger"><?= $data->diskon ?>%</span>
                   </h5>
                   <?php } elseif ($data->tipe_diskon == 'nominal') { ?>
-                  <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
+                  <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
                   </h5>
                   <?php } elseif ($data->tipe_diskon == 'no_diskon') { ?>
-                    <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>
+                    <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>
                   <?php } ?>
                   <?php if ($data->status_jual == 0) { ?>
-                    <span class="text-danger fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+                    <h6 class="text-danger fw-bold text-hidden"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</h6>
                   <?php } else { ?>
-                    <span class="text-success fw-bold"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</span>
+                    <h6 class="text-success fw-bold text-hidden"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</h6>
                   <?php } ?>
                 </div>
               </div>
@@ -253,10 +253,10 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="<?= base_url('assets/img/img-thumb-1.jpg') ?>" class="d-block w-100" alt="...">
+                <img src="<?= base_url($direktori->banner_direktori.'img-thumb-1.jpg') ?>" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="<?= base_url('assets/img/img-thumb-2.jpg') ?>" class="d-block w-100" alt="...">
+                <img src="<?= base_url($direktori->banner_direktori.'img-thumb-2.jpg') ?>" class="d-block w-100" alt="...">
               </div>
             </div>
           </div>
@@ -270,10 +270,10 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="<?= base_url('assets/img/img-thumb-3.jpg') ?>" class="d-block w-100" alt="...">
+                <img src="<?= base_url($direktori->banner_direktori.'img-thumb-3.jpg') ?>" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="<?= base_url('assets/img/img-thumb-4.jpg') ?>" class="d-block w-100" alt="...">
+                <img src="<?= base_url($direktori->banner_direktori.'img-thumb-4.jpg') ?>" class="d-block w-100" alt="...">
               </div>
             </div>
           </div>
@@ -287,10 +287,10 @@
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="<?= base_url('assets/img/img-thumb-5.jpg') ?>" class="d-block w-100" alt="...">
+                <img src="<?= base_url($direktori->banner_direktori.'img-thumb-5.jpg') ?>" class="d-block w-100" alt="...">
               </div>
               <div class="carousel-item">
-                <img src="<?= base_url('assets/img/img-thumb-6.jpg') ?>" class="d-block w-100" alt="...">
+                <img src="<?= base_url($direktori->banner_direktori.'img-thumb-6.jpg') ?>" class="d-block w-100" alt="...">
               </div>
             </div>
           </div>
@@ -317,24 +317,24 @@
             <div class="owl-item">
               <div class="card <?= ($data->status_jual == 0) ? 'border border-danger' : ''; ?>">
                 <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
-                  <img src="<?= base_url('assets/img/'.$data->nama_file) ?>" class="card-img-top" alt="...">
+                  <img src="<?= base_url($direktori->produk_direktori.$data->nama_file) ?>" class="card-img-top" alt="...">
                 </a>
                 <div class="card-body">
                   <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
                   <?php if ($data->tipe_diskon == 'persen') { ?>
-                  <h5 class="card-title">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
+                  <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
                     <span class="badge rounded-pill bg-danger"><?= $data->diskon ?>%</span>
                   </h5>
                   <?php } elseif ($data->tipe_diskon == 'nominal') { ?>
-                  <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
+                  <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
                   </h5>
                   <?php } elseif ($data->tipe_diskon == 'no_diskon') { ?>
-                    <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>
+                    <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>
                   <?php } ?>
                   <?php if ($data->status_jual == 0) { ?>
-                    <span class="text-danger fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+                    <h6 class="text-danger fw-bold text-hidden"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</h6>
                   <?php } else { ?>
-                    <span class="text-success fw-bold text-hidden"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</span>
+                    <h6 class="text-success fw-bold text-hidden"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</h6>
                   <?php } ?>
                 </div>
               </div>

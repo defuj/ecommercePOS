@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Pages extends CI_Controller
 {
 	protected $user;
+	protected $direktori;
 
 	public function __construct()
     {
@@ -13,6 +14,8 @@ class Pages extends CI_Controller
         	$this->user = $this->db->get_where('dat_pelanggan', ['email' => $this->session->userdata('email')])->row_array();
         	// redirect('auth');
         }
+
+        $this->direktori = $this->db->get('konf_direktori')->row();
 	    
         $this->load->model('produk');
 
@@ -20,13 +23,12 @@ class Pages extends CI_Controller
 
 	public function index()
 	{
-		// var_dump([$this->produk->findAll()->result(), $this->produk->findLimit()->result()]);
-		// die();
 		$data = [
 			'title' => 'Beranda | Megakomputer',
 			'produk' => $this->produk->findAll()->result(),
 			'produkLimit' => $this->produk->findLimit()->result(),
-			'user' => $this->user
+			'user' => $this->user,
+			'direktori' => $this->direktori
 		];
 
 		$this->load->view('template/header.php', $data);
@@ -41,7 +43,8 @@ class Pages extends CI_Controller
 			'title' => 'Detail Produk | Megakomputer',
 			'produk' => $this->produk->getData($slug, 'dat_produk')->result(),
 			'produkLimit' => $this->produk->findLimit()->result(),
-			'user' => $this->user
+			'user' => $this->user,
+			'direktori' => $this->direktori
 		];
 
 		$this->load->view('template/header.php', $data);
@@ -83,7 +86,8 @@ class Pages extends CI_Controller
 				'count' => $count->result_array(),
 				'produk' => $this->db->get()->result(),
 				'key' => $key,
-				'user' => $this->user
+				'user' => $this->user,
+				'direktori' => $this->direktori
 			];
 
 			$this->load->view('template/header.php', $data);

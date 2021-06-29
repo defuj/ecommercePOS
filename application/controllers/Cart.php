@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Cart extends CI_Controller {
 
 	protected $user;
+	protected $direktori;
 
 	public function __construct()
     {
@@ -13,6 +14,8 @@ class Cart extends CI_Controller {
         	$this->user = $this->db->get_where('dat_pelanggan', ['email' => $this->session->userdata('email')])->row_array();
         	// redirect('auth');
         }
+
+        $this->direktori = $this->db->get('konf_direktori')->row();
 	    
         $this->load->model('produk');
 
@@ -57,7 +60,8 @@ class Cart extends CI_Controller {
 			'produk' => $this->produk->getData($slug, 'dat_produk')->result(),
 			'qty' => $qty,
 			'user' => $user,
-			'alamat' => $alamat
+			'alamat' => $alamat,
+			'direktori' => $this->direktori
 		];
 
 		$this->load->view('template/header.php', $data);
@@ -79,7 +83,8 @@ class Cart extends CI_Controller {
 	{
 		$data = [
 			'dataCart' => $this->cart->contents(),
-			'produkLimit' => $this->produk->findLimit()->result()
+			'produkLimit' => $this->produk->findLimit()->result(),
+			'direktori' => $this->direktori
 		];
 
 		$this->load->view('cart/cart-items.php', $data);
@@ -100,7 +105,7 @@ class Cart extends CI_Controller {
 	        'qty'     => 1,
 	        'price'   => $produk->harga_akhir,
 	        'status_jual' => $produk->status_jual,
-	        'ket'	  => $produk->ket,
+	        'deskripsi'	  => $produk->deskripsi_ecommerce,
 	        'name'    => $produk->nama_item,
 	        'nama_file'	  => $produk->nama_file,
 	        'slug' 	  => $produk->slug,
@@ -149,6 +154,6 @@ class Cart extends CI_Controller {
 	{
 		$this->cart->destroy();
 
-		redirect('index.php/cart');
+		redirect('pages');
 	}
 }

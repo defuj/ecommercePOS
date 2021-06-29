@@ -87,7 +87,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2 col-sm-12 mt-3">
-                            <img src="<?= base_url('assets/img/card-1.jpg') ?>" class="img-fluid rounded">
+                            <img src="<?= base_url($direktori->produk_direktori.'card-1.jpg') ?>" class="img-fluid rounded">
                         </div>
                         <div class="col-md-3 col-sm-12 mt-3">
                             <p class="text-muted">Nama Produk</p>

@@ -1,4 +1,4 @@
-
+html{
     scroll-behavior: smooth;
 }
 
@@ -126,7 +126,7 @@ body{
 }
 
 #search .card img {
-	height: 160px;
+	height: 260px;
 }
 
 #promo .carousel-item img {
@@ -359,7 +359,7 @@ body{
 	}
 
 	#search .card img {
-		height: 100px;
+		height: 180px;
 	}
 }
 

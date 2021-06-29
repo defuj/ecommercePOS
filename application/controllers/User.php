@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Controller {
 
 	protected $user;
+	protected $direktori;
 
 	public function __construct()
     {
@@ -15,6 +16,8 @@ class User extends CI_Controller {
 
         // Get user data
 		$this->user = $this->db->get_where('dat_pelanggan', ['email' => $this->session->userdata('email')])->row_array();
+
+		$this->direktori = $this->db->get('konf_direktori')->row();
 
 		$this->load->library('form_validation');
 
@@ -453,7 +456,8 @@ class User extends CI_Controller {
 		
 		$data = [
 			'title' => 'Daftar Pesanan | Megakomputer',
-			'user' => $this->user
+			'user' => $this->user,
+			'direktori' => $this->direktori
 		];
 
 		$this->load->view('template/header.php', $data);
@@ -467,7 +471,8 @@ class User extends CI_Controller {
 
 		$data = [
 			'title' => 'Rincian Pesanan | Megakomputer',
-			'user' => $this->user
+			'user' => $this->user,
+			'direktori' => $this->direktori
 		];
 
 		$this->load->view('template/header.php', $data);

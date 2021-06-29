@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2021 at 02:27 PM
+-- Generation Time: Jun 29, 2021 at 09:48 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -357,10 +357,10 @@ CREATE TABLE `dat_produk` (
 --
 
 INSERT INTO `dat_produk` (`id`, `tipe`, `kode_item`, `nama_item`, `slug`, `id_jenis`, `id_sub_jenis`, `id_merk`, `rak`, `status_jual`, `stok_minimum`, `ket`, `berat`, `panjang`, `lebar`, `tinggi`, `pot_umum`, `pot_reseller`, `pot_dealer`, `link_share`, `id_varian`, `kondisi_barang`, `deskripsi_ecommerce`, `id_cover_img`, `satuan_dasar`, `is_rakit`, `is_active`) VALUES
-(2, 1, 'LAN001', 'KABEL LAN BELDEN', 'kabel-lan-belden', 9, 1, 1, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 2, 10, NULL, 0, 1, '                Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1, 1, 0, 0),
-(3, 1, 'MONITOR', 'DELL 20INCH', 'dell-20inch', 5, 1, 0, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 10, 20, NULL, 0, 1, '                Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 2, 3, 0, 0),
-(4, 1, 'prtr0001', 'PRINTER EPSON', 'printer-epson', 2, NULL, 0, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 1, '                Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 3, 4, 0, 0),
-(5, 1, 'LNV112', 'LENOVO 112', 'lenovo-112', 1, 0, 0, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 1, '                Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 4, 6, 0, 0);
+(2, 1, 'LAN001', 'KABEL LAN BELDEN', 'kabel-lan-belden', 9, 1, 1, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 2, 10, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1, 1, 0, 0),
+(3, 1, 'MONITOR', 'DELL 20INCH', 'dell-20inch', 5, 1, 0, '', 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 10, 20, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 2, 3, 0, 0),
+(4, 1, 'prtr0001', 'PRINTER EPSON', 'printer-epson', 2, NULL, 0, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 3, 4, 0, 0),
+(5, 1, 'LNV112', 'LENOVO 112', 'lenovo-112', 1, 0, 0, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 4, 6, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -525,29 +525,21 @@ INSERT INTO `dat_user` (`id`, `id_level`, `id_toko`, `kode_cabang`, `nama`, `use
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori`
+-- Table structure for table `konf_direktori`
 --
 
-CREATE TABLE `kategori` (
+CREATE TABLE `konf_direktori` (
   `id` int(11) NOT NULL,
-  `nama_kategori` varchar(20) NOT NULL
+  `produk_direktori` text NOT NULL,
+  `banner_direktori` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `kategori`
+-- Dumping data for table `konf_direktori`
 --
 
-INSERT INTO `kategori` (`id`, `nama_kategori`) VALUES
-(1, 'notebook/laptop'),
-(2, 'perangkat pc'),
-(3, 'pc'),
-(4, 'lcd'),
-(5, 'aksesoris'),
-(6, 'ups'),
-(7, 'printer'),
-(8, 'storage'),
-(9, 'networking'),
-(10, 'proyektor');
+INSERT INTO `konf_direktori` (`id`, `produk_direktori`, `banner_direktori`) VALUES
+(1, 'assets/media/images/produk/', 'assets/media/images/banner/');
 
 -- --------------------------------------------------------
 
@@ -1055,9 +1047,9 @@ ALTER TABLE `dat_user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kategori`
+-- Indexes for table `konf_direktori`
 --
-ALTER TABLE `kategori`
+ALTER TABLE `konf_direktori`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1263,10 +1255,10 @@ ALTER TABLE `dat_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `kategori`
+-- AUTO_INCREMENT for table `konf_direktori`
 --
-ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `konf_direktori`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `konf_print`

@@ -61,19 +61,27 @@
                                 <div class="text-center text-muted my-5">Tidak ada item yang dapat ditampilkan. Silahkan cari keyword atau kategori yang benar!</div>
                              <?php } ?>
                              <?php foreach ($produk as $data) { ?>
-                             <div class="col-md-3 col-sm-4 col-12 mb-4">
+                             <div class="col-md-4 col-sm-6 col-12 mb-4">
                                  <div class="card shadow">
                                     <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
                                         <img src="<?= base_url('assets/img/'.$data->nama_file) ?>" class="card-img-top" alt="...">
                                     </a>
                                     <div class="card-body">
-                                        <h6 class="card-subtitle mb-2 nama-produk"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
-                                        <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>
+                                        <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
+                                        <?php if ($data->tipe_diskon == 'persen') { ?>
+                                        <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
+                                        </h5>
+                                        <?php } elseif ($data->tipe_diskon == 'nominal') { ?>
+                                        <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
+                                        </h5>
+                                        <?php } elseif ($data->tipe_diskon == 'no_diskon') { ?>
+                                          <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>  
+                                        <?php } ?>
                                         <?php if ($data->status_jual == 0) { ?>
-                                        <span class="text-danger ms-2 fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+                                        <h6 class="text-danger fw-bold text-hidden"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</h6>
                                         <?php } else { ?>
-                                        <span class="text-success ms-2 fw-bold"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</span>
-                                        <?php } ?> 
+                                        <h6 class="text-success fw-bold text-hidden"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</h6>
+                                        <?php } ?>
                                     </div>
                                  </div>
                              </div>

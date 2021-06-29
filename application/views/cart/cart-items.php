@@ -18,24 +18,24 @@
                     <div class="owl-item">
                       <div class="card <?= ($data->status_jual == 0) ? 'border border-danger' : ''; ?>">
                         <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
-                          <img src="<?= base_url('assets/img/'.$data->nama_file) ?>" class="card-img-top" alt="...">
+                          <img src="<?= base_url($direktori->produk_direktori.$data->nama_file) ?>" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
                           <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
                           <?php if ($data->tipe_diskon == 'persen') { ?>
-                          <h5 class="card-title">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
+                          <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
                             <span class="badge rounded-pill bg-danger"><?= $data->diskon ?>%</span>
                           </h5>
                           <?php } elseif ($data->tipe_diskon == 'nominal') { ?>
-                          <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
+                          <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
                           </h5>
                           <?php } elseif ($data->tipe_diskon == 'no_diskon') { ?>
-                            <h5 class="card-title">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>
+                            <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>
                           <?php } ?>
                           <?php if ($data->status_jual == 0) { ?>
-                            <span class="text-danger fw-bold"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+                            <h6 class="text-danger fw-bold text-hidden"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</h6>
                           <?php } else { ?>
-                            <span class="text-success fw-bold"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</span>
+                            <h6 class="text-success fw-bold text-hidden"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</h6>
                           <?php } ?>
                         </div>
                       </div>
@@ -58,7 +58,7 @@
                 <div class="col-lg-6">
                   <div class="product-image me-lg-3 me-0">
                     <a href="<?= base_url('pages/detail/'.$data['slug']) ?>">
-                      <img src="<?= base_url('assets/img/'.$data['nama_file']) ?>" class="img-fluid rounded w-100 thumb">
+                      <img src="<?= base_url($direktori->produk_direktori.$data['nama_file']) ?>" class="img-fluid rounded w-100 thumb">
                     </a>
                   </div>
                 </div>
@@ -94,7 +94,7 @@
                       <?php } ?>
                     </div>
                     <hr/>
-                    <p class="card-text mb-3"><?= $data['ket'] ?></p>
+                    <p class="card-text mb-3"><?= $data['deskripsi'] ?></p>
                     <!-- Varian -->
                     <!-- <div class="d-flex mb-3" id="varian">
                       <input type="radio" class="btn-check" name="varian" id="danger-outlined" autocomplete="off">
