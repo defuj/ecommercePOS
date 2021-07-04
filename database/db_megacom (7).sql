@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2021 at 09:48 AM
+-- Generation Time: Jul 04, 2021 at 11:01 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -32,6 +32,8 @@ CREATE TABLE `alamat` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `alamat` text NOT NULL,
+  `provinsi_id` int(11) NOT NULL,
+  `kota_id` int(11) NOT NULL,
   `provinsi` varchar(50) NOT NULL,
   `kota` varchar(50) NOT NULL,
   `kecamatan` varchar(50) NOT NULL,
@@ -44,11 +46,8 @@ CREATE TABLE `alamat` (
 -- Dumping data for table `alamat`
 --
 
-INSERT INTO `alamat` (`id`, `user_id`, `alamat`, `provinsi`, `kota`, `kecamatan`, `desa`, `kode_pos`, `is_active`) VALUES
-(16, 7, 'Dusun Citembong Girang, RT01/RW03, Ds.Cikeusi, Kec.Daramaraja, Kab.Sumedang', 'Jawa Barat', 'Sumedang', 'Cibugel', 'Ciputat', 45372, 1),
-(17, 7, 'Perum pesona gading blok E4 no 21, RT003/RW016, Desa Wanajaya, Kec Cibitung, Kab Bekasi, Jawa Barat', 'Jawa Barat', 'Sumedang', 'Cikarang', 'Cibeureum', 45372, 0),
-(20, 6, 'Dusun Citembong Girang, RT01/RW03, Ds.Cikeusi, Kec.Daramaraja, Kab.Sumedang', 'Jawa Barat', 'Sumedang', 'Darmaraja', 'Ciputat', 45372, 1),
-(25, 9, 'Dusun Citembong Girang, RT01/RW03, Ds.Cikeusi, Kec.Daramaraja, Kab.Sumedang', 'Jawa Timur', 'Sumedang', 'Darmaking', 'Cipulang', 45371, 1);
+INSERT INTO `alamat` (`id`, `user_id`, `alamat`, `provinsi_id`, `kota_id`, `provinsi`, `kota`, `kecamatan`, `desa`, `kode_pos`, `is_active`) VALUES
+(35, 9, 'Dusun Citembong Girang, RT01/RW03, Ds.Cikeusi, Kec.Daramaraja, Kab.Sumedang', 9, 440, 'Jawa Barat', 'Sumedang', 'Darmaraja', 'Cikeusi', 45372, 1);
 
 -- --------------------------------------------------------
 
@@ -269,7 +268,7 @@ INSERT INTO `dat_pelanggan` (`id`, `kode_pelanggan`, `nama`, `alamat`, `kota`, `
 (0, 'UMUM', 'UMUM', '', '', '', '', '', '', '', '', '', '', 'user.png', '', '', '', '', 0),
 (7, 'PLG000001', 'RESELLER', 'Sumedang', '', '', '', '', '', '', '', '', '', 'user.png', '', '', '', '', 1),
 (8, 'PLG000002', 'DEALER', 'BANDUNG', '', '', '', '', '', '', '', '', '', 'user.png', '', '', '', '', 2),
-(9, '', 'Andi Muhyi Mayapada', '', '', '', '', '', '0855245696311', '', 'andimayapada04@gmail.com', 'Prommpd830', '$2y$10$pvbdsJ9Hn0qj2OPb.PFPY.BwP.RSjVPF90tQ/asTyXsl9g3.Shq8C', 'user.png', '', '', '', '', 0),
+(9, '', 'Andi Muhyi Mayapada', '', '', '', '', '', '085524569631', '', 'andimayapada04@gmail.com', 'Prommpd830', '$2y$10$pvbdsJ9Hn0qj2OPb.PFPY.BwP.RSjVPF90tQ/asTyXsl9g3.Shq8C', 'user.png', '', '', '', '', 0),
 (10, '', '', '', '', '', '', '', '0855245696344', '', 'user@gmail.com', 'shadowverse', '$2y$10$lGSE8WN1iIfzYLXb1SbcbePc/eC1//O//ScxlYv3zs9mZ3HMCUG7e', 'user.png', '', '', '', '', 0),
 (11, '', 'Andi Guntur Mario', '', '', '', '', '', '084564839264', '', 'andigunturmario@gmail.com', 'mario', '$2y$10$rc2JRnRymZYTNO8Si0FZ1.rwpaqamvjVG1/J3eS8JTXqCBLEYJ02O', 'user.png', '', '', '', '', 0);
 
@@ -335,7 +334,7 @@ CREATE TABLE `dat_produk` (
   `status_jual` int(11) NOT NULL,
   `stok_minimum` int(11) NOT NULL,
   `ket` text DEFAULT NULL,
-  `berat` int(11) NOT NULL,
+  `berat` int(11) NOT NULL COMMENT '(gram)',
   `panjang` int(11) NOT NULL,
   `lebar` int(11) NOT NULL,
   `tinggi` int(11) NOT NULL,
@@ -357,10 +356,10 @@ CREATE TABLE `dat_produk` (
 --
 
 INSERT INTO `dat_produk` (`id`, `tipe`, `kode_item`, `nama_item`, `slug`, `id_jenis`, `id_sub_jenis`, `id_merk`, `rak`, `status_jual`, `stok_minimum`, `ket`, `berat`, `panjang`, `lebar`, `tinggi`, `pot_umum`, `pot_reseller`, `pot_dealer`, `link_share`, `id_varian`, `kondisi_barang`, `deskripsi_ecommerce`, `id_cover_img`, `satuan_dasar`, `is_rakit`, `is_active`) VALUES
-(2, 1, 'LAN001', 'KABEL LAN BELDEN', 'kabel-lan-belden', 9, 1, 1, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 2, 10, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1, 1, 0, 0),
-(3, 1, 'MONITOR', 'DELL 20INCH', 'dell-20inch', 5, 1, 0, '', 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 10, 20, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 2, 3, 0, 0),
-(4, 1, 'prtr0001', 'PRINTER EPSON', 'printer-epson', 2, NULL, 0, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 3, 4, 0, 0),
-(5, 1, 'LNV112', 'LENOVO 112', 'lenovo-112', 1, 0, 0, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 0, 0, 0, 0, 0, 0, 0, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 4, 6, 0, 0);
+(2, 1, 'LAN001', 'KABEL LAN BELDEN', 'kabel-lan-belden', 9, 1, 1, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 300, 0, 0, 0, 0, 2, 10, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1, 1, 0, 0),
+(3, 1, 'MONITOR', 'DELL 20INCH', 'dell-20inch', 5, 1, 0, '', 0, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 500, 0, 0, 0, 0, 10, 20, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 2, 3, 0, 0),
+(4, 1, 'prtr0001', 'PRINTER EPSON', 'printer-epson', 2, NULL, 0, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 1000, 0, 0, 0, 0, 0, 0, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 3, 4, 0, 0),
+(5, 1, 'LNV112', 'LENOVO 112', 'lenovo-112', 1, 0, 0, '', 1, 0, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 450, 0, 0, 0, 0, 0, 0, NULL, 0, 1, 'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 4, 6, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1162,7 +1161,7 @@ ALTER TABLE `ref_varian`
 -- AUTO_INCREMENT for table `alamat`
 --
 ALTER TABLE `alamat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `dat_img_produk`
