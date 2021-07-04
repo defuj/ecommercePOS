@@ -28,6 +28,8 @@ $(document).ready(function () {
         const cost = $(this).val();
         const stok = $(this).data('stok');
 
+        $('#input-qty').val(cost);
+
         $.ajax({
           url: href,
           type: 'post',

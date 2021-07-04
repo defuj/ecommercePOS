@@ -213,9 +213,6 @@ class User extends CI_Controller {
 	public function addAlamat()
 	{
 		// Validation Rules
-		$this->form_validation->set_rules('provinsi', 'Provinsi', 'required', [
-			'required' => 'Provinsi tidak boleh kosong',
-		]);
 		$this->form_validation->set_rules('kota', 'Kota', 'required', [
 			'required' => 'Kota tidak boleh kosong',
 		]);
@@ -234,12 +231,45 @@ class User extends CI_Controller {
 
 		if ($this->form_validation->run()) {
 
+			// Get Alamat
+
+			$city_id = htmlspecialchars($this->input->post('kota', true));
+
+			$curl = curl_init();
+
+			curl_setopt_array($curl, array(
+			  CURLOPT_URL => "https://api.rajaongkir.com/starter/city?id=".$city_id,
+			  CURLOPT_RETURNTRANSFER => true,
+			  CURLOPT_ENCODING => "",
+			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_TIMEOUT => 30,
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_CUSTOMREQUEST => "GET",
+			  CURLOPT_HTTPHEADER => array(
+			    "key: f377578c71065bee2e2f45b1336ab296"
+			  ),
+			));
+
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+
+			curl_close($curl);
+
+			if ($err) {
+			  echo "cURL Error #:" . $err;
+			} else {
+			  $output = json_decode($response, true);
+			}
+
+
 			$user = $this->user;
 
 			$data = [
 				'user_id' => $user['id'],
-				'provinsi' => htmlspecialchars($this->input->post('provinsi', true)),
-				'kota' => htmlspecialchars($this->input->post('kota', true)),
+				'provinsi_id' => $output['rajaongkir']['results']['province_id'],
+				'kota_id' => $output['rajaongkir']['results']['city_id'],
+				'provinsi' => $output['rajaongkir']['results']['province'],
+				'kota' => $output['rajaongkir']['results']['city_name'],
 				'kecamatan' => htmlspecialchars($this->input->post('kecamatan', true)),
 				'desa' => htmlspecialchars($this->input->post('desa', true)),
 				'alamat' => htmlspecialchars($this->input->post('alamat', true)),
@@ -256,7 +286,6 @@ class User extends CI_Controller {
 
 			$array = array(
 			    'error'   => true,
-			    'provinsi_add_alamat_error' => form_error('provinsi', '<small class="text-danger">', '</small>'),
 			    'kota_add_alamat_error' => form_error('kota', '<small class="text-danger">', '</small>'),
 			    'kecamatan_add_alamat_error' => form_error('kecamatan', '<small class="text-danger">', '</small>'),
 			    'desa_add_alamat_error' => form_error('desa', '<small class="text-danger">', '</small>'),
@@ -267,6 +296,37 @@ class User extends CI_Controller {
 		}
 
 	 	echo json_encode($array);
+
+	}
+
+	public function coba()
+	{
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+		  CURLOPT_URL => "https://api.rajaongkir.com/starter/city?id=440",
+		  CURLOPT_RETURNTRANSFER => true,
+		  CURLOPT_ENCODING => "",
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 30,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => "GET",
+		  CURLOPT_HTTPHEADER => array(
+		    "key: f377578c71065bee2e2f45b1336ab296"
+		  ),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+		  echo "cURL Error #:" . $err;
+		} else {
+		  $output = json_decode($response, true);
+		  var_dump($output['rajaongkir']);
+		}
 
 	}
 
@@ -281,8 +341,7 @@ class User extends CI_Controller {
 
 			$data = [
 				'success' => true,
-				'provinsi' => $alamat['provinsi'],
-				'kota' => $alamat['kota'],
+				'kota' => $alamat['kota_id'],
 				'kecamatan' => $alamat['kecamatan'],
 				'desa' => $alamat['desa'],
 				'alamat' => $alamat['alamat'],
@@ -304,9 +363,6 @@ class User extends CI_Controller {
 	public function updateAlamat()
 	{
 		// Validation Rules
-		$this->form_validation->set_rules('provinsi', 'Provinsi', 'required', [
-			'required' => 'Provinsi tidak boleh kosong',
-		]);
 		$this->form_validation->set_rules('kota', 'Kota', 'required', [
 			'required' => 'Kota tidak boleh kosong',
 		]);
@@ -325,11 +381,42 @@ class User extends CI_Controller {
 
 		if ($this->form_validation->run()) {
 
+			$city_id = htmlspecialchars($this->input->post('kota', true));
+
+			$curl = curl_init();
+
+			curl_setopt_array($curl, array(
+			  CURLOPT_URL => "https://api.rajaongkir.com/starter/city?id=".$city_id,
+			  CURLOPT_RETURNTRANSFER => true,
+			  CURLOPT_ENCODING => "",
+			  CURLOPT_MAXREDIRS => 10,
+			  CURLOPT_TIMEOUT => 30,
+			  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			  CURLOPT_CUSTOMREQUEST => "GET",
+			  CURLOPT_HTTPHEADER => array(
+			    "key: f377578c71065bee2e2f45b1336ab296"
+			  ),
+			));
+
+			$response = curl_exec($curl);
+			$err = curl_error($curl);
+
+			curl_close($curl);
+
+			if ($err) {
+			  echo "cURL Error #:" . $err;
+			} else {
+			  $output = json_decode($response, true);
+			}
+
+
 			$id = htmlspecialchars($this->input->post('id', true));
 
 			$data = [
-				'provinsi' => htmlspecialchars($this->input->post('provinsi', true)),
-				'kota' => htmlspecialchars($this->input->post('kota', true)),
+				'provinsi_id' => $output['rajaongkir']['results']['province_id'],
+				'kota_id' => $output['rajaongkir']['results']['city_id'],
+				'provinsi' => $output['rajaongkir']['results']['province'],
+				'kota' => $output['rajaongkir']['results']['city_name'],
 				'kecamatan' => htmlspecialchars($this->input->post('kecamatan', true)),
 				'desa' => htmlspecialchars($this->input->post('desa', true)),
 				'alamat' => htmlspecialchars($this->input->post('alamat', true)),
@@ -346,7 +433,6 @@ class User extends CI_Controller {
 
 			$array = array(
 			    'error'   => true,
-			    'provinsi_update_alamat_error' => form_error('provinsi', '<small class="text-danger">', '</small>'),
 			    'kota_update_alamat_error' => form_error('kota', '<small class="text-danger">', '</small>'),
 			    'kecamatan_update_alamat_error' => form_error('kecamatan', '<small class="text-danger">', '</small>'),
 			    'desa_update_alamat_error' => form_error('desa', '<small class="text-danger">', '</small>'),
@@ -446,6 +532,19 @@ class User extends CI_Controller {
 		}
 
 	 	echo json_encode($array);
+	}
+
+	public function loadCity()
+	{
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, 'https://api.rajaongkir.com/starter/city?key=f377578c71065bee2e2f45b1336ab296');
+		curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+		$output = curl_exec($ch);
+		curl_close($ch);
+		$output = json_decode($output);
+		die($output);
 	}
 
 

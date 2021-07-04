@@ -57,7 +57,7 @@ class Cart extends CI_Controller {
 		
 		$data = [
 			'title' => 'Checkout | Product Listening',
-			'produk' => $this->produk->getData($slug, 'dat_produk')->result(),
+			'produk' => $this->produk->getData($slug, 'dat_produk')->row(),
 			'qty' => $qty,
 			'user' => $user,
 			'alamat' => $alamat,
@@ -100,17 +100,27 @@ class Cart extends CI_Controller {
 
 		$produk = $this->produk->findCart($id);
 
+		if ($produk->tipe_diskon == 'persen') {
+			$harga = ($produk->diskon / 100) * $produk->harga_akhir;
+		} elseif ($produk->tipe_diskon == 'nominal') {
+			$harga = $produk->harga_akhir - ($produk->diskon);
+		} elseif ($produk->tipe_diskon == 'no_diskon') {
+			$harga = $produk->harga_akhir;
+		}
+
 		$data = [
 			'id'      => $id,
 	        'qty'     => 1,
-	        'price'   => $produk->harga_akhir,
+	        'price'   => $harga,
+	        'name'    => $produk->nama_item,
+	        'harga_akhir' => $produk->harga_akhir,
 	        'status_jual' => $produk->status_jual,
 	        'deskripsi'	  => $produk->deskripsi_ecommerce,
-	        'name'    => $produk->nama_item,
 	        'nama_file'	  => $produk->nama_file,
 	        'slug' 	  => $produk->slug,
 	        'diskon' 	  => $produk->diskon,
-	        'tipe_diskon' => $produk->tipe_diskon
+	        'tipe_diskon' => $produk->tipe_diskon,
+	        'berat' => $produk->berat
 		];
 
 		$this->cart->insert($data);
@@ -156,4 +166,44 @@ class Cart extends CI_Controller {
 
 		redirect('pages');
 	}
+
+	public function loadOngkir()
+	{
+		$user = $this->user;
+
+		$alamat = $this->db->select('alamat.*');
+		$alamat = $this->db->from('dat_pelanggan');
+		$alamat = $this->db->join('alamat', 'alamat.user_id = dat_pelanggan.id');
+		$alamat = $this->db->where('alamat.user_id', $user['id']);
+		$alamat = $this->db->where('alamat.is_active', 1);
+		$alamat = $this->db->get()->row_array();
+
+		if ($alamat) {
+			$weight = $this->input->post('weight');
+			$kurir = $this->input->post('kurir');
+
+			$post_fields = 'origin=440&destination='.$alamat['kota_id'].'&weight='.$weight.'&courier='.$kurir;
+			rtrim($post_fields, '&');
+
+			$ch = curl_init();												//<-- init curl
+			curl_setopt_array($ch, array(			
+			  CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",		//<-- url rajaongkir
+			  CURLOPT_HTTPHEADER => array(										//<-- header http
+			    "content-type: application/x-www-form-urlencoded",			//<-- content type
+			    "key:f377578c71065bee2e2f45b1336ab296"						//<-- api key rajaongkir
+			  ),
+			  CURLOPT_POST => 4, 											//<-- jumlah fields {origin,destination,weight,courier}
+			  CURLOPT_POSTFIELDS => $post_fields,							//<-- field yang akan dikirim
+			));
+			$output = curl_exec($ch);
+			curl_close($ch);
+			$output = json_decode($output);
+			die($output);
+		}
+
+		
+	}
+
+
+
 }

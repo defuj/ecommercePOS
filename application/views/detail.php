@@ -1,15 +1,18 @@
 <?php if ($produk) { ?>
   <!-- Main Content -->
   <main>
+
     <div class="container">
       <?php foreach ($produk as $data) { ?>
         <div class="card shadow border-white">
           <div class="card-body pb-5">
             <div class="row g-2">
               <div class="col-lg-6">
-                <div class="productimg ">
-                  <img src="<?= base_url($direktori->produk_direktori.$data->nama_file) ?>" class="img-fluid rounded w-100 thumb">
-                  <div id="img-pruduct-slider" class="owl-carousel pt-2 " height="100px">
+                <div class="productimg">
+                  <a href="<?= base_url($direktori->produk_direktori . $data->nama_file) ?>" id="single_image">
+                    <img src="<?= base_url($direktori->produk_direktori . $data->nama_file) ?>" class="img-fluid rounded thumb d-block m-auto">
+                  </a>
+                  <div id="img-pruduct-slider" class="owl-carousel pt-2 ">
                     <?php
 
                     $this->load->model('produk');
@@ -17,9 +20,9 @@
                     $dataImg = $this->produk->getDataImg($data->id)->result();
 
                     foreach ($dataImg as $img) { ?>
-                    <div class="grid-image ms-1">
-                      <img src="<?= base_url($direktori->produk_direktori.$img->nama_file) ?>" class="img-fluid img-thumb rounded">
-                    </div>
+                      <div class="grid-image ms-1">
+                        <img src="<?= base_url($direktori->produk_direktori . $img->nama_file) ?>" class="img-fluid img-thumb rounded">
+                      </div>
                     <?php } ?>
                   </div>
                 </div>
@@ -33,68 +36,68 @@
                 <div class="d-flex flex-column bd-highlight product-box">
                   <h3 class="card-title mt-3 mt-lg-0 text-hidden"><?= $data->nama_item ?> <a href=""><i class="fas fa-share-alt float-end text-custom pe-2"></i></a></h3>
                   <?php if ($data->tipe_diskon == 'persen') { ?>
-                  <h4 class="text-hidden">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
-                    <span class="badge rounded-pill bg-danger"><?= $data->diskon ?>%</span>
-                    <sub><s>Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></s></sub>
-                  </h4>
+                    <h4 class="text-hidden">Rp.&nbsp;<?= number_format((($data->diskon / 100) * $data->harga_akhir), 0, ',', '.') ?>
+                      <span class="badge rounded-pill bg-danger"><?= $data->diskon ?>%</span>
+                      <sub><s>Rp.&nbsp;<?= number_format(($data->harga_akhir), 0, ',', '.') ?></s></sub>
+                    </h4>
                   <?php } elseif ($data->tipe_diskon == 'nominal') { ?>
-                  <h4 class="text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
-                    <sub><s>Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></s></sub>
-                  </h4>
+                    <h4 class="text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir - ($data->diskon)), 0, ',', '.') ?>
+                      <sub><s>Rp.&nbsp;<?= number_format(($data->harga_akhir), 0, ',', '.') ?></s></sub>
+                    </h4>
                   <?php } elseif ($data->tipe_diskon == 'no_diskon') { ?>
-                    <h4 class="text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>  
-                  <?php } ?>
-                  <div class="bd-highlight">
-                    <span class="text-warning me-1">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                    <?php if ($data->status_jual == 0) { ?>
-                      <span class="text-danger ms-2 fw-bold d-none d-sm-inline"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
-                    <?php } else { ?>
-                      <span class="text-success ms-2 fw-bold d-none d-sm-inline"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</span>
+                    <h4 class="text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0, ',', '.') ?></h5>
                     <?php } ?>
-                  </div>
-                  <hr />
-                  <p class="card-text mb-3"><?= $data->deskripsi_ecommerce ?></p>
-                  <!-- Varian -->
-                  <!-- <div class="d-flex mb-3" id="varian">
+                    <div class="bd-highlight">
+                      <span class="text-warning me-1">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                      <?php if ($data->status_jual == 0) { ?>
+                        <span class="text-danger ms-2 fw-bold d-none d-sm-inline"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</span>
+                      <?php } else { ?>
+                        <span class="text-success ms-2 fw-bold d-none d-sm-inline"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</span>
+                      <?php } ?>
+                    </div>
+                    <hr />
+                    <p class="card-text mb-3"><?= $data->deskripsi_ecommerce ?></p>
+                    <!-- Varian -->
+                    <!-- <div class="d-flex mb-3" id="varian">
                     <input type="radio" class="btn-check" name="varian" id="danger-outlined" autocomplete="off">
                     <label class="btn btn-outline-danger me-2 lh-base" for="danger-outlined">Hitam</label>
                     <input type="radio" class="btn-check" name="varian" id="danger-outlined-2" autocomplete="off">
                     <label class="btn btn-outline-danger lh-base" for="danger-outlined-2">Putih</label>
                   </div> -->
-                  <!-- End Varian -->
-                  <div class="number">
-                    <label class="me-2">Kuantitas</label>
-                    <button type="button" class="btn btn-sm btn-custom minus">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                    <input type="text" data-stok="99" class="form-number" value="1" />
-                    <button type="button" class="btn btn-sm btn-custom plus">
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
-                  <hr/>
-                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <?php if ($data->status_jual == 0) { ?>
-                      <button class="btn btn-secondary text-white"><i class="fas fa-cart-plus me-2"></i> Masukan Keranjang</button>
-                      <a class="btn btn-secondary"><i class="fas fa-share me-1"></i> Beli Sekarang</a>
-                    <?php } elseif($user) { ?>
-                      <a class="btn btn-custom text-white add-cart" data-kode="<?= $data->kode_item ?>" href="<?= base_url('cart/insert') ?>"><i class="fas fa-cart-plus me-1"></i> Masukan Keranjang</a>
-                      <form action="<?= base_url('cart/checkout') ?>" method="post" class="d-grid">
-                        <input type="hidden" id="input-qty" name="qty" value="1">
-                        <input type="hidden" name="slug" value="<?= $data->slug ?>">
-                        <button class="btn btn-custom-2" type="submit"><i class="fas fa-share me-1"></i> Beli Sekarang</button>
-                      </form>
-                    <?php } else { ?>
-                      <a href="<?= base_url('auth') ?>" class="btn btn-custom"><i class="fas fa-cart-plus me-2"></i> Masukan Keranjang</a>
-                      <a href="<?= base_url('auth') ?>" class="btn btn-custom-2"><i class="fas fa-share me-1"></i> Beli Sekarang</a>
-                    <?php } ?>
-                  </div>
+                    <!-- End Varian -->
+                    <div class="number">
+                      <label class="me-2">Kuantitas</label>
+                      <button type="button" class="btn btn-sm btn-custom minus">
+                        <i class="fas fa-minus"></i>
+                      </button>
+                      <input type="text" data-stok="99" class="form-number" value="1" />
+                      <button type="button" class="btn btn-sm btn-custom plus">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                    <hr />
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                      <?php if ($data->status_jual == 0) { ?>
+                        <button class="btn btn-secondary text-white"><i class="fas fa-cart-plus me-2"></i> Masukan Keranjang</button>
+                        <a class="btn btn-secondary"><i class="fas fa-share me-1"></i> Beli Sekarang</a>
+                      <?php } elseif ($user) { ?>
+                        <a class="btn btn-custom text-white add-cart" data-kode="<?= $data->kode_item ?>" href="<?= base_url('cart/insert') ?>"><i class="fas fa-cart-plus me-1"></i> Masukan Keranjang</a>
+                        <form action="<?= base_url('cart/checkout') ?>" method="post" class="d-grid">
+                          <input type="hidden" id="input-qty" name="qty" value="1">
+                          <input type="hidden" name="slug" value="<?= $data->slug ?>">
+                          <button class="btn btn-custom-2" type="submit"><i class="fas fa-share me-1"></i> Beli Sekarang</button>
+                        </form>
+                      <?php } else { ?>
+                        <a href="<?= base_url('auth') ?>" class="btn btn-custom"><i class="fas fa-cart-plus me-2"></i> Masukan Keranjang</a>
+                        <a href="<?= base_url('auth') ?>" class="btn btn-custom-2"><i class="fas fa-share me-1"></i> Beli Sekarang</a>
+                      <?php } ?>
+                    </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <?php } ?>
+      <?php } ?>
     </div>
   </main>
   <!-- End Main Content -->
@@ -136,7 +139,7 @@
   <!-- End Spesification Box -->
 
   <!--  Description Box -->
-  <div class="container">
+  <!-- <div class="container">
     <div class="card shadow border-white mt-4">
       <div class="card-body">
         <div class="d-flex p-2 bd-highlight bg-light">Deskripsi Produk</div>
@@ -145,11 +148,11 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- End Description Box -->
 
   <!-- Reviews -->
-  <div class="container">
+  <!-- <div class="container">
     <div class="card shadow border-white mt-4 ">
       <div class="card-body">
         <div class="d-flex bd-highlight">
@@ -213,19 +216,19 @@
         </nav>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- End Reviews -->
-  <?php } else { ?>
-    <main>
-      <div class="container">
-        <div class="card border-0 shadow">
-          <div class="card-body text-center">
-            <span>Barang tidak ditemukan</span>
-          </div>
+<?php } else { ?>
+  <main>
+    <div class="container">
+      <div class="card border-0 shadow">
+        <div class="card-body text-center">
+          <span>Barang tidak ditemukan</span>
         </div>
       </div>
-    </main>
-  <?php } ?>
+    </div>
+  </main>
+<?php } ?>
 
 <!-- Produk Lain -->
 <div class="container">
@@ -241,31 +244,31 @@
           <div class="owl-stage">
 
             <?php foreach ($produkLimit as $data) { ?>
-            <div class="owl-item">
-              <div class="card <?= ($data->status_jual == 0) ? 'border border-danger' : ''; ?>">
-                <a href="<?= base_url('pages/detail/'.$data->slug) ?>">
-                  <img src="<?= base_url($direktori->produk_direktori.$data->nama_file) ?>" class="card-img-top" alt="...">
-                </a>
-                <div class="card-body">
-                  <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/'.$data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
-                  <?php if ($data->tipe_diskon == 'persen') { ?>
-                  <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format((($data->diskon/100)*$data->harga_akhir), 0,',','.') ?>
-                    <span class="badge rounded-pill bg-danger"><?= $data->diskon ?>%</span>
-                  </h5>
-                  <?php } elseif ($data->tipe_diskon == 'nominal') { ?>
-                  <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir-($data->diskon)), 0,',','.') ?>
-                  </h5>
-                  <?php } elseif ($data->tipe_diskon == 'no_diskon') { ?>
-                    <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0,',','.') ?></h5>
-                  <?php } ?>
-                  <?php if ($data->status_jual == 0) { ?>
-                    <h6 class="text-danger fw-bold text-hidden"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</h6>
-                  <?php } else { ?>
-                    <h6 class="text-success fw-bold text-hidden"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</h6>
-                  <?php } ?>
+              <div class="owl-item">
+                <div class="card <?= ($data->status_jual == 0) ? 'border border-danger' : ''; ?>">
+                  <a href="<?= base_url('pages/detail/' . $data->slug) ?>">
+                    <img src="<?= base_url($direktori->produk_direktori . $data->nama_file) ?>" class="card-img-top" alt="...">
+                  </a>
+                  <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-hidden"><a href="<?= base_url('pages/detail/' . $data->slug) ?>" class="text-muted text-decoration-none"><?= $data->nama_item ?></a></h6>
+                    <?php if ($data->tipe_diskon == 'persen') { ?>
+                      <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format((($data->diskon / 100) * $data->harga_akhir), 0, ',', '.') ?>
+                        <span class="badge rounded-pill bg-danger"><?= $data->diskon ?>%</span>
+                      </h5>
+                    <?php } elseif ($data->tipe_diskon == 'nominal') { ?>
+                      <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir - ($data->diskon)), 0, ',', '.') ?>
+                      </h5>
+                    <?php } elseif ($data->tipe_diskon == 'no_diskon') { ?>
+                      <h5 class="card-title text-hidden">Rp.&nbsp;<?= number_format(($data->harga_akhir), 0, ',', '.') ?></h5>
+                    <?php } ?>
+                    <?php if ($data->status_jual == 0) { ?>
+                      <h6 class="text-danger fw-bold text-hidden"><i class="fas fa-exclamation-circle me-1"></i>Stok Habis</h6>
+                    <?php } else { ?>
+                      <h6 class="text-success fw-bold text-hidden"><i class="fas fa-check-circle me-1"></i>Stok Tersedia</h6>
+                    <?php } ?>
+                  </div>
                 </div>
               </div>
-            </div>
             <?php } ?>
           </div>
         </div>

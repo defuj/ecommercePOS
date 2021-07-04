@@ -18,7 +18,7 @@
 			  <div class="tab-pane fade show active" id="nav-semua" role="tabpanel" aria-labelledby="nav-semua-tab">
 			  	<div class="row mt-3">
 	              <div class="col-md-2 col-sm-12 mt-3">
-	                <img src="<?= base_url('assets/img/card-2.jpg') ?>" class="img-fluid rounded">
+	                <img src="<?= base_url($direktori->produk_direktori.'card-2.jpg') ?>" class="img-fluid rounded">
 	              </div>
 	              <div class="col-md-2 col-sm-12 mt-3">
 	                <p class="text-muted">Nama Produk</p>

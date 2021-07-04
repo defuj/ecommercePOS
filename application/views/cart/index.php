@@ -18,11 +18,11 @@
               </div>
               <div class="col-md-3 col-sm-12 mt-3">
                 <p class="card-text">Total Jumlah</p>
-                <h2 class="text-custom fw-bold"><span class="cart-cost" data-href="<?= base_url('cart/loadCost') ?>"><?= $this->cart->total_items() ?></span></h2>
+                <h3 class="text-custom fw-bold text-hidden"><span class="cart-cost" data-href="<?= base_url('cart/loadCost') ?>"><?= $this->cart->total_items() ?></span></h3>
               </div>
               <div class="col-md-3 col-sm-12 mt-3">
                 <p class="card-text">Total Harga</p>
-                <h2 class="text-custom fw-bold">Rp.&nbsp;<span class="cart-price" data-href="<?= base_url('cart/loadPrice') ?>"><?= number_format(($this->cart->total()), 0,',','.') ?></span></h2>
+                <h3 class="text-custom fw-bold text-hidden">Rp.&nbsp;<span class="cart-price" data-href="<?= base_url('cart/loadPrice') ?>"><?= number_format(($this->cart->total()), 0,',','.') ?></span></h3>
               </div>
               <div class="col-md-3 col-sm-12 mt-3">
                 <a class="btn btn-custom btn-lg w-100" href="<?= base_url('cart/checkout') ?>">Checkout</a>

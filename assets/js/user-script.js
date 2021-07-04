@@ -169,12 +169,6 @@ $(document).ready(function () {
               // Form validation error
               if(data.error) {
 
-                if (data.provinsi_add_alamat_error != '') {
-
-                  $('#provinsi_add_alamat_error').html(data.provinsi_add_alamat_error);
-
-                }
-
                 if (data.kota_add_alamat_error != '') {
 
                   $('#kota_add_alamat_error').html(data.kota_add_alamat_error);
@@ -209,7 +203,6 @@ $(document).ready(function () {
 
               // Form validation success
               if(data.success) {
-                $('#provinsi_add_alamat_error').html('');
                 $('#kota_add_alamat_error').html('');
                 $('#kecamatan_add_alamat_error').html('');
                 $('#desa_add_alamat_error').html('');
@@ -270,14 +263,6 @@ $(document).ready(function () {
               // Form validation error
               if(data.error) {
 
-                console.log(data.status);
-
-                if (data.provinsi_update_alamat_error != '') {
-
-                  $('#provinsi_update_alamat_error').html(data.provinsi_update_alamat_error);
-
-                }
-
                 if (data.kota_update_alamat_error != '') {
 
                   $('#kota_update_alamat_error').html(data.kota_update_alamat_error);
@@ -312,7 +297,6 @@ $(document).ready(function () {
 
               // Form validation success
               if(data.success) {
-                $('#provinsi_update_alamat_error').html('');
                 $('#kota_update_alamat_error').html('');
                 $('#kecamatan_update_alamat_error').html('');
                 $('#desa_update_alamat_error').html('');

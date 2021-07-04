@@ -278,17 +278,20 @@ body{
 
 /* Detail Thumbnail */
 .thumb {
+	height: 400px;
 	max-height: 400px !important;
 }
 
 .thumbnail{
 	margin: 0px 0px 0px 0px;
 }
+
 .img-thumb{
 	width: 120px;
 	height: 100px;
 	max-height: 100px;
 }
+
 .img-thumb:hover{
 	opacity: 0.5;
 	cursor: pointer;	
@@ -311,6 +314,15 @@ body{
 
 	#slider .card .card-title {
 		font-size: 17px;
+	}
+
+	.thumb {
+		height: 300px;
+	}
+
+	.img-thumb{
+		width: 70px;
+		height: 70px;
 	}
 
 	#search .card img {

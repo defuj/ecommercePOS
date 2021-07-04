@@ -23,8 +23,8 @@ $('.gobtn').click(function(){
     $('html, body').animate({scrollTop: 0},800);
 });
 
-$(document).ready(function(){
 
+$(document).ready(function(){
   $(".slide-show").owlCarousel();
 });
 
@@ -170,8 +170,13 @@ $(document).ready(function () {
 
 $('.img-thumb').on('click', function(){
     var src = $(this).attr('src');
-     $('.thumb').attr('src', src);
+    $("a#single_image").attr('href', src);
+
+    $('.thumb').attr('src', src);
 });
+
+$("a#single_image").fancybox();
+
  
 
 

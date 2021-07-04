@@ -67,6 +67,29 @@
                 	
                 	$(document).ready(function () {
 
+                        function load_city_pesan() {
+                            $.ajax({
+                              url : '<?= base_url('user/loadCity'); ?>',
+                              type : 'get',
+                              dataType : 'json',
+                              error : function (e) {
+                                $('.city_pesan').html('<option>'+e.status+' '+e.statusText+'</option>')
+                              },
+                              success : function (e) {
+                                 if (e.rajaongkir.status.code==400) {
+                                  $('.city_pesan').html('<option>'+e.rajaongkir.status.description+'</option>')
+                                 } else {
+                                  $('.city_pesan').html('');
+                                  $.each(e.rajaongkir.results,function(i,value){
+                                    $('.city_pesan').append('<option value="'+value.city_id+'">'+value.city_name+'</option>');
+                                  });
+                                 }
+                              }
+                            })
+                        }
+
+                        load_city_pesan();
+
                 		// Load Form aalamat
 						function loadAlamat() {
 
@@ -202,13 +225,7 @@
                                     } 
 
                                     if (data.success) {
-                                        input_provinsi.each(function (i) {
-                                            if ($(this).val(data.provinsi) == data.provinsi) {
-                                                $(this).prop('selected', true);
-                                            } else {
-                                                $(this).prop('selected', false);
-                                            }
-                                        })
+
                                         input_kota.each(function (i) {
                                             if ($(this).val(data.kota) == data.kota) {
                                                 $(this).prop('selected', true);
@@ -217,7 +234,6 @@
                                             }
                                         })
 
-                                        console.log(data.alamat);
                                         input_kecamatan.val(data.kecamatan);
                                         input_desa.val(data.desa);
                                         input_alamat.val(data.alamat);
@@ -228,6 +244,7 @@
                             })
 
                         })
+
 
 
                 	})

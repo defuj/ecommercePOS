@@ -218,20 +218,8 @@
 		                <div class="modal-body">
 		                	<div class="row g-3">
 		                        <div class="col-lg-3">
-		                            <label class="form-label">Provinsi</label>
-		                            <select class="form-select" name="provinsi" id="add-provinsi">
-		                                <option value="">...</option>
-		                                <option value="Jawa Barat">Jawa Barat</option>
-		                                <option value="Jawa Timur">Jawa Timur</option>
-		                            </select>
-		                            <span id="provinsi_add_alamat_error"></span>
-		                        </div>
-		                        <div class="col-lg-3">
 		                            <label class="form-label">Kota/Kabupaten</label>
-		                            <select class="form-select" name="kota" id="add-kota">
-		                                <option value="">...</option>
-		                                <option value="Sumedang">Sumedang</option>
-		                                <option value="Bandung">Bandung</option>
+		                            <select class="form-select city_pesan" name="kota" id="add-kota">
 		                            </select>
 		                            <span id="kota_add_alamat_error"></span>
 		                        </div>
@@ -285,20 +273,8 @@
 	                	<div class="modal-body">
 	                		<div class="row g-3">
 		                        <div class="col-lg-3">
-		                            <label class="form-label">Provinsi</label>
-		                            <select class="form-select" name="provinsi">
-		                                <option value="">...</option>
-		                                <option value="Jawa Barat">Jawa Barat</option>
-		                                <option value="Jawa Timur">Jawa Timur</option>
-		                            </select>
-		                            <span id="provinsi_update_alamat_error"></span>
-		                        </div>
-		                        <div class="col-lg-3">
 		                            <label class="form-label">Kota/Kabupaten</label>
-		                            <select class="form-select" name="kota">
-		                                <option value="">...</option>
-		                                <option value="Sumedang">Sumedang</option>
-		                                <option value="Bandung">Bandung</option>
+		                            <select class="form-select city_pesan" name="kota">
 		                            </select>
 		                            <span id="kota_update_alamat_error"></span>
 		                        </div>
