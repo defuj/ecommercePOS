@@ -70,7 +70,7 @@
                       <button type="button" class="btn btn-sm btn-custom minus">
                         <i class="fas fa-minus"></i>
                       </button>
-                      <input type="text" data-stok="99" class="form-number" value="1" />
+                      <input type="number" data-stok="99" class="form-number" value="1" />
                       <button type="button" class="btn btn-sm btn-custom plus">
                         <i class="fas fa-plus"></i>
                       </button>

@@ -217,18 +217,18 @@
 	                <form class="row g-3" action="<?= base_url('user/addAlamat') ?>" method="post" id="form-add-alamat">
 		                <div class="modal-body">
 		                	<div class="row g-3">
-		                        <div class="col-lg-3">
+		                        <div class="col-lg-4">
 		                            <label class="form-label">Kota/Kabupaten</label>
 		                            <select class="form-select city_pesan" name="kota" id="add-kota">
 		                            </select>
 		                            <span id="kota_add_alamat_error"></span>
 		                        </div>
-		                        <div class="col-lg-3">
+		                        <div class="col-lg-4">
 		                            <label class="form-label">Kecamatan</label>
 		                            <input class="form-control" type="text" name="kecamatan" id="add-kecamatan" placeholder="...">
 		                            <span id="kecamatan_add_alamat_error"></span>
 		                        </div>
-		                        <div class="col-lg-3">
+		                        <div class="col-lg-4">
 		                            <label class="form-label">Desa</label>
 		                            <input class="form-control" type="text" name="desa" id="add-desa" placeholder="...">
 		                            <span id="desa_add_alamat_error"></span>
@@ -272,18 +272,18 @@
 	                	<input type="hidden" name="id">
 	                	<div class="modal-body">
 	                		<div class="row g-3">
-		                        <div class="col-lg-3">
+		                        <div class="col-lg-4">
 		                            <label class="form-label">Kota/Kabupaten</label>
 		                            <select class="form-select city_pesan" name="kota">
 		                            </select>
 		                            <span id="kota_update_alamat_error"></span>
 		                        </div>
-		                        <div class="col-lg-3">
+		                        <div class="col-lg-4">
 		                            <label class="form-label">Kecamatan</label>
 		                            <input class="form-control" type="text" name="kecamatan" placeholder="...">
 		                            <span id="kecamatan_update_alamat_error"></span>
 		                        </div>
-		                        <div class="col-lg-3">
+		                        <div class="col-lg-4">
 		                            <label class="form-label">Desa</label>
 		                            <input class="form-control" type="text" name="desa" placeholder="...">
 		                            <span id="desa_update_alamat_error"></span>

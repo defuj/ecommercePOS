@@ -145,7 +145,7 @@
                   <p class="text-muted text-hidden">Total Berat</p>
                   <p class="card-text text-hidden"><span id="berat"><?= $produk->berat * $qty ?></span>gram</p>
                 </div>
-                <div class="col-md-2 col-sm-12">
+                <div class="col-md-2 col-sm-12 mt-3">
                   <p class="text-muted text-hidden">Total Jumlah</p>
                   <p class="card-text text-hidden"><?= $qty ?></p>
                 </div>
@@ -364,7 +364,6 @@
               }
             },
             success : function (e) {
-              console.log(e.rajaongkir);
                if (e.rajaongkir.status.code == 400) {
                 $('#alert-ongkir').html('<div class="alert alert-danger text-center" role="alert">'+e.rajaongkir.status.description+'</div>');
                } else {

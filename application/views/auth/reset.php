@@ -29,18 +29,23 @@
           <div class="card-body">
             <h1 class="h3 mb-2 fw-normal text-center">Reset Password</h1>
             <p class="text-center">Masukan token yang telah Kami kirim ke email anda. Dan masukan password baru anda.</p>
-            <form class="row g-3 mt-3">
+            <div class="alert alert-warning text-center" role="alert">Token akan kadaluarsa dalam waktu 1 jam</div>
+            <?= $this->session->flashdata('message') ?>
+            <form class="row g-3 mt-3" action="<?= base_url('auth/reset') ?>" method="post">
               <div class="col-md-12">
-                <input type="text" class="form-control p-3" name="token" placeholder="Token">
+                <input type="text" class="form-control p-3" name="token" placeholder="Token" value="<?= ($token) ? $token : set_value('token') ; ?>">
               </div>
               <div class="col-md-12">
-                <input type="text" class="form-control p-3" name="email" placeholder="Email">
+                <input type="text" class="form-control p-3" name="email" placeholder="Email" value="<?= set_value('email') ?>">
+                <?= form_error('email', '<small class="text-danger">', '</small>') ?>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control p-3" name="password" placeholder="Password">
+                <input type="password" class="form-control p-3" name="password" placeholder="Password Baru">
+                <?= form_error('password', '<small class="text-danger">', '</small>') ?>
               </div>
               <div class="col-md-6">
-                <input type="password" class="form-control p-3" name="confirm-pass" placeholder="Confirm Password">
+                <input type="password" class="form-control p-3" name="confirm_pass" placeholder="Confirm Password">
+                <?= form_error('confirm_pass', '<small class="text-danger">', '</small>') ?>
               </div>
               
               <div class="col-12">

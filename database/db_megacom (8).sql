@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2021 at 11:01 AM
+-- Generation Time: Jul 15, 2021 at 05:44 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -47,7 +47,8 @@ CREATE TABLE `alamat` (
 --
 
 INSERT INTO `alamat` (`id`, `user_id`, `alamat`, `provinsi_id`, `kota_id`, `provinsi`, `kota`, `kecamatan`, `desa`, `kode_pos`, `is_active`) VALUES
-(35, 9, 'Dusun Citembong Girang, RT01/RW03, Ds.Cikeusi, Kec.Daramaraja, Kab.Sumedang', 9, 440, 'Jawa Barat', 'Sumedang', 'Darmaraja', 'Cikeusi', 45372, 1);
+(35, 9, 'Dusun Citembong Girang, RT01/RW03, Ds.Cikeusi, Kec.Daramaraja, Kab.Sumedang', 9, 440, 'Jawa Barat', 'Sumedang', 'Darmaraja', 'Cikeusi', 45372, 1),
+(36, 9, 'Dusun Citembong Girang, RT01/RW03, Ds.Cikeusi, Kec.Daramaraja, Kab.Sumedang', 9, 22, 'Jawa Barat', 'Bandung', 'Darmaraja', 'Cikeusi', 45372, 0);
 
 -- --------------------------------------------------------
 
@@ -268,9 +269,10 @@ INSERT INTO `dat_pelanggan` (`id`, `kode_pelanggan`, `nama`, `alamat`, `kota`, `
 (0, 'UMUM', 'UMUM', '', '', '', '', '', '', '', '', '', '', 'user.png', '', '', '', '', 0),
 (7, 'PLG000001', 'RESELLER', 'Sumedang', '', '', '', '', '', '', '', '', '', 'user.png', '', '', '', '', 1),
 (8, 'PLG000002', 'DEALER', 'BANDUNG', '', '', '', '', '', '', '', '', '', 'user.png', '', '', '', '', 2),
-(9, '', 'Andi Muhyi Mayapada', '', '', '', '', '', '085524569631', '', 'andimayapada04@gmail.com', 'Prommpd830', '$2y$10$pvbdsJ9Hn0qj2OPb.PFPY.BwP.RSjVPF90tQ/asTyXsl9g3.Shq8C', 'user.png', '', '', '', '', 0),
+(9, '', 'Andi Muhyi Mayapada', '', '', '', '', '', '085524569631', '', 'andimayapada04@gmail.com', 'Prommpd830', '$2y$10$EiiaDQNWJP/JqaukZmWoTe2yyxgfnK.lQ7Jv1V1KHAAXbIIrHrCOi', 'user.png', '', '', '', '', 0),
 (10, '', '', '', '', '', '', '', '0855245696344', '', 'user@gmail.com', 'shadowverse', '$2y$10$lGSE8WN1iIfzYLXb1SbcbePc/eC1//O//ScxlYv3zs9mZ3HMCUG7e', 'user.png', '', '', '', '', 0),
-(11, '', 'Andi Guntur Mario', '', '', '', '', '', '084564839264', '', 'andigunturmario@gmail.com', 'mario', '$2y$10$rc2JRnRymZYTNO8Si0FZ1.rwpaqamvjVG1/J3eS8JTXqCBLEYJ02O', 'user.png', '', '', '', '', 0);
+(11, '', 'Andi Guntur Mario', '', '', '', '', '', '084564839264', '', 'andigunturmario@gmail.com', 'mario', '$2y$10$rc2JRnRymZYTNO8Si0FZ1.rwpaqamvjVG1/J3eS8JTXqCBLEYJ02O', 'user.png', '', '', '', '', 0),
+(12, '', 'Nana Nuraini', '', '', '', '', '', '085524569631', '', 'prokontra830@gmail.com', 'mario', '$2y$10$h68emRdTvc8oaGWKLeNape8uxJAqQrgj4NyMVcT26IOnaC9mEBDee', 'user.png', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -927,6 +929,28 @@ CREATE TABLE `ref_varian` (
 INSERT INTO `ref_varian` (`id`, `varian`, `ket`) VALUES
 (2, '4gb/128gb', '');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_token`
+--
+
+CREATE TABLE `user_token` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_token`
+--
+
+INSERT INTO `user_token` (`id`, `email`, `token`, `created_at`) VALUES
+(5, 'andimayapada04@gmail.com', 'GmHz3BqNXpyt1LlAi6VOGxDzYhuOCNzS0SCtc5n1DmM=', 1626270685),
+(6, 'andimayapada04@gmail.com', 'ItE5s8Z1Y+LWwLcahcNCIRezRjDCXjaj/gFXy8Qpb7A=', 1626270722),
+(7, 'andimayapada04@gmail.com', 'jOsYFQa4aaHET64+UgNfN1k9qCsqhKJ8wQBKFoDbEE0=', 1626271405);
+
 --
 -- Indexes for dumped tables
 --
@@ -1154,6 +1178,12 @@ ALTER TABLE `ref_varian`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_token`
+--
+ALTER TABLE `user_token`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1161,7 +1191,7 @@ ALTER TABLE `ref_varian`
 -- AUTO_INCREMENT for table `alamat`
 --
 ALTER TABLE `alamat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `dat_img_produk`
@@ -1203,7 +1233,7 @@ ALTER TABLE `dat_order_detail`
 -- AUTO_INCREMENT for table `dat_pelanggan`
 --
 ALTER TABLE `dat_pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `dat_pembayaran_piutang`
@@ -1354,6 +1384,12 @@ ALTER TABLE `ref_tipe_rakitan`
 --
 ALTER TABLE `ref_varian`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user_token`
+--
+ALTER TABLE `user_token`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

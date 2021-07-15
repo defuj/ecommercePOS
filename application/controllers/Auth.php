@@ -8,6 +8,7 @@ class Auth extends CI_Controller
         parent::__construct();
 
         $this->load->library('form_validation');
+        $this->load->library('email');
 
     }
 
@@ -185,20 +186,182 @@ class Auth extends CI_Controller
 
 	public function forgot()
 	{
-		$data = [
-			'title' => 'Forgot Password | Megakomputer',
+
+		// Validation Rules
+		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email', [
+			'required' => 'Email tidak boleh kosong',
+			'trim' => 'Email tidak boleh ada spasi',
+			'valid_email' => 'Email harus valid'
+		]);
+
+
+		if ($this->form_validation->run() == false) {
+
+			$data = [
+				'title' => 'Forgot Password | Megakomputer',
+			];
+
+			$this->load->view('auth/forgot', $data);
+
+		} else {
+
+			$email = $this->input->post('email');
+
+			$user = $this->db->get_where('dat_pelanggan', ['email' => $email])->row_array();
+
+			// Cek jika user ada
+			if ($user) {
+
+				$token = base64_encode(random_bytes(32));
+
+				$data = [
+					'email' => $email,
+					'token' => $token,
+					'created_at' => time()
+				];
+
+				$this->db->insert('user_token', $data);
+				$this->_sendEmail($token);
+				
+			} else {
+
+				$this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Email belum terdaftar!</div>');
+
+				redirect('auth/forgot');
+
+			}
+
+		}
+
+	}
+
+
+	private function _sendEmail($token)
+	{
+		$config = [
+			'protocol' => 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_user' => 'youremail@gmail.com',
+			'smtp_pass' => 'yourpassword',
+			'smtp_port' => '465',
+			'mailtype' => 'html',
+			'charset' => 'utf-8',
+			'newline' => "\r\n"
 		];
 
-		$this->load->view('auth/forgot', $data);
+		$this->email->initialize($config);
+
+		$this->email->from('youremail@gmail.com', 'Megacom');
+		$this->email->to($this->input->post('email'));
+		$this->email->subject('Reset Password Akun | Megacom');
+		$this->email->message('Silahkan klik link ini untuk mereset password anda <a href="'. base_url() .'auth/reset?token='. urlencode($token) .'">Reset</a><br/>Token : '. $token .'');
+
+
+		if ($this->email->send()) {
+
+			$this->session->set_flashdata('message', '<div class="alert alert-success text-center" role="alert">Email sudah dikirim. Silahkan cek Email anda!</div>');
+
+			redirect('auth/forgot');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Gagal mengirim email!</div>');
+
+			redirect('auth/forgot');
+		}
+
 	}
 
  	public function reset()
  	{
- 		$data = [
-			'title' => 'Reset Password | Megakomputer',
-		];
 
-		$this->load->view('auth/reset', $data);
+ 		// Validation Rules
+		$this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[8]|matches[confirm_pass]', [
+			'required' => 'Password tidak boleh kosong',
+			'trim' => 'Password tidak boleh ada spasi',
+			'min_length' => 'Password terlalu pendek',
+			'matches' => 'Password tidak sama'
+		]);
+		$this->form_validation->set_rules('confirm_pass', 'Confirm Password', 'required|trim|matches[password]', [
+			'required' => 'Password tidak boleh kosong',
+			'trim' => 'Password tidak boleh ada spasi',
+			'matches' => 'Password tidak sama'
+		]);
+
+
+		if ($this->form_validation->run() == false) {
+
+			if ($this->input->get('token')) {
+
+				$token = $this->input->get('token');
+
+			} else {
+
+				$token = "";
+
+			}
+
+			$data = [
+				'title' => 'Reset Password | Megakomputer',
+				'token' => $token
+			];
+
+			$this->load->view('auth/reset', $data);
+
+		} else {
+
+			$token = $this->input->post('token');
+			$email = $this->input->post('email');
+			$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+			
+			$user_email = $this->db->get_where('user_token', ['email' => $email])->row_array();
+
+			// Cek jika user ada
+			if ($user_email) {
+
+				$user_token = $this->db->get_where('user_token', ['token' => $token])->row_array();
+
+				if ($user_token) {
+
+					if (time() - $user_token['created_at'] < (60*60)) {
+
+						$data = [
+							'password' => $password
+						];
+
+						$this->db->update('dat_pelanggan', $data, ['email' => $email]);
+
+						$this->session->set_flashdata('message', '<div class="alert alert-success text-center" role="alert">Password berhasil di reset. Silahkan Login!</div>');
+
+						redirect('auth');
+
+					} else {
+
+						$this->db->delete('user_token', ['email' => $email]);
+						$this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Token anda sudah kadaluarsa</div>');
+
+						redirect('auth/forgot');
+					}
+
+
+				} else {
+
+					$this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Token anda salah</div>');
+
+					redirect('auth/reset');
+
+				}
+
+
+				
+			} else {
+
+				$this->session->set_flashdata('message', '<div class="alert alert-danger text-center" role="alert">Email anda salah</div>');
+
+				redirect('auth/reset');
+
+			}
+
+		}
+
  	}
 
 }

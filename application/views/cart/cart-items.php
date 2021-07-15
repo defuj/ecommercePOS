@@ -110,7 +110,7 @@
                         <button type="button" class="btn btn-sm btn-custom minus">
                           <i class="fas fa-minus"></i>
                         </button>
-                        <input type="text" class="form-number" data-id="<?= $data['rowid'] ?>" data-stok="99" data-kode="<?= $data['id'] ?>" data-href="<?= base_url('cart/changeCost') ?>" value="<?= $data['qty'] ?>" />
+                        <input type="number" class="form-number" data-id="<?= $data['rowid'] ?>" data-stok="99" data-kode="<?= $data['id'] ?>" data-href="<?= base_url('cart/changeCost') ?>" value="<?= $data['qty'] ?>" />
                         <button class="btn btn-sm btn-custom plus">
                           <i class="fas fa-plus"></i>
                         </button>
